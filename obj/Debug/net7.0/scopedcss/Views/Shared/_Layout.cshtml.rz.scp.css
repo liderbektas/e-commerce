@@ -1,0 +1,45 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body[b-kuvkw7v0hs] {
+  background-color: black;
+  color: white; /* Metin rengini beyaz yaparak okunabilirliği artırabilirsiniz */
+}
+
+
+a.navbar-brand[b-kuvkw7v0hs] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-kuvkw7v0hs] {
+  color: white;
+}
+
+.btn-primary[b-kuvkw7v0hs] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-kuvkw7v0hs], .nav-pills .show > .nav-link[b-kuvkw7v0hs] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.
+
+.box-shadow[b-kuvkw7v0hs] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-kuvkw7v0hs] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+
+
+

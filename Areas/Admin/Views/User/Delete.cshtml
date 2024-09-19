@@ -1,0 +1,28 @@
+@model User
+
+<h2 class="mb-4 text-black">Ürün Sil</h2>
+
+<div class="text-black">
+    <div>
+        <h4 class="card-title">Bu ürünü silmek istediğinizden emin misiniz?</h4>
+        <div class="mb-3">
+            <h5>Kullanıcı Adı : @Model.userName</h5>
+            <p>Mail Adresi : @Model.email</p>
+            <p>Kullanıcı Rolü : @(Model.role == "Admin" ? "Admin" : "Müşteri")</p>
+            
+        </div>
+
+        <form asp-controller="User" asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id"/>
+            <button type="submit" class="btn btn-danger me-2 btn-sm" style="width: 80px;">Sil</button>
+            <a asp-action="Index" class="btn btn-secondary btn-sm" style="width: 80px;">İptal</a>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger mt-4">
+        @ViewBag.Error
+    </div>
+}

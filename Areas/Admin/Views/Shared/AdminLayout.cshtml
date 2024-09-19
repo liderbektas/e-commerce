@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - ProductManagament_MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/ProductManagament_MVC.styles.css" asp-append-version="true"/>
+    <style>
+        body, html {
+            background-color: #f4f4f4; 
+            color: #333;
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .navbar {
+            background-color: #212121;
+            border-right: 0.5px solid azure;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            width: 250px;
+            overflow-y: auto;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            color: #fff; 
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff;
+        }
+
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #fff; 
+            background-color: #495057; 
+            width: 230px;
+            border-radius: 4px;
+        }
+
+        .logout-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .logout-container .btn {
+            background-color: #dc3545;
+            border: none;
+            color: #fff; 
+            font-size: 0.9rem;
+        }
+
+        .logout-container .btn:hover {
+            background-color: #c82333;
+        }
+
+        .container {
+            width: calc(100% - 249px);
+            padding: 50px;
+        }
+        
+        
+        .section {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <nav class="navbar navbar-expand-sm">
+        <div class="navbar-brand">
+            Admin Panel
+        </div>
+        <div class="container-fluid">
+            <ul class="navbar-nav flex-column gap-3">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="Main" asp-action="Index">Ana sayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
+                </li>
+            </ul>
+        </div>
+        <div class="logout-container">
+            <a class="btn btn-danger btn-sm w-100" asp-action="Logout" asp-controller="Logout" asp-area="Admin">
+                Oturumu Kapat
+            </a>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

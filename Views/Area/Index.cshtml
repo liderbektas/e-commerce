@@ -1,0 +1,18 @@
+@using System.Security.Claims
+@{
+    ViewBag.HideHeader = false;
+}
+
+
+@{
+    var role = User.FindFirst(ClaimTypes.Role)?.Value;
+}
+
+@if (role == "Admin")
+{
+    <a style="color: white" asp-area="Admin" asp-controller="Main" asp-action="Index">Admin paneline git.</a>
+}
+else
+{
+    <p>Admin sayfasına giriş yetkiniz yok.</p>
+}
