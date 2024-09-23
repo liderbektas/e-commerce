@@ -26,3 +26,30 @@ body {
   border-bottom: none;
 }
 
+.navbar1 {
+    background-color: #212121;
+    border-right: 0.5px solid azure;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    width: 250px;
+    overflow-y: auto;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navbar-nav .nav-item .nav-link1:hover {
+    color: #fff;
+    background-color: #495057;
+    width: 230px;
+    border-radius: 4px;
+}
+

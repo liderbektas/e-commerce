@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -26,17 +24,17 @@ public class ProductsController : Controller
          ViewBag.Error = "Geçerli bir kullanıcı bulunamadı.";
                   return View(new List<Products>());
         */
-
-        var products = await _context.Products.ToListAsync();
-
+        var products = await _context.Products.Include(x => x.Category).ToListAsync();
         return View(products);
     }
 
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
+        var categories = await _context.Categories.ToListAsync();
+        ViewBag.Categories = new SelectList(categories, "Id", "Name");
         return View();
     }
-
+    
     [HttpPost]
     public async Task<IActionResult> Create(Products products, IFormFile? img)
     {
@@ -51,16 +49,17 @@ public class ProductsController : Controller
                 {
                     if (img != null)
                     {
-                        var folder = Directory.GetCurrentDirectory() + "/wwwroot/Images/";
-                        using var stream = new FileStream(folder + img.FileName, FileMode.Create);
-                        img.CopyTo(stream);
+                        var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/");
+                        using var stream = new FileStream(Path.Combine(folder, img.FileName), FileMode.Create);
+                        await img.CopyToAsync(stream);
                         products.UserId = currentUser.Id;
                         products.img = img.FileName;
                     }
+
+                    _context.Products.Add(products);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                _context.Products.Add(products);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -71,16 +70,16 @@ public class ProductsController : Controller
         {
             ViewBag.Error = "Formda eksik veya geçersiz bilgiler var.";
         }
-
+        
         return View(products);
     }
-
+    
     public async Task<IActionResult> Edit(int id)
     {
         var products = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         if (products == null)
         {
-            NotFound();
+           return NotFound();
         }
 
         return View(products);

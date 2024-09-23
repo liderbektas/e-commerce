@@ -79,4 +79,5 @@
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductManagament_MVC.genruntimeconfig.cache
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ref/ProductManagament_MVC.dll
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/scopedcss/Areas/Admin/Views/Shared/AdminLayout.cshtml.rz.scp.css
-/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductManagament_MVC.csproj.CopyComplete
+/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductManagament_MVC.sourcelink.json
+/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductM.68A5477E.Up2Date
