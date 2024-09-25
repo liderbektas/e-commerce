@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductManagament_MVC.Models;
 
@@ -11,9 +12,11 @@ using ProductManagament_MVC.Models;
 namespace ProductManagament_MVC.Migrations
 {
     [DbContext(typeof(PM_Context))]
-    partial class PM_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240924221210_removeedOrders")]
+    partial class removeedOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,40 +47,19 @@ namespace ProductManagament_MVC.Migrations
 
             modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CardNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ShippingCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingCountry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingFullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingState")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingStreet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingZipCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

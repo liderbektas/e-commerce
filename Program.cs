@@ -34,6 +34,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseDeveloperExceptionPage(); // Geliştirme ortamında detaylı hata sayfası görmek için
+
+
 app.UseRouting();
 
 // Yetkilendirmeden önce session'ı kullanın

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductManagament_MVC.Models;
 
@@ -11,9 +12,11 @@ using ProductManagament_MVC.Models;
 namespace ProductManagament_MVC.Migrations
 {
     [DbContext(typeof(PM_Context))]
-    partial class PM_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240923202017_addedOrder")]
+    partial class addedOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,43 +47,24 @@ namespace ProductManagament_MVC.Migrations
 
             modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CardNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PaymentMethod")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ShippingCity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingCountry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingFullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingState")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingStreet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShippingZipCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -93,13 +77,13 @@ namespace ProductManagament_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductsId")
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -180,15 +164,30 @@ namespace ProductManagament_MVC.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
+                {
+                    b.HasOne("ProductManagament_MVC.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProductManagament_MVC.Models.OrderItem", b =>
                 {
                     b.HasOne("ProductManagament_MVC.Models.Order", "Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProductManagament_MVC.Models.Products", "Products")
                         .WithMany()
-                        .HasForeignKey("ProductsId");
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 

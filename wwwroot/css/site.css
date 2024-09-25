@@ -28,7 +28,6 @@ body {
 
 .navbar1 {
     background-color: #212121;
-    border-right: 0.5px solid azure;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100vh;
     width: 250px;
@@ -46,10 +45,30 @@ body {
     margin-bottom: 20px;
 }
 
-.navbar-nav .nav-item .nav-link1:hover {
-    color: #fff;
-    background-color: #495057;
-    width: 230px;
-    border-radius: 4px;
+.navbar-nav .nav-item .nav-link1 {
+    display: block; 
+    width: 100%;
+    text-decoration: none; 
+    padding: 10px; 
+    color: #ffffff; 
+    background-color: transparent; 
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 4px; 
 }
+
+.navbar-nav .nav-item .nav-link1:hover {
+    color: #fff; 
+    background-color: #495057;
+    width: 100%;
+}
+
+.card1 {
+    transition: transform 0.3s ease; 
+}
+
+.card1:hover {
+    transform: scale(1.05); 
+    z-index: 1; 
+}
+
 
