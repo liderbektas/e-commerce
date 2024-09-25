@@ -1,13 +1,13 @@
-@model ProductManagament_MVC.Models.Order
+@model Cart
 
 @{
-    ViewData["Title"] = "Checkout";
-    ViewBag.HideHeader = false;
+ViewData["Title"] = "Checkout";
+ViewBag.HideHeader = false;
 }
 
 <h2>Checkout</h2>
 
-<form asp-controller="Cart" asp-action="Checkout" method="post">
+<form asp-controller="Checkout" asp-action="Index" method="post">
     <input type="hidden" asp-for="Id" value="@Model.Id" />
 
     <h4>Shipping Information</h4>
@@ -59,20 +59,21 @@
     <h4>Order Summary</h4>
     <table class="table">
         <thead>
-            <tr>
-                <th class="text-white">Product</th>
-                <th class="text-white">Quantity</th>
-                <th class="text-white">Price</th>
-                <th class="text-white">Total</th>
-            </tr>
+        <tr>
+            <th class="text-white">Product</th>
+            <th class="text-white">Quantity</th>
+            <th class="text-white">Price</th>
+        </tr>
         </thead>
         <tbody>
-        @if (Model.OrderItems != null && Model.OrderItems.Any())
+        @if (Model.CartItems != null && Model.CartItems.Any())
         {
-        foreach (var item in Model.OrderItems)
+        foreach (var item in Model.CartItems)
         {
         <tr>
             <td class="text-white">@item.Products.name</td>
+            <td class="text-white">@item.Quantity</td>
+            <td class="text-white">@item.Products.price</td>
         </tr>
         }
         }
@@ -82,9 +83,8 @@
             <td colspan="4">No items in your cart</td>
         </tr>
         }
-
         </tbody>
     </table>
-    
+
     <button type="submit" class="btn btn-primary">Place Order</button>
 </form>

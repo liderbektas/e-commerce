@@ -11,57 +11,62 @@ public class CartController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        if (userId == null)
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
         {
             return RedirectToAction("Login", "Auth");
         }
 
-        var order = await _context.Orders
-            .Include(o => o.OrderItems)
-            .ThenInclude(o => o.Products)
-            .FirstOrDefaultAsync(o => o.UserId == int.Parse(userId));
+        var cart = await _context.Carts
+            .Include(c => c.CartItems)
+            .ThenInclude(p => p.Products)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
 
-        if (order == null)
+        if (cart == null)
         {
-            return View(new Order { OrderItems = new List<OrderItem>() });
+            cart = new Cart
+            {
+                UserId = userId,
+                CreatedAt = DateTime.Now,
+                CartItems = new List<CartItem>()
+            };
+            await _context.Carts.AddAsync(cart);
+            await _context.SaveChangesAsync();
         }
 
-        if (order.OrderItems == null)
-        {
-            order.OrderItems = new List<OrderItem>();
-        }
-
-        return View(order);
+        return View(cart);
     }
 
     [HttpPost]
     public async Task<IActionResult> AddToCart(int productId, int quantity)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        var order = await _context.Orders
-            .Include(x => x.OrderItems)
-            .FirstOrDefaultAsync(x => x.UserId == int.Parse(userId));
-
-        if (order == null)
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
         {
-            order = new Order
+            return RedirectToAction("Login", "Auth");
+        }
+
+        var cart = await _context.Carts
+            .Include(x => x.CartItems)
+            .FirstOrDefaultAsync(x => x.UserId == userId);
+
+        if (cart == null)
+        {
+            cart = new Cart
             {
-                UserId = int.Parse(userId),
-                OrderDate = DateTime.Now,
-                OrderItems = new List<OrderItem>()
+                UserId = userId,
+                CreatedAt = DateTime.Now,
+                CartItems = new List<CartItem>()
             };
 
-            await _context.Orders.AddAsync(order);
+            await _context.Carts.AddAsync(cart);
             await _context.SaveChangesAsync();
         }
 
-        var orderItem = order.OrderItems.FirstOrDefault(x => x.ProductId == productId);
-        if (orderItem != null)
+        var cartItem = cart.CartItems.FirstOrDefault(x => x.ProductId == productId);
+        if (cartItem != null)
         {
-            orderItem.Quantity += quantity;
+            cartItem.Quantity += quantity;
         }
         else
         {
@@ -71,7 +76,7 @@ public class CartController : Controller
                 return NotFound("Ürün bulunamadı.");
             }
 
-            order.OrderItems.Add(new OrderItem()
+            cart.CartItems.Add(new CartItem()
             {
                 ProductId = productId,
                 Products = product,
@@ -81,85 +86,5 @@ public class CartController : Controller
 
         await _context.SaveChangesAsync();
         return RedirectToAction("Index", "Products");
-    }
-
-    public async Task<IActionResult> Checkout()
-    {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (userId == null)
-        {
-            return RedirectToAction("Login", "Auth");
-        }
-
-        var order = await _context.Orders
-            .Include(x => x.OrderItems)
-            .ThenInclude(oi => oi.Products)
-            .FirstOrDefaultAsync(x => x.UserId == int.Parse(userId));
-
-        if (order == null)
-        {
-            return View(new Order { OrderItems = new List<OrderItem>() });
-        }
-
-        if (order.OrderItems == null || !order.OrderItems.Any())
-        {
-            order.OrderItems = new List<OrderItem>();
-        }
-
-        return View(order);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Checkout(string shippingFullName, string shippingStreet, string shippingCity,
-        string shippingState, string shippingZipCode, string shippingCountry, string paymentMethod, string cardNumber)
-    {
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (userId == null)
-                {
-                    return RedirectToAction("Login", "Auth");
-                }
-
-                var order = await _context.Orders.Include(x => x.OrderItems)
-                    .ThenInclude(x => x.Products)
-                    .FirstOrDefaultAsync(x => x.UserId == int.Parse(userId));
-
-                if (order == null)
-                {
-                    return NotFound();
-                }
-
-                if (!order.OrderItems.Any())
-                {
-                    return BadRequest("Sepetiniz Boş");
-                }
-
-
-                order.ShippingFullName = shippingFullName;
-                order.ShippingStreet = shippingStreet;
-                order.ShippingCity = shippingCity;
-                order.ShippingState = shippingState;
-                order.ShippingZipCode = shippingZipCode;
-                order.ShippingCountry = shippingCountry;
-                order.PaymentMethod = paymentMethod;
-                order.CardNumber = cardNumber;
-
-                await _context.SaveChangesAsync();
-
-                order.OrderItems.Clear();
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", "Sipariş Alınamadı.");
-            }
-        }
-
-        return View("Error");
     }
 }

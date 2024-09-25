@@ -8,27 +8,30 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private readonly PM_Context _context = new();
-        
+
         public async Task<IActionResult> Index()
         {
-            var orders = await _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Products)
-                .ToListAsync();
-            if (orders == null)
+            var orders = await _context.Orders.ToListAsync();
+            if (orders == null || !orders.Any())
             {
                 return NotFound();
             }
-            
+
             return View(orders);
         }
-        
-        public async Task<IActionResult> Details(int id)
+
+        public async Task<IActionResult> Details(int id , int productId)
         {
-            var order = await _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Products).FirstOrDefaultAsync(x => x.Id == id);
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(o => o.Products)
+                .FirstOrDefaultAsync(o => o.Id == id);
+
             if (order == null)
             {
                 return NotFound();
             }
-            
+
             return View(order);
         }
     }

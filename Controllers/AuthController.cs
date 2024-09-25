@@ -30,7 +30,7 @@ public class AuthController : Controller
         }
 
         var user = _context.Users.FirstOrDefault(x => x.email == email);
-
+        
         if (user == null || password != user.password)
         {
             ViewBag.Error = "Geçersiz e-posta veya şifre.";
@@ -78,7 +78,7 @@ public class AuthController : Controller
                 ViewBag.Error = "Bu e-posta adresi ile bir kullanıcı zaten kayıtlı.";
                 return View(user);
             }
-
+            
             user.role = "Müşteri";
 
             _context.Users.Add(user);
