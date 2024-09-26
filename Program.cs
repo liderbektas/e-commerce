@@ -1,26 +1,36 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using ProductManagament_MVC.Controllers;
+using ProductManagament_MVC.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Servisleri container'a ekleyin.
 builder.Services.AddControllersWithViews();
 
+// EF Core ile veritabanı bağlantısı
+builder.Services.AddDbContext<PM_Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 // Session durumunu etkinleştirin
-builder.Services.AddDistributedMemoryCache(); // IDistributedCache için varsayılan bellek içi uygulama ekler
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session zaman aşımı süresi
-    options.Cookie.HttpOnly = true; // XSS saldırılarına karşı session çerezinin sadece Http üzerinden erişilebilir olmasını sağlar
-    options.Cookie.IsEssential = true; // GDPR kapsamında bile çerezin gerekli olduğunu belirtir
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
-// Kimlik doğrulama işlemleri için gerekli servis ayarı
+// Kimlik doğrulama işlemleri
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Auth/Login"; // Giriş sayfasının yolu
-        options.AccessDeniedPath = "/Home/AccessDenied"; // Erişim izni olmayan sayfa
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Home/AccessDenied";
     });
+
+// Gerekli diğer servisleri ekleyin (örneğin CartController)
+builder.Services.AddScoped<CartController>();
 
 var app = builder.Build();
 
@@ -34,15 +44,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseDeveloperExceptionPage(); // Geliştirme ortamında detaylı hata sayfası görmek için
-
-
 app.UseRouting();
 
 // Yetkilendirmeden önce session'ı kullanın
-app.UseSession(); // Bunun app.UseAuthorization()'dan önce çağrıldığından emin olun
+app.UseSession();
 
-app.UseAuthentication(); // Kimlik doğrulama kullanıyorsanız bunu ekleyin
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

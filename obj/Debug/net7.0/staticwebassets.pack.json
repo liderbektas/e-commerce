@@ -17,6 +17,14 @@
       "PackagePath": "staticwebassets/Images/1-4roast.webp"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/360_F_642002859_Yp2aTxdztdSzjpsSaTcnp5a8d772CU2i.jpg",
+      "PackagePath": "staticwebassets/Images/360_F_642002859_Yp2aTxdztdSzjpsSaTcnp5a8d772CU2i.jpg"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/burger.jpg",
+      "PackagePath": "staticwebassets/Images/burger.jpg"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/cacik-2.webp",
       "PackagePath": "staticwebassets/Images/cacik-2.webp"
     },
@@ -27,6 +35,18 @@
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hawaiian.webp",
       "PackagePath": "staticwebassets/Images/hawaiian.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hdburger.jpg",
+      "PackagePath": "staticwebassets/Images/hdburger.jpg"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hdfish.avif",
+      "PackagePath": "staticwebassets/Images/hdfish.avif"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hdpizza.jpg",
+      "PackagePath": "staticwebassets/Images/hdpizza.jpg"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hot_wings.webp",
@@ -47,6 +67,10 @@
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/pepperoni.webp",
       "PackagePath": "staticwebassets/Images/pepperoni.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/pizza.webp",
+      "PackagePath": "staticwebassets/Images/pizza.webp"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıphone_mavi.webp",

@@ -9,9 +9,10 @@
     <table class="table table-striped table-hover">
         <thead class="table-dark">
         <tr>
+            <th>Id</th>
             <th>Resim</th>
             <th>Adı</th>
-            <th>Kategori</th> 
+            <th>Kategori</th>
             <th>Açıklama</th>
             <th>Fiyat</th>
             <th>İşlemler</th>
@@ -20,21 +21,22 @@
         <tbody>
         @foreach (var product in Model)
         {
-        <tr>
-            <td>
-                <img src="/Images/@product.img" title="@product.name" height="34"/>
-            </td>
-            <td>@product.name</td>
-            <td>@product.Category?.Name</td>
-            <td>@product.description</td>
-            <td>@product.price.ToString("C")</td>
-            <td>
-                <div class="d-flex gap-2">
-                    <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">Düzenle</a>
-                    <a asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">Sil</a>
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td>@product.Id</td>
+                <td>
+                    <img src="/Images/@product.img" title="@product.name" height="34"/>
+                </td>
+                <td>@product.name</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.description</td>
+                <td>@product.price.ToString("C")</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-outline-primary">Düzenle</a>
+                        <a asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-outline-danger">Sil</a>
+                    </div>
+                </td>
+            </tr>
         }
         </tbody>
     </table>

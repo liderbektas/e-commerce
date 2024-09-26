@@ -1,90 +1,122 @@
 @model Cart
 
 @{
-ViewData["Title"] = "Checkout";
-ViewBag.HideHeader = false;
+    ViewData["Title"] = "Checkout";
+    ViewBag.HideHeader = false;
 }
 
-<h2>Checkout</h2>
+<div class="container py-5">
+    <h2 class="text-center mb-5 text-white">Ödeme Bilgileri</h2>
 
-<form asp-controller="Checkout" asp-action="Index" method="post">
-    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <form asp-controller="Checkout" asp-action="Index" method="post">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card bg-black text-white border-white shadow-sm rounded-3">
+                    <div class="card-header border-bottom border-white">
+                        <h4 class="mb-0">Adres Bilgileri</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="shippingFullName" class="form-label">İsim Soyisim</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingFullName" name="shippingFullName" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="shippingStreet" class="form-label">Sokak</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingStreet" name="shippingStreet" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="shippingCity" class="form-label">İlçe</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingCity" name="shippingCity" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="shippingState" class="form-label">Şehir</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingState" name="shippingState" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="shippingZipCode" class="form-label">Zip Kodu</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingZipCode" name="shippingZipCode" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="shippingCountry" class="form-label">Ülke</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="shippingCountry" name="shippingCountry" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card bg-black text-white border-white shadow-sm rounded-3">
+                    <div class="card-header border-bottom border-white">
+                        <h4 class="mb-0">Ödeme Bilgileri</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="paymentMethod" class="form-label">Ödeme Yöntemi</label>
+                            <select class="form-select bg-dark text-white border-white no-outline" id="paymentMethod" name="paymentMethod" required>
+                                <option value="Kredi Kartı">Kredi Kartı</option>
+                                <option value="PayPal">PayPal</option>
+                                <option value="Havale">Havale</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Kart Numarası</label>
+                            <input type="text" class="form-control bg-dark text-white border-white no-outline" id="cardNumber" name="cardNumber" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <h4>Shipping Information</h4>
-    <div class="form-group">
-        <label for="shippingFullName">Full Name</label>
-        <input type="text" class="form-control" id="shippingFullName" name="shippingFullName" required />
-    </div>
+        <!-- Order Summary -->
+        <div class="card mt-4 bg-black text-white border-white shadow-sm rounded-3">
+            <div class="card-header border-bottom border-white">
+                <h4 class="mb-0">Sipariş Özeti</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped border-white">
+                    <thead>
+                        <tr>
+                            <th>Ürün</th>
+                            <th>Miktar</th>
+                            <th>Fiyat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CartItems != null && Model.CartItems.Any())
+                        {
+                            foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td>@item.Products.name</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Products.price.ToString("C")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center">Karta ürün yok.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-outline-light">
+               Ödeme Yap
+            </button>
+        </div>
+    </form>
+</div>
 
-    <div class="form-group">
-        <label for="shippingStreet">Street Address</label>
-        <input type="text" class="form-control" id="shippingStreet" name="shippingStreet" required />
-    </div>
-
-    <div class="form-group">
-        <label for="shippingCity">City</label>
-        <input type="text" class="form-control" id="shippingCity" name="shippingCity" required />
-    </div>
-
-    <div class="form-group">
-        <label for="shippingState">State</label>
-        <input type="text" class="form-control" id="shippingState" name="shippingState" />
-    </div>
-
-    <div class="form-group">
-        <label for="shippingZipCode">Zip Code</label>
-        <input type="text" class="form-control" id="shippingZipCode" name="shippingZipCode" required />
-    </div>
-
-    <div class="form-group">
-        <label for="shippingCountry">Country</label>
-        <input type="text" class="form-control" id="shippingCountry" name="shippingCountry" required />
-    </div>
-
-    <h4>Payment Information</h4>
-    <div class="form-group">
-        <label for="paymentMethod">Payment Method</label>
-        <select class="form-control" id="paymentMethod" name="paymentMethod" required>
-            <option value="Credit Card">Credit Card</option>
-            <option value="PayPal">PayPal</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label for="cardNumber">Card Number</label>
-        <input type="text" class="form-control" id="cardNumber" name="cardNumber" required />
-    </div>
-
-    <h4>Order Summary</h4>
-    <table class="table">
-        <thead>
-        <tr>
-            <th class="text-white">Product</th>
-            <th class="text-white">Quantity</th>
-            <th class="text-white">Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        @if (Model.CartItems != null && Model.CartItems.Any())
-        {
-        foreach (var item in Model.CartItems)
-        {
-        <tr>
-            <td class="text-white">@item.Products.name</td>
-            <td class="text-white">@item.Quantity</td>
-            <td class="text-white">@item.Products.price</td>
-        </tr>
-        }
-        }
-        else
-        {
-        <tr>
-            <td colspan="4">No items in your cart</td>
-        </tr>
-        }
-        </tbody>
-    </table>
-
-    <button type="submit" class="btn btn-primary">Place Order</button>
-</form>
+<style>
+    .no-outline:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+</style>

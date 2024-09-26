@@ -8,7 +8,12 @@ namespace ProductManagament_MVC.Controllers;
 
 public class AuthController : Controller
 {
-    private readonly PM_Context _context = new();
+    private readonly PM_Context _context;
+
+    public AuthController(PM_Context context)
+    {
+        _context = context;
+    }
 
     public IActionResult Index()
     {

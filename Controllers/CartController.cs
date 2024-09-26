@@ -7,7 +7,12 @@ namespace ProductManagament_MVC.Controllers;
 
 public class CartController : Controller
 {
-    private readonly PM_Context _context = new();
+    private readonly PM_Context _context;
+
+    public CartController(PM_Context context)
+    {
+        _context = context;
+    }
 
     public async Task<IActionResult> Index()
     {
@@ -30,6 +35,7 @@ public class CartController : Controller
                 CreatedAt = DateTime.Now,
                 CartItems = new List<CartItem>()
             };
+
             await _context.Carts.AddAsync(cart);
             await _context.SaveChangesAsync();
         }

@@ -7,7 +7,12 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
     [Area("Admin")]
     public class OrderController : Controller
     {
-        private readonly PM_Context _context = new();
+        private readonly PM_Context _context;
+
+        public OrderController(PM_Context context)
+        {
+            _context = context;
+        }
 
         public async Task<IActionResult> Index()
         {

@@ -7,7 +7,12 @@ namespace ProductManagament_MVC.Controllers;
 
 public class Checkout : Controller
 {
-    private readonly PM_Context _context = new();
+    private readonly PM_Context _context;
+
+    public Checkout(PM_Context context)
+    {
+        _context = context;
+    }
 
     public async Task<IActionResult> Index()
     {
@@ -77,14 +82,10 @@ public class Checkout : Controller
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
 
-                foreach (var cartItem in cart.CartItems)
-                {
-                    cartItem.IsOrdered = true;
-                }
-                
+                cart.CartItems.Clear();
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Success");
             }
             catch (Exception e)
             {

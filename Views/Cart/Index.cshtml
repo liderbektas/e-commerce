@@ -14,9 +14,6 @@ ViewBag.HideHeader = false;
         <div class="col-md-8 d-flex flex-column gap-3">
             @foreach (var item in Model.CartItems)
             {
-            // Sipariş edilen ürünleri gizle
-            if (!item.IsOrdered) // IsOrdered, sipariş edilmiş olup olmadığını belirten bir özellik
-            {
             <div class="col-md-12">
                 <div class="card1 border border-white bg-black text-white">
                     <div class="card-body">
@@ -41,7 +38,6 @@ ViewBag.HideHeader = false;
                 </div>
             </div>
             }
-            }
         </div>
 
         <div class="col-md-4">
@@ -53,7 +49,7 @@ ViewBag.HideHeader = false;
                         <h5 class="card-title">Ödeme Detayları</h5>
                         <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
                             <h6>Ara Toplam</h6>
-                            <span>@String.Format("{0:C}", Model.CartItems.Where(item => !item.IsOrdered).Sum(item => item.Products.price * item.Quantity))</span>
+                            <span>@Model.CartItems.Sum(x => x.Products.price * x.Quantity)</span>
                         </div>
                         <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
                             <h6>Kargo Ücreti</h6>
@@ -61,10 +57,10 @@ ViewBag.HideHeader = false;
                         </div>
                         <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
                             <h6>Toplam</h6>
-                            <h6>@String.Format("{0:C}", Model.CartItems.Where(item => !item.IsOrdered).Sum(item => item.Products.price * item.Quantity) + 10)</h6>
+                           <h6>@Model.CartItems.Sum(x => x.Products.price * x.Quantity + 10)</h6>
                         </div>
                         <div class="text-center mt-4">
-                            <a asp-controller="Checkout" asp-action="Index" class="btn btn-secondary">Ödeme Ekranına Geç</a>
+                            <a asp-controller="Checkout" asp-action="Index" class="btn btn-outline-light">Ödeme Ekranına Geç</a>
                         </div>
                     </div>
                 </div>

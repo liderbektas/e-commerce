@@ -8,8 +8,12 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers;
 [Area("Admin")]
 public class ProductsController : Controller
 {
-    private readonly PM_Context _context = new();
+    private readonly PM_Context _context;
 
+    public ProductsController(PM_Context context)
+    {
+        _context = context;
+    }
     public async Task<IActionResult> Index()
     {
         /*

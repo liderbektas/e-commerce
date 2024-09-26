@@ -8,8 +8,9 @@
             <h5 class="card-title">Sipariş Bilgileri</h5>
             <p><strong>Sipariş ID:</strong> @Model.Id</p>
             <p><strong>Kullanıcı ID:</strong> @Model.UserId</p>
-            <p><strong>Sipariş Tarihi:</strong> @Model.OrderDate.ToString("dd MMMM yyyy")</p>
             <p><strong>Gönderim Adı:</strong> @Model.ShippingFullName</p>
+            <p><strong>Sipariş Tarihi:</strong> @Model.OrderDate.ToString("dd MMMM yyyy")</p>
+            <p><strong>Ödeme Yöntemi</strong> : @Model.PaymentMethod</p>
             <p><strong>Adres:</strong> @Model.ShippingStreet, @Model.ShippingCity, @Model.ShippingState, @Model.ShippingZipCode, @Model.ShippingCountry</p>
         </div>
     </div>

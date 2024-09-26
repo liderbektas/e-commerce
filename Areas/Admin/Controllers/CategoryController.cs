@@ -6,7 +6,12 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers;
 [Area("Admin")]
 public class CategoryController : Controller
 {
-    private readonly PM_Context _context = new();
+    private readonly PM_Context _context;
+
+    public CategoryController(PM_Context context)
+    {
+        _context = context;
+    }
 
     public IActionResult Index()
     {
