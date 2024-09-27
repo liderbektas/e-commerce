@@ -15,5 +15,6 @@ namespace ProductManagament_MVC.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Questions> Questions { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<Answer> Answers { get; set; }
     }
 }

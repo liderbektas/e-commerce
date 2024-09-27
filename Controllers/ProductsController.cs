@@ -32,25 +32,31 @@ public class ProductsController : Controller
         var product = await _context.Products.FindAsync(id);
         
         var questions = await _context.Questions
-            .Where(q => q.ProductId == id)
+            .Where(q => q.ProductId == id)  
             .ToListAsync();
-
+        
         var reviews = await _context.Reviews
-            .Where(r => r.ProductId == id)
+            .Where(r => r.ProductId == id)  
+            .ToListAsync();
+        
+        var questionsId = questions.Select(q => q.Id).ToList();
+        
+        var answers = await _context.Answers
+            .Where(a => questionsId.Contains(a.QuestionId))  
             .ToListAsync();
         
         ViewBag.Questions = questions;
         ViewBag.Reviews = reviews;
-
-        if (product == null) 
+        ViewBag.Answers = answers;
+        
+        if (product == null)
         {
             return NotFound();
         }
-        
-        return View(product);
+
+        return View(product); 
     }
-
-
+    
     [HttpPost]
     public async Task<IActionResult> AskQuestions(string PQuestion, int ProductId)
     {
@@ -90,7 +96,7 @@ public class ProductsController : Controller
         return View("ProductDetails");
     }
 
-    public async Task<IActionResult> Reviews(string Review , int Rating , int ProductId)
+    public async Task<IActionResult> Reviews(string Review, int Rating, int ProductId)
     {
         if (ModelState.IsValid)
         {
@@ -99,7 +105,7 @@ public class ProductsController : Controller
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (userId == null)
                 {
-                    return RedirectToAction("Login" , "Auth");
+                    return RedirectToAction("Login", "Auth");
                 }
 
                 var review = new Reviews()
@@ -117,9 +123,43 @@ public class ProductsController : Controller
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("" , "İnceleme Eklenemedi" + e.Message);
+                ModelState.AddModelError("", "İnceleme Eklenemedi" + e.Message);
             }
         }
-        return RedirectToAction("Index" , "Home");
+
+        return RedirectToAction("Index", "Home");
+    }
+
+    public async Task<IActionResult> Answer(string answer, int id, int productId)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (userId == null)
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+
+                var answers = new Answer()
+                {
+                    Content = answer,
+                    CreatedAt = DateTime.Now,
+                    QuestionId = id,
+                    userId = int.Parse(userId),
+                };
+
+                await _context.Answers.AddAsync(answers);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Products", new { id = productId });
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Soru cevaplanamadı." + e.Message);
+            }
+        }
+
+        return RedirectToAction("Index", "Home");
     }
 }

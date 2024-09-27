@@ -62,14 +62,6 @@ body {
     width: 100%;
 }
 
-.card1 {
-    transition: transform 0.3s ease;
-}
-
-.card1:hover {
-    transform: scale(1.05);
-    z-index: 1;
-}
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -82,6 +74,22 @@ body {
 
 .tab-content {
     border: none; 
+}
+
+.nav-tabs {
+    border-radius: 0.5rem;
+    overflow: hidden; 
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 0.5rem; 
+    transition: background-color 0.3s; 
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #18181c !important;
+    color: white; 
 }
 
 

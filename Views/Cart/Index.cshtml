@@ -1,75 +1,88 @@
 @model Cart
 
 @{
-ViewBag.Title = "Sepetim";
-ViewBag.HideHeader = false;
+    ViewBag.Title = "Sepetim";
+    ViewBag.HideHeader = false;
 }
 
 @if (Model.CartItems != null && Model.CartItems.Any())
 {
-<h1 class="text-center text-white">Sepetim</h1>
+    <h1 class="text-center text-white">Sepetim</h1>
 
-<div class="container" style="margin-top: 70px">
-    <div class="row g-4">
-        <div class="col-md-8 d-flex flex-column gap-3">
-            @foreach (var item in Model.CartItems)
-            {
-            <div class="col-md-12">
-                <div class="card1 border border-white bg-black text-white">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="me-3">
-                                <img src="/Images/@item.Products.img" alt="@item.Products.name" class="img-fluid rounded" style="width: 100px; height: auto;"/>
-                            </div>
-                            <div class="flex-grow-1">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="card-title">@item.Products.name</h5>
-                                    <h6 class="card-subtitle mb-2">
-                                        Fiyat: @String.Format("{0:C}", item.Products.price)
-                                    </h6>
+    <div class="container" style="margin-top: 70px">
+        <div class="row g-4">
+            <div class="col-md-8 d-flex flex-column gap-3">
+                @foreach (var item in Model.CartItems)
+                {
+                    <div class="col-md-12">
+                        <div class="card1 bg-black text-white" style="border: 0.5px solid white">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <img src="/Images/@item.Products.img" alt="@item.Products.name" class="img-fluid rounded" style="width: 100px; height: auto;"/>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title">@item.Products.name</h5>
+                                            <h6 class="card-subtitle mb-2">
+                                                Fiyat: @String.Format("{0:C}", item.Products.price)
+                                            </h6>
+                                        </div>
+                                        <p class="card-text">Miktar: @item.Quantity</p>
+                                        <p class="card-text">
+                                            Toplam: @String.Format("{0:C}", item.Products.price * item.Quantity)
+                                        </p>
+                                    </div>
                                 </div>
-                                <p class="card-text">Miktar: @item.Quantity</p>
-                                <p class="card-text">
-                                    Toplam: @String.Format("{0:C}", item.Products.price * item.Quantity)
-                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
-            }
-        </div>
 
-        <div class="col-md-4">
-            <div class="d-flex flex-column gap-3" style="width: 100%">
-                <h3>Ödemeyi Tamamla</h3>
+            <div class="col-md-4">
+                <div class="d-flex flex-column gap-3" style="width: 100%">
+                    <h3>Ödemeyi Tamamla</h3>
 
-                <div class="card bg-black text-white border border-white">
-                    <div class="card-body d-flex flex-column gap-3">
-                        <h5 class="card-title">Ödeme Detayları</h5>
-                        <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
-                            <h6>Ara Toplam</h6>
-                            <span>@Model.CartItems.Sum(x => x.Products.price * x.Quantity)</span>
-                        </div>
-                        <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
-                            <h6>Kargo Ücreti</h6>
-                            <span>@String.Format("{0:C}", 10.00)</span>
-                        </div>
-                        <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
-                            <h6>Toplam</h6>
-                           <h6>@Model.CartItems.Sum(x => x.Products.price * x.Quantity + 10)</h6>
-                        </div>
-                        <div class="text-center mt-4">
-                            <a asp-controller="Checkout" asp-action="Index" class="btn btn-outline-light">Ödeme Ekranına Geç</a>
+                    <div class="card bg-black text-white border border-white">
+                        <div class="card-body d-flex flex-column gap-3">
+                            <h5 class="card-title">Ödeme Detayları</h5>
+                            <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
+                                <h6>Ara Toplam</h6>
+                                <span>@Model.CartItems.Sum(x => x.Products.price * x.Quantity)</span>
+                            </div>
+                            <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
+                                <h6>Kargo Ücreti</h6>
+                                <span>@String.Format("{0:C}", 10.00)</span>
+                            </div>
+                            <div class="d-flex justify-content-between" style="border-bottom: 0.5px solid white">
+                                <h6>Toplam</h6>
+                                <h6>@Model.CartItems.Sum(x => x.Products.price * x.Quantity + 10)</h6>
+                            </div>
+                            <div class="text-center mt-4">
+                                <a asp-controller="Checkout" asp-action="Index" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; text-decoration: none;">Ödeme Ekranına Geç</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
 else
 {
-<div class="text-center text-white" style="margin-top: 280px; font-size: 24px">Sepetiniz Boş</div>
+    <div class="container d-flex flex-column w-100 py-5 px-3 border border-zinc-500 text-center rounded-md align-items-center justify-content-center text-danger" style="margin-top: 150px;">
+        <div class="mb-2">
+            <svg stroke="#ef6c17" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="56" width="56" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0" class="rotate-180 origin-center"></path>
+            </svg>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <h1 class="h4 mb-1 text-white">Sepetiniz boş</h1>
+        </div>
+        <p class="small text-white">Henüz sepetinize ürün eklemediniz. Sepetinizi doldurmak için alışverişe başlayın!</p>
+    </div>
+
 }
