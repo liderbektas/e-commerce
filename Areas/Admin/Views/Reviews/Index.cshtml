@@ -30,7 +30,11 @@
                 <td class="text-warning" style="width: 150px;">
                     @for (int i = 0; i < review.Rating; i++)
                     {
-                        <i class="fas fa-star"></i>
+                        <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+                            <g shape-rendering="geometricPrecision">
+                                <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#db711a"></path>
+                            </g>
+                        </svg>
                     }
                 </td>
                 <td>@review.CreatedAt</td>

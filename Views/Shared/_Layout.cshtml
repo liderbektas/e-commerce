@@ -22,7 +22,7 @@
                 <a class="navbar-brand" href="#" style="color: white; font-size: 24px;">zeta.</a>
 
                 <div class="collapse navbar-collapse justify-content-center">
-                    <ul class="navbar-nav gap-5">
+                    <ul class="navbar-nav gap-5" style="font-size: 14px;">
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                         </li>
@@ -50,8 +50,8 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li>
-                                    <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">
-                                        Çıkış Yap
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Index">
+                                        Hesabım
                                     </a>
                                 </li>
                                 if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
@@ -60,6 +60,11 @@
                                         <a style="color: black;" class="nav-link" asp-controller="Area" asp-action="Index">Admin Panel</a>
                                     </li>
                                 }
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">
+                                        Çıkış Yap
+                                    </a>
+                                </li>
                             }
                         </ul>
                     </div>

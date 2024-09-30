@@ -96,4 +96,24 @@ public class AuthController : Controller
             return View(user);
         }
     }
+    
+    [HttpPost]
+    public IActionResult Edit(int userId , string address , string phone , DateTime birthDate , string email , string userName)
+    {
+        var user = _context.Users.Find(userId);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.phoneNumber = phone;
+        user.BirthDate = birthDate;
+        user.email = email;
+        user.userName = userName;
+        user.Address = address;
+
+        _context.Users.Update(user);
+        _context.SaveChanges();
+        return RedirectToAction("Index" , "Account");
+    }
 }

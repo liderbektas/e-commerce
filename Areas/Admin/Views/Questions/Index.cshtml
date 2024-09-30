@@ -2,7 +2,7 @@
 
 <div class="">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-black">Ürünler</h2>
+        <h2 class="text-black">Sorular</h2>
         <a class="btn btn-primary btn-sm" asp-action="Create">Yeni Ekle</a>
     </div>
 
@@ -11,7 +11,8 @@
         <tr>
             <th>Kullanıcı</th>
             <th>Ürün</th>
-            <th>Soru</th> 
+            <th>Soru</th>
+            <th>Cevap</th>
             <th>Sorulma Tarihi</th>
             <th>İşemler</th>
         </tr>
@@ -23,6 +24,22 @@
                 <td>@question.UserId</td>
                 <td>@question.ProductId</td>
                 <td>@question.Question</td>
+                <td>
+                    @foreach (var answer in ViewBag.Answer)
+                    {
+                        if (question.Id == answer.QuestionId)
+                        {
+                            if (answer.Content != null)
+                            {
+                                <p style="color: #db7219">@answer.Content</p>
+                            }
+                            else
+                            {
+                                <p class="text-danger">Soru cevaplanmadı</p>
+                            }
+                        }
+                    }
+                </td>
                 <td>@question.CreatedAt</td>
                 <td>
                     <div class="d-flex gap-2">

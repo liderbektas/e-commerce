@@ -62,7 +62,6 @@ body {
     width: 100%;
 }
 
-
 .carousel-control-prev,
 .carousel-control-next {
     display: none;
@@ -92,4 +91,28 @@ body {
     color: white; 
 }
 
+.nav-link2{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    padding: 10px;
+    color: #ffffff;
+    background-color: transparent;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 4px;
+}
 
+.nav-link2.active {
+    background-color: #ef6c17 !important;
+    color: white !important;
+    border: none;
+}
+
+.order-border {
+    border: 0.5px solid #52525b; 
+    transition: border-color 0.3s;
+}
+
+.order-border:hover {
+    border: 0.5px solid #c1c1c6;
+}

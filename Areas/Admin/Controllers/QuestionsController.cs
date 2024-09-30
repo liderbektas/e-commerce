@@ -17,6 +17,13 @@ public class QuestionsController : Controller
     public async Task<IActionResult> Index()
     {
         var questions = await _context.Questions.ToListAsync();
+
+        var questionsId = questions.Select(q => q.Id).ToList();
+        var answers = await _context.Answers
+            .Where(a => questionsId.Contains(a.QuestionId))
+            .ToListAsync();
+
+       ViewBag.Answer  = answers;
         if (questions == null)
         {
             return NotFound();

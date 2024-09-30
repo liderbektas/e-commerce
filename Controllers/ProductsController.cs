@@ -44,7 +44,20 @@ public class ProductsController : Controller
         var answers = await _context.Answers
             .Where(a => questionsId.Contains(a.QuestionId))  
             .ToListAsync();
+
+        double ratingAverage = 0;
+        if (reviews.Any())
+        {
+            ratingAverage = reviews.Average(r => r.Rating);
+        }
         
+        var ratingCounts = reviews
+            .GroupBy(r => r.Rating)
+            .ToDictionary(g => g.Key, g => g.Count());
+        
+        
+        ViewBag.RatingAverage = ratingAverage;
+        ViewBag.RatingCounts = ratingCounts; 
         ViewBag.Questions = questions;
         ViewBag.Reviews = reviews;
         ViewBag.Answers = answers;
@@ -108,13 +121,17 @@ public class ProductsController : Controller
                     return RedirectToAction("Login", "Auth");
                 }
 
+                var product = _context.Products
+                    .FirstOrDefault(p => p.Id == ProductId);
+
                 var review = new Reviews()
                 {
                     UserId = int.Parse(userId),
                     ProductId = ProductId,
                     Rating = Rating,
                     Review = Review,
-                    CreatedAt = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    Products = product
                 };
 
                 await _context.Reviews.AddAsync(review);

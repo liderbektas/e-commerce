@@ -1,0 +1,260 @@
+@model UserInfo
+
+@{
+    ViewBag.HideHeader = false;
+}
+
+<div class="container mt-5 d-flex gap-5">
+
+<div class="d-flex flex-column gap-4" style="width: 270px;">
+    <div class="d-flex align-items-center gap-4">
+        <div class="d-flex align-items-center justify-content-center text-black" style="width: 64px; height: 64px; border-radius: 100%; background-color: #f4f4f6;">
+            @Model.User.userName.Substring(0, 1)
+        </div>
+        <div>@Model.User.userName</div>
+    </div>
+
+    <ul class="nav nav-tabs flex-column gap-1 p-2" role="tablist" style="border: 0.5px solid #5c5c63; background-color: #18181c; width: 280px;">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded font-weight-medium active" id="account-tab" data-bs-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true" style="font-size: 14px;">Hesabım</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="order-tab" data-bs-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" style="font-size: 14px;">Siparişler</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false" style="font-size: 14px;">İncelemeler</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false" style="font-size: 14px;">Adresler</a>
+        </li>
+    </ul>
+</div>
+
+<div class="tab-content" style="flex-grow: 1;">
+    <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+        <h3 style="font-weight: bold">Hesabım</h3>
+        <form asp-controller="Auth" asp-action="Edit" method="post">
+            <input type="hidden" name="userId" value="@Model.User.Id"/>
+            <div class="d-flex flex-column gap-2">
+                <div class="d-flex flex-column gap-2">
+                    <span style="font-size: 14px;">E-posta</span>
+                    <input type="text" name="email" class="form-control px-3 py-2 rounded-3 text-white" style="background-color: #151518; width: 600px; font-size: 14px; border: 0.5px solid #5c5c63;" value="@Model.User.email" placeholder="">
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <span style="font-size: 14px;">Kullanıcı Adı</span>
+                    <input type="text" name="userName" class="form-control px-3 py-2 rounded-3 text-white" style="background-color: #151518; width: 600px; font-size: 14px; border: 0.5px solid #5c5c63;" value="@Model.User.userName" placeholder="">
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <span style="font-size: 14px;">Telefon</span>
+                    <input type="text" name="phone" class="form-control px-3 py-2 rounded-3 text-white" style="background-color: #151518; width: 600px; font-size: 14px; border: 0.5px solid #5c5c63;" value="@Model.User.phoneNumber" placeholder="Telefon">
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <span style="font-size: 14px;">Doğum Tarihi</span>
+                    <input type="date" name="birthDate" class="form-control px-3 py-2 rounded-3 text-white" style="background-color: #151518; width: 600px; font-size: 14px; border: 0.5px solid #5c5c63;" value="@Model.User.BirthDate?.ToString("yyyy-MM-dd")" placeholder="Doğum Tarihi">
+                </div>
+            </div>
+            <button type="submit" class="px-3 py-2 mt-3 text-white rounded-3" style="background-color: #27272a; width: 100px; border: none;">Kaydet</button>
+        </form>
+
+    </div>
+
+    <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">
+        <h3 class="mb-4">Siparişler</h3>
+        @if (Model.Orders != null && Model.Orders.Count > 0)
+        {
+            @foreach (var order in Model.Orders)
+            {
+                <div class="order-border rounded-3 mt-2 overflow-hidden">
+                    <button class="d-flex justify-content-between align-items-center p-3 w-100 text-start" type="button" aria-expanded="false" style="background-color: #141416; border: none;">
+                        <div class="d-flex gap-2 align-items-center" style="flex: 1;">
+                            @foreach (var orderItem in order.OrderItems)
+                            {
+                                var product = orderItem.Products;
+                                if (product != null)
+                                {
+                                    <img src="/Images/@product.img" alt="@product.name" class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"/>
+                                }
+                            }
+                        </div>
+                        <div class="d-flex align-items-center flex-grow-1" style="min-width: 200px;">
+                            <div>
+                                <div class="text-muted" style="font-size: 0.875rem;">Sipariş numarası</div>
+                                <div class="text-white" style="font-size: 1rem;">@order.Id</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="text-muted d-flex align-items-center gap-1 me-5" style="font-size: 0.875rem;">
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm11.575-4.75a.825.825 0 1 0-1.65 0v5.5c0 .296.159.57.416.716l3.5 2a.825.825 0 0 0 .818-1.432l-3.084-1.763Z"></path>
+                                </svg>
+                                Hazırlanacak
+                            </div>
+                        </div>
+                        <div class="text-end" style="min-width: 150px;">
+                            <div class="text-muted" style="font-size: 0.875rem;">
+                                @order.OrderDate.ToString("dd MMMM yyyy")
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            }
+        }
+        else
+        {
+            <div style="margin-top: 50px;">
+                <div class="bg-black text-center d-flex align-items-center justify-content-center flex-column rounded-3" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
+                    <div class="d-flex justify-content-center mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="84" viewBox="0 -960 960 960" width="84" fill="#ef6c17">
+                            <path d="M464.62-157.85v-313.61L190.77-629.77V-330q0 6.15 3.08 11.54 3.07 5.38 9.23 9.23l261.54 151.38Zm30.76 0 261.54-151.38q6.16-3.85 9.23-9.23 3.08-5.39 3.08-11.54v-300L495.38-471.62v313.77ZM480-497.08l270.62-157.3-258.31-149.39q-6.16-3.08-12.31-3.08t-12.31 3.08L209.15-654.38 480-497.08ZM187.69-282.62q-13.48-7.65-20.58-20.67-7.11-13.02-7.11-27.48v-298.46q0-14.46 7.11-27.48 7.1-13.02 20.58-20.67l264.62-153q13.56-7.24 27.85-7.24 14.3 0 27.53 7.24l264.62 153q13.48 7.65 20.58 20.67 7.11 13.02 7.11 27.48v298.46q0 14.46-7.11 27.48-7.1 13.02-20.58 20.67l-264.62 153q-13.56 7.24-27.85 7.24-14.3 0-27.53-7.24l-264.62-153ZM480-480Z"></path>
+                        </svg>
+                    </div>
+                    <div class="h3" style="color:#fff;">Siparişiniz bulunmuyor</div>
+                    <div class="mt-1">
+                        <p style="font-weight: lighter;">Henüz bir sipariş vermediniz.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+        <h3 class="mb-4">İncelemeler</h3>
+        @if (Model.Reviews != null && Model.Reviews.Count > 0)
+        {
+        @foreach (var review in Model.Reviews)
+        {
+        if (review.Products != null) 
+        {
+        <div class="order-border rounded-3 mt-2 overflow-hidden">
+            <button class="d-flex justify-content-between align-items-center p-3 w-100 text-start" type="button" aria-expanded="false" style="background-color: #141416; border: none;">
+                <div class="d-flex gap-2 align-items-center" style="flex: 1;">
+                    <img src="/Images/@review.Products.img" alt="@review.Products.name" class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"/>
+                </div>
+                <div class="d-flex align-items-center flex-grow-1" style="width: 200px;">
+                    <div>
+                        <div class="text-muted" style="font-size: 0.875rem;">Yorumun</div>
+                        <div class="text-white" style="font-size: 0.875rem;">@review.Review</div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-center" style="min-width: 100px;">
+                    <span class="text-muted" style="font-size: 0.875rem;">Verdiğin Puan</span>
+                    <div class="d-flex gap-2 align-items-center">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                        if (i <= review.Rating)
+                        {
+                        <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+                            <g shape-rendering="geometricPrecision">
+                                <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#db711a"></path>
+                            </g>
+                        </svg>
+                        }
+                        else
+                        {
+                        <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="24" preserveAspectRatio="xMidYMid meet">
+                            <g shape-rendering="geometricPrecision">
+                                <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#fff"></path>
+                            </g>
+                        </svg>
+                        }
+                        }
+                    </div>
+                </div>
+                <div class="text-end" style="min-width: 150px;">
+                    <div class="text-muted" style="font-size: 0.875rem;">
+                        @review.CreatedAt.ToString("dd MMMM yyyy")
+                    </div>
+                </div>
+            </button>
+        </div>
+        }
+        else
+        {
+        <div class="text-muted">Ürün bilgisi mevcut değil.</div>
+        }
+        }
+        }
+        else
+        {
+        <p>Henüz incelemeniz yok.</p>
+        }
+    </div>
+
+
+
+    <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+        <h3 class="mb-4">Adresler</h3>
+        <div class="d-flex text-muted gap-3">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="flex-shrink-0 mt-1" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
+            </svg>
+            <p style="font-size: 14px;">Bu sayfada yapacağınız adres değişiklikleri, daha önce vermiş olduğunuz siparişleri etkilemez. Vermiş olduğunuz siparişlerin adres değişikliğini Siparişlerim alanından gerçekleştirebilirsiniz.</p>
+        </div>
+
+        @if (Model.User.Address == null)
+        {
+            <div style="margin-top: 70px;">
+                <div class="bg-black text-center d-flex align-items-center justify-content-center flex-column" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
+                    <div class="h3">
+                        Adres eklemediniz
+                    </div>
+                    <p class="text-muted">Henüz bir adres eklemediniz, sipariş işlemleri için bir adres ekleyin.</p>
+                    <div class="mt-3">
+                        <button type="button" class="px-4 py-2 rounded-2" style="background-color: transparent; color: white; border: 0.5px solid #3a3a3f" data-bs-toggle="modal" data-bs-target="#addressModal">
+                            Yeni Ekle
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="background-color: black; border: 0.5px solid gray">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addressModalLabel">Yeni Adres Ekle</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addressForm" method="post" asp-controller="Auth" asp-action="Edit">
+                                <input type="hidden" name="UserId" value="@Model.User.Id"/>
+                                <input type="hidden" name="userName" value="@Model.User.userName"/>
+                                <input type="hidden" name="email" value="@Model.User.email"/>
+                                <input type="hidden" name="birthDate" value="@Model.User.BirthDate"/>
+                                <input type="hidden" name="phone" value="@Model.User.phoneNumber"/>
+
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Adres</label>
+                                    <textarea style="background-color: #21252a; color: white;" class="form-control" name="Address" id="address" rows="4" placeholder="Adresinizi buraya girin..." required></textarea>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">Adres Ekle</button>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card border border-secondary p-3 rounded" style="width: 450px; margin-top: 25px; background-color: transparent;">
+                <div class="d-flex gap-2 align-items-center font-weight-bold">
+                    <div style="margin-bottom: 16px;">
+                        <svg stroke="currentColor" fill="#ef6d16" stroke-width="0" viewBox="0 0 24 24" class="text-secondary" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19ZM8 15H16V17H8V15Z"></path>
+                        </svg>
+                    </div>
+                    <p style="font-size: 13px">Ev</p>
+                </div>
+                <div class="text-muted">
+                    <p style="font-size: 14px;">@Model.User.Address</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</div>
+<div/>
