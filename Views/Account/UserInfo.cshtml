@@ -1,2 +1,26 @@
 @model UserInfo
 
+
+<div class="d-flex flex-column gap-4" style="width: 270px;">
+    <div class="d-flex align-items-center gap-4">
+        <div class="d-flex align-items-center justify-content-center text-black" style="width: 64px; height: 64px; border-radius: 100%; background-color: #f4f4f6;">
+            @Model.User.userName.Substring(0, 1)
+        </div>
+        <div>@Model.User.userName</div>
+    </div>
+
+    <ul class="nav nav-tabs flex-column gap-1 p-2" role="tablist" style="border: 0.5px solid #5c5c63; background-color: #18181c; width: 280px;">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded font-weight-medium active" id="account-tab" data-bs-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true" style="font-size: 14px;">Hesabım</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="order-tab" data-bs-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" style="font-size: 14px;">Siparişler</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false" style="font-size: 14px;">İncelemeler</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link2 text-white d-flex align-items-center px-4 rounded text-sm font-weight-medium" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="false" style="font-size: 14px;">Adresler</a>
+        </li>
+    </ul>
+</div>

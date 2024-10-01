@@ -16,16 +16,30 @@ public class ProductsController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? categoryId)
     {
-        var products = await _context.Products.ToListAsync();
-        if (products == null)
+        
+        var categories = await _context.Categories.ToListAsync();
+        var products = _context.Products.AsQueryable();
+
+        if (categoryId.HasValue)
         {
-            return NotFound();
+            products = products.Where(p => p.CategoryId == categoryId.Value);
         }
 
-        return View(products);
+        var category = _context.Categories.Find(categoryId);
+
+        var productsInfo = new ProductsInfo()
+        {
+            Category = categories,
+            Products=  products.ToList(),
+            CategoryName = category?.Name
+        };
+
+        return View(productsInfo);
     }
+
+
 
     public async Task<IActionResult> Details(int id)
     {

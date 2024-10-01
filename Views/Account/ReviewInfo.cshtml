@@ -1,0 +1,74 @@
+@model UserInfo
+
+
+ <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <h3 class="mb-4">İncelemeler</h3>
+            @if (Model.Reviews != null && Model.Reviews.Count > 0)
+            {
+                @foreach (var review in Model.Reviews)
+                {
+                    if (review.Products != null)
+                    {
+                        <div class="order-border rounded-3 mt-2 overflow-hidden">
+                            <button class="d-flex justify-content-between align-items-center p-3 w-100 text-start" type="button" aria-expanded="false" style="background-color: #141416; border: none;">
+                                <div class="d-flex gap-2 align-items-center" style="flex: 1;">
+                                    <img src="/Images/@review.Products.img" alt="@review.Products.name" class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"/>
+                                </div>
+                                <div class="d-flex align-items-center flex-grow-1" style="width: 200px;">
+                                    <div>
+                                        <div class="text-muted" style="font-size: 0.875rem;">Yorumun</div>
+                                        <div class="text-white" style="font-size: 0.875rem;">@review.Review</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column align-items-center" style="min-width: 100px;">
+                                    <span class="text-muted" style="font-size: 0.875rem;">Verdiğin Puan</span>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= review.Rating)
+                                            {
+                                                <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+                                                    <g shape-rendering="geometricPrecision">
+                                                        <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#db711a"></path>
+                                                    </g>
+                                                </svg>
+                                            }
+                                            else
+                                            {
+                                                <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="24" preserveAspectRatio="xMidYMid meet">
+                                                    <g shape-rendering="geometricPrecision">
+                                                        <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#fff"></path>
+                                                    </g>
+                                                </svg>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="text-end" style="min-width: 150px;">
+                                    <div class="text-muted" style="font-size: 0.875rem;">
+                                        @review.CreatedAt.ToString("dd MMMM yyyy")
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                       <p>Ürün bulunamadı</p>
+                    }
+                }
+            }
+            else
+            {
+                <div style="margin-top: 50px;">
+                    <div class="bg-black text-center d-flex align-items-center justify-content-center flex-column rounded-3" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
+                        <div class="d-flex justify-content-center mb-2">
+                            <svg stroke="currentColor" fill="#ef6d16" stroke-width="0" version="1.1" viewBox="0 0 17 17" class="text-zinc-600" height="50" width="50" xmlns="http://www.w3.org/2000/svg">
+                                <g></g><path d="M15.5 0h-14c-0.827 0-1.5 0.673-1.5 1.5v10c0 0.827 0.673 1.5 1.5 1.5h0.5v4.102l4.688-4.102h8.812c0.827 0 1.5-0.673 1.5-1.5v-10c0-0.827-0.673-1.5-1.5-1.5zM16 11.5c0 0.275-0.224 0.5-0.5 0.5h-9.188l-3.312 2.898v-2.898h-1.5c-0.276 0-0.5-0.225-0.5-0.5v-10c0-0.275 0.224-0.5 0.5-0.5h14c0.276 0 0.5 0.225 0.5 0.5v10zM3 3h11v1h-11v-1zM3 5h11v1h-11v-1zM3 7h6v1h-6v-1z"></path>
+                            </svg>
+                        </div>
+                        <div class="h5" style="color : white; margin-top: 15px;">Ürün hakkında bir yorum bulunmuyor</div>
+                    </div>
+                </div>
+            }
+        </div>

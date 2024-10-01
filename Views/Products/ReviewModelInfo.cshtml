@@ -1,0 +1,34 @@
+@model Products
+
+
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-black text-white" style="border: 0.5px solid white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel">Değerlendirme Yap</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm" asp-action="Reviews" asp-controller="Products" method="post">
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Yıldız Değerlendirmesi</label>
+                        <select name="Rating" id="rating" class="form-control bg-dark text-white" required>
+                            <option value="">Seçin</option>
+                            <option value="1">1 Yıldız</option>
+                            <option value="2">2 Yıldız</option>
+                            <option value="3">3 Yıldız</option>
+                            <option value="4">4 Yıldız</option>
+                            <option value="5">5 Yıldız</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewContent" class="form-label">Yorumunuz</label>
+                        <textarea name="Review" class="form-control bg-dark text-white" id="reviewContent" rows="3" required></textarea>
+                    </div>
+                    <input type="hidden" name="ProductId" value="@Model.Id"/>
+                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

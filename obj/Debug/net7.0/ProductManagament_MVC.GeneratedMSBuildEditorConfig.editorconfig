@@ -102,8 +102,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/AccountInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9BY2NvdW50SW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/AddressInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9BZGRyZXNzSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/OrderInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9PcmRlckluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/ReviewInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9SZXZpZXdJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Account/UserInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWNjb3VudC9Vc2VySW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Area/Index.cshtml]
@@ -138,16 +158,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/ProductInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvUHJvZHVjdEluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/QuestionInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvUXVlc3Rpb25JbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/QuestionModelInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvUXVlc3Rpb25Nb2RlbEluZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/ReviewModelInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvUmV2aWV3TW9kZWxJbmZvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/ReviewsInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvUmV2aWV3c0luZm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Products/SectionInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdHMvU2VjdGlvbkluZm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Shared/Error.cshtml]

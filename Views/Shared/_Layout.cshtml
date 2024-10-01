@@ -16,7 +16,7 @@
 <body>
 @if (!ViewBag.HideHeader ?? false)
 {
-    <header class="position-relative" style="z-index: 10;">
+    <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-xl">
                 <a class="navbar-brand" href="#" style="color: white; font-size: 24px;">zeta.</a>
@@ -27,10 +27,7 @@
                             <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Privacy">Hakkımızda</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white" asp-controller="Products" asp-action="Index">Menü</a>
+                            <a class="nav-link" style="color: white" asp-controller="Products" asp-action="Index">Alışveriş</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: white" asp-controller="" asp-action="">İletişim</a>
@@ -39,35 +36,29 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <a class="nav-link position-relative" asp-controller="Cart" asp-action="Index">
+                    <a class="nav-link" asp-controller="Cart" asp-action="Index">
                         <i class="bi bi-cart text-white"></i>
                     </a>
                     <div class="dropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person" style="color: white"></i>
+                        <a class="nav-link dropdown-toggle text-white" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            @if (User.Identity.IsAuthenticated)
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
+                            </li>
+                            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
                             {
-                                <li>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Index">
-                                        Hesabım
-                                    </a>
-                                </li>
-                                if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
-                                {
-                                    <li class="nav-item">
-                                        <a style="color: black;" class="nav-link" asp-controller="Area" asp-action="Index">Admin Panel</a>
-                                    </li>
-                                }
-                                <li>
-                                    <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">
-                                        Çıkış Yap
-                                    </a>
-                                </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Area" asp-action="Index">Admin Panel</a>
+                            </li>
                             }
+                            <li>
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
+                            </li>
                         </ul>
                     </div>
+
                 </div>
 
             </div>
@@ -75,7 +66,7 @@
     </header>
 }
 
-<div class="">
+<div>
     <main role="main" class="pb-3">
         @RenderBody()
     </main>

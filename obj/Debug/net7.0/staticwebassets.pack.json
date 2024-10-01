@@ -21,6 +21,86 @@
       "PackagePath": "staticwebassets/Images/360_F_642002859_Yp2aTxdztdSzjpsSaTcnp5a8d772CU2i.jpg"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/3d_viewer_pf_16__b8iq7yl5sewi_large_2x.webp",
+      "PackagePath": "staticwebassets/Images/3d_viewer_pf_16__b8iq7yl5sewi_large_2x.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MK0U3_FV404.webp",
+      "PackagePath": "staticwebassets/Images/MK0U3_FV404.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MME73.webp",
+      "PackagePath": "staticwebassets/Images/MME73.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MMMQ3.webp",
+      "PackagePath": "staticwebassets/Images/MMMQ3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MMMR3.webp",
+      "PackagePath": "staticwebassets/Images/MMMR3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MNWP3_GEO_EMEA.webp",
+      "PackagePath": "staticwebassets/Images/MNWP3_GEO_EMEA.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MQTP3.webp",
+      "PackagePath": "staticwebassets/Images/MQTP3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MQTR3.webp",
+      "PackagePath": "staticwebassets/Images/MQTR3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MQTT3.webp",
+      "PackagePath": "staticwebassets/Images/MQTT3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MTJV3.webp",
+      "PackagePath": "staticwebassets/Images/MTJV3.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MU2G3-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MU2G3-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MUF82-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MUF82-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MWK43-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MWK43-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MWK73-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MWK73-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MWR53_FV402-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MWR53_FV402-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/MX2D3-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/MX2D3-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/airpods-max-select-green-202011.webp",
+      "PackagePath": "staticwebassets/Images/airpods-max-select-green-202011.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/airpods-max-select-pink-202011.webp",
+      "PackagePath": "staticwebassets/Images/airpods-max-select-pink-202011.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/airpods-max-select-skyblue-202011.webp",
+      "PackagePath": "staticwebassets/Images/airpods-max-select-skyblue-202011.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/airpods-max-select-spacegray-202011.webp",
+      "PackagePath": "staticwebassets/Images/airpods-max-select-spacegray-202011.webp"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/burger.jpg",
       "PackagePath": "staticwebassets/Images/burger.jpg"
     },
@@ -49,6 +129,10 @@
       "PackagePath": "staticwebassets/Images/hdpizza.jpg"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/homepod-select-midnight-202210.webp",
+      "PackagePath": "staticwebassets/Images/homepod-select-midnight-202210.webp"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hot_wings.webp",
       "PackagePath": "staticwebassets/Images/hot_wings.webp"
     },
@@ -57,8 +141,48 @@
       "PackagePath": "staticwebassets/Images/hummus.webp"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ipad-card-40-air-202405-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/ipad-card-40-air-202405-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ipad-card-40-ipad-202405-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/ipad-card-40-ipad-202405-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ipad-card-40-ipad-mini-202109-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/ipad-card-40-ipad-mini-202109-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ipad-card-40-pro-202405-Photoroom.webp",
+      "PackagePath": "staticwebassets/Images/ipad-card-40-pro-202405-Photoroom.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/iphone_kahverengi.webp",
+      "PackagePath": "staticwebassets/Images/iphone_kahverengi.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/iphone_mor.webp",
+      "PackagePath": "staticwebassets/Images/iphone_mor.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/iphone_siyah.webp",
+      "PackagePath": "staticwebassets/Images/iphone_siyah.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/mac-card-40-imac-24-202310.webp",
+      "PackagePath": "staticwebassets/Images/mac-card-40-imac-24-202310.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/mac-card-40-mac-studio-202306.webp",
+      "PackagePath": "staticwebassets/Images/mac-card-40-mac-studio-202306.webp"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/measty_treat.webp",
       "PackagePath": "staticwebassets/Images/measty_treat.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/model_mba_m2__cfrbip6c05yq_large_2x.webp",
+      "PackagePath": "staticwebassets/Images/model_mba_m2__cfrbip6c05yq_large_2x.webp"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/nuggest.webp",
@@ -73,8 +197,20 @@
       "PackagePath": "staticwebassets/Images/pizza.webp"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıhone_pembe.webp",
+      "PackagePath": "staticwebassets/Images/ıhone_pembe.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıphone_beyaz.webp",
+      "PackagePath": "staticwebassets/Images/ıphone_beyaz.webp"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıphone_mavi.webp",
       "PackagePath": "staticwebassets/Images/ıphone_mavi.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıphone_yeşil.webp",
+      "PackagePath": "staticwebassets/Images/ıphone_yeşil.webp"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/css/site.css",

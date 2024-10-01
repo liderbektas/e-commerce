@@ -1,0 +1,23 @@
+@model Products
+
+
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-black text-white" style="border: 0.5px solid white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionModalLabel">Soru Sor</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="questionForm" asp-action="AskQuestions" asp-controller="Products" method="post">
+                    <div class="mb-3">
+                        <label for="question" class="form-label">Sorunuz</label>
+                        <textarea name="PQuestion" class="form-control bg-dark text-white" id="question" rows="3" required></textarea>
+                    </div>
+                    <input type="hidden" name="ProductId" value="@Model.Id"/>
+                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
