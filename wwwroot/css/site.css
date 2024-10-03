@@ -22,7 +22,7 @@ body {
 }
 
 .navbar1 {
-    background-color: #212121;
+    background-color: #0a0a0b;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100vh;
     width: 250px;
@@ -30,15 +30,9 @@ body {
     padding-top: 20px;
     display: flex;
     flex-direction: column;
+    border-right: 0.5px solid #3f3f46;
 }
 
-.navbar-brand {
-    color: #000;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
 
 .navbar-nav .nav-item .nav-link1 {
     display: block;
@@ -53,7 +47,7 @@ body {
 
 .navbar-nav .nav-item .nav-link1:hover {
     color: #fff;
-    background-color: #495057;
+    background-color: #ef6c17;
     width: 100%;
 }
 

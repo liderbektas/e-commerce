@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -8,48 +9,56 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/ProductManagament_MVC.styles.css" asp-append-version="true"/>
 </head>
-<body style="background-color: #f4f4f4; font-family: Arial, sans-serif; overflow: hidden;">
+<body style="background-color: #0a0a0b; color:#fff; font-family: Arial, sans-serif; overflow: hidden;">
 
 <div class="d-flex">
     <nav class="navbar1 navbar-expand-sm">
-        <div class="navbar-brand">
-            Admin Panel
+        <div class="d-flex flex-column mb-1" style="padding-left: 22px;">
+            <h4 style="font-weight: bold">zeta.</h4>
+            <p class="text-muted" style="font-weight : lighter; font-size: 13px;">Yönetim Paneli</p>
         </div>
         <div class="container-fluid">
             <ul class="navbar-nav flex-column gap-3">
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white"  asp-area="Admin" asp-controller="Main" asp-action="Index">Ana sayfa</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Order" asp-action="Index">Siparişler</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Questions" asp-action="Index">Sorular</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Reviews" asp-action="Index">İncelemeler</a>
                 </li>
             </ul>
         </div>
-        <div class="d-flex flex-column gap-3 position-absolute text-center" style="bottom: 20px; padding: 10px; width: 230px;">
-            <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Home" asp-area="">
-                Sayfadan Ayrıl
-            </a>
-            <a class="btn btn-danger btn-sm w-100" asp-action="Logout" asp-controller="Logout" asp-area="Admin">
-                Oturumu Kapat
-            </a>
+        <div class="mt-auto sticky-bottom shadow px-4 py-2 d-flex justify-content-between" style="background-color: #18181c; border-top: 0.5px solid #3f3f46;">
+            <div>
+                <div class="">Admin</div>
+               <p style="color: #696971; font-size: 12px;">@User.FindFirst(ClaimTypes.Email)?.Value</p>
+            </div>
+            <button class="btn" type="button">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <svg stroke="currentColor" fill="#ef4444" stroke-width="0" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path d="m17 8-1.41 1.41L17.17 11H9v2h8.17l-1.58 1.58L17 16l4-4-4-4zM5 5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h7v-2H5V5z"></path>
+                    </svg>
+                </a>
+            </button>
         </div>
+
     </nav>
-    <div class="container" style="width: calc(100% - 249px);  padding: 50px; height: 100vh;  overflow-y: auto;">
+    <div class="container" style="width: calc(100% - 249px);  padding: 20px; height: 100vh;  overflow-y: auto;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

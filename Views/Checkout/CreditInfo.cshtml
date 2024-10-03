@@ -10,22 +10,22 @@
             <p class="mb-0" style="font-size: 13px; color: #77777e">Kredi kartınızla güvenli ve hızlı ödeme.</p>
         </div>
     </button>
-    <div id="card-form" class="gap-3 px-3 pb-3" style="width: 500px; margin-top: 10px; display: none;">
+    <div id="card-form" class="gap-3 px-3 pb-3" style="width: 500px; margin-top: 10px; display: block;">
         <div class="my-2">
-            <input name="cardName" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="Kart ismi">
+            <input name="cardName" required="" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="Kart ismi">
         </div>
         <div class="mb-2">
-            <input name="cardNumber" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="Kart numarası">
+            <input name="cardNumber" required="" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="Kart numarası">
         </div>
         <div class="row g-3">
             <div class="col-md-6">
                 <div class="">
-                    <input name="lastDate" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="Geçerlilik tarihi">
+                    <input name="lastDate" required="" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="MM/YY">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="">
-                    <input name="cvv" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;" type="text" class="form-control text-white" placeholder="CVV">
+                    <input name="cvv" required="" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 14px; height: 50px;"  type="text" class="form-control text-white" placeholder="CVV">
                 </div>
             </div>
         </div>

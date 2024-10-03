@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductManagament_MVC.Models;
 
@@ -11,9 +12,11 @@ using ProductManagament_MVC.Models;
 namespace ProductManagament_MVC.Migrations
 {
     [DbContext(typeof(PM_Context))]
-    partial class PM_ContextModelSnapshot : ModelSnapshot
+    [Migration("20241003133855_addedPaymentMethod")]
+    partial class addedPaymentMethod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,6 +56,35 @@ namespace ProductManagament_MVC.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("ProductManagament_MVC.Models.Bank", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IBAN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransferReference")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bank");
                 });
 
             modelBuilder.Entity("ProductManagament_MVC.Models.Cart", b =>
@@ -111,9 +143,6 @@ namespace ProductManagament_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -126,7 +155,7 @@ namespace ProductManagament_MVC.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
+            modelBuilder.Entity("ProductManagament_MVC.Models.CreditCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,21 +164,45 @@ namespace ProductManagament_MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CVV")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastDate")
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreditCart");
+                });
+
+            modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BankId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreditCartId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
@@ -159,6 +212,10 @@ namespace ProductManagament_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BankId");
+
+                    b.HasIndex("CreditCartId");
 
                     b.ToTable("Orders");
                 });
@@ -293,8 +350,6 @@ namespace ProductManagament_MVC.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Reviews");
                 });
 
@@ -370,6 +425,21 @@ namespace ProductManagament_MVC.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
+                {
+                    b.HasOne("ProductManagament_MVC.Models.Bank", "Bank")
+                        .WithMany()
+                        .HasForeignKey("BankId");
+
+                    b.HasOne("ProductManagament_MVC.Models.CreditCart", "CreditCart")
+                        .WithMany()
+                        .HasForeignKey("CreditCartId");
+
+                    b.Navigation("Bank");
+
+                    b.Navigation("CreditCart");
+                });
+
             modelBuilder.Entity("ProductManagament_MVC.Models.OrderItem", b =>
                 {
                     b.HasOne("ProductManagament_MVC.Models.Order", null)
@@ -423,15 +493,7 @@ namespace ProductManagament_MVC.Migrations
                         .WithMany()
                         .HasForeignKey("ProductsId");
 
-                    b.HasOne("ProductManagament_MVC.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Products");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProductManagament_MVC.Models.Cart", b =>

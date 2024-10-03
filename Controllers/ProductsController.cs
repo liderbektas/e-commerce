@@ -38,51 +38,54 @@ public class ProductsController : Controller
 
         return View(productsInfo);
     }
+    
 
+   public async Task<IActionResult> Details(int id)
+{
+    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    
+    var product = await _context.Products.FindAsync(id);
+    
+    var questions = await _context.Questions
+        .Where(q => q.ProductId == id)  
+        .ToListAsync();
+    
+    var reviews = await _context.Reviews
+        .Where(r => r.ProductId == id)
+        .Include(r => r.User) // Kullanıcı bilgilerini dahil et
+        .ToListAsync();
 
-
-    public async Task<IActionResult> Details(int id)
+    var questionsId = questions.Select(q => q.Id).ToList();
+    
+    var answers = await _context.Answers
+        .Where(a => questionsId.Contains(a.QuestionId))  
+        .ToListAsync();
+    
+    double ratingAverage = 0;
+    if (reviews.Any())
     {
-        var product = await _context.Products.FindAsync(id);
-        
-        var questions = await _context.Questions
-            .Where(q => q.ProductId == id)  
-            .ToListAsync();
-        
-        var reviews = await _context.Reviews
-            .Where(r => r.ProductId == id)  
-            .ToListAsync();
-        
-        var questionsId = questions.Select(q => q.Id).ToList();
-        
-        var answers = await _context.Answers
-            .Where(a => questionsId.Contains(a.QuestionId))  
-            .ToListAsync();
-
-        double ratingAverage = 0;
-        if (reviews.Any())
-        {
-            ratingAverage = reviews.Average(r => r.Rating);
-        }
-        
-        var ratingCounts = reviews
-            .GroupBy(r => r.Rating)
-            .ToDictionary(g => g.Key, g => g.Count());
-        
-        
-        ViewBag.RatingAverage = ratingAverage;
-        ViewBag.RatingCounts = ratingCounts; 
-        ViewBag.Questions = questions;
-        ViewBag.Reviews = reviews;
-        ViewBag.Answers = answers;
-        
-        if (product == null)
-        {
-            return NotFound();
-        }
-
-        return View(product); 
+        ratingAverage = reviews.Average(r => r.Rating);
     }
+    
+    var ratingCounts = reviews
+        .GroupBy(r => r.Rating)
+        .ToDictionary(g => g.Key, g => g.Count());
+    
+    
+    ViewBag.RatingAverage = ratingAverage;
+    ViewBag.RatingCounts = ratingCounts; 
+    ViewBag.Questions = questions;
+    ViewBag.Reviews = reviews;
+    ViewBag.Answers = answers;
+    
+    if (product == null)
+    {
+        return NotFound();
+    }
+
+    return View(product); 
+}
+
     
     [HttpPost]
     public async Task<IActionResult> AskQuestions(string PQuestion, int ProductId)
@@ -123,24 +126,24 @@ public class ProductsController : Controller
         return View("ProductDetails");
     }
 
-    public async Task<IActionResult> Reviews(string Review, int Rating, int ProductId)
+    public async Task<IActionResult> Reviews(string Review, int Rating, int ProductId , int userId)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                /*var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (userId == null)
                 {
                     return RedirectToAction("Login", "Auth");
-                }
+                }*/
 
                 var product = _context.Products
                     .FirstOrDefault(p => p.Id == ProductId);
 
                 var review = new Reviews()
                 {
-                    UserId = int.Parse(userId),
+                    UserId = userId,
                     ProductId = ProductId,
                     Rating = Rating,
                     Review = Review,

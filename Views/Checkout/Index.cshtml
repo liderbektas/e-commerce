@@ -15,17 +15,17 @@
             </h6>
         </div>
 
-        <div class="d-flex justify-content-between" style="margin-top: 30px;">
+        <div class="d-flex justify-content-between" style="margin-top: 20px;">
 
 
             <form asp-controller="Checkout" asp-action="Index" method="post" class="d-flex flex-column gap-3">
                 @Html.Partial("AddressInfo", Model.User)
 
                 <input type="hidden" name="address" value="@Model.User.Address"/>
-                <input type="hidden" name="paymentMethod" id="payment-method" value=""/>
+                <input type="hidden" name="paymentMethod" id="payment-method" value="Kredi Kartı"/>
 
                 <section class="p-4 rounded-md" style="background-color: #27272a; width: 700px;">
-                    <h5>Ödeme bilgileri</h5>
+                    <h5 class="mb-2">Ödeme bilgileri</h5>
 
                     <div class="d-grid gap-2 mt-2">
                         @Html.Partial("CreditInfo", Model.Cart)
@@ -42,19 +42,19 @@
 </div>
 
 
-<script>
+@*<script>
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("credit-card-btn").addEventListener("click", () => {
             const form = document.getElementById("card-form");
             form.style.display = form.style.display === "none" ? "block" : "none";
         });
     });
-    
+
     const paymentMethodInput = document.getElementById('payment-method');
 
     const selectPaymentMethod = (method) => {
         paymentMethodInput.value = method;
-        console.log('Selected payment method:', paymentMethodInput.value); 
+        console.log('Selected payment method:', paymentMethodInput.value);
     };
 
     document.addEventListener("DOMContentLoaded", function() {
@@ -62,4 +62,4 @@
             selectPaymentMethod('Kredi Kartı');
         });
     });
-</script>
+</script>*@

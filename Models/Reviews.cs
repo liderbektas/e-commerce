@@ -7,6 +7,7 @@ public class Reviews
     public int ProductId { get; set; }
     public Products? Products { get; set; }
     public int UserId { get; set; }
+    public User? User { get; set; }
     public int Rating { get; set; }
     public DateTime CreatedAt { get; set; }
 }
