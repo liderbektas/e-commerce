@@ -8,6 +8,7 @@ public class MainController : Controller
 {
     public IActionResult Index()
     {
+        ViewData["ActivePage"] = "Main";
         return View();
     }
 }

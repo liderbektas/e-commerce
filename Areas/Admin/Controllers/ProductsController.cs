@@ -16,18 +16,7 @@ public class ProductsController : Controller
     }
     public async Task<IActionResult> Index()
     {
-        /*
-        var currentUserName = User.Identity.Name;
-        var currentUser = _context.Users.FirstOrDefault(u => u.userName == currentUserName);
-
-        if (currentUser != null)
-        {
-            var products = _context.Products.Where(p => p.UserId == currentUser.Id).ToList();
-            return View(products);
-        }
-         ViewBag.Error = "Geçerli bir kullanıcı bulunamadı.";
-                  return View(new List<Products>());
-        */
+        ViewData["ActivePage"] = "Products";
         var products = await _context.Products.Include(x => x.Category).ToListAsync();
         return View(products);
     }

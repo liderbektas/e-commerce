@@ -15,6 +15,7 @@ public class CategoryController : Controller
 
     public IActionResult Index()
     {
+        ViewData["ActivePage"] = "Category";
         var categories = _context.Categories.ToList();
         return View(categories);
     }

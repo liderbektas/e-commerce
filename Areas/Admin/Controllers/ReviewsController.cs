@@ -15,6 +15,8 @@ public class ReviewsController : Controller
     }
     public async Task<IActionResult> Index()
     {
+        ViewData["ActivePage"] = "Reviews";
+        
         var reviews = await _context.Reviews.ToListAsync();
         if (reviews == null)
         {

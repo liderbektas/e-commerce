@@ -16,6 +16,7 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewData["ActivePage"] = "Order";
             var orders = await _context.Orders.ToListAsync();
             if (orders == null || !orders.Any())
             {

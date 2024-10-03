@@ -16,6 +16,8 @@ public class UserController : Controller
 
     public async Task<IActionResult> Index()
     {
+        ViewData["ActivePage"] = "User";
+        
         var user = await _context.Users.ToListAsync();
         if (user == null)
         {

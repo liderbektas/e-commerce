@@ -16,6 +16,8 @@ public class QuestionsController : Controller
     
     public async Task<IActionResult> Index()
     {
+        ViewData["ActivePage"] = "Questions";
+        
         var questions = await _context.Questions.ToListAsync();
 
         var questionsId = questions.Select(q => q.Id).ToList();

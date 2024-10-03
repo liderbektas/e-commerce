@@ -20,25 +20,25 @@
         <div class="container-fluid">
             <ul class="navbar-nav flex-column gap-3">
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white"  asp-area="Admin" asp-controller="Main" asp-action="Index">Ana sayfa</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Main" ? "active" : "")" asp-area="Admin" asp-controller="Main" asp-action="Index">Ana sayfa</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Products" ? "active" : "") "  asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "User" ? "active" : "")" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Category" ? "active" : "")" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Order" asp-action="Index">Siparişler</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Order" ? "active" : "")" asp-area="Admin" asp-controller="Order" asp-action="Index">Siparişler</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Questions" asp-action="Index">Sorular</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Questions" ? "active" : "")" asp-area="Admin" asp-controller="Questions" asp-action="Index">Sorular</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white" asp-area="Admin" asp-controller="Reviews" asp-action="Index">İncelemeler</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Reviews" ? "active" : "")" asp-area="Admin" asp-controller="Reviews" asp-action="Index">İncelemeler</a>
                 </li>
             </ul>
         </div>
