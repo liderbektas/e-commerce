@@ -29,10 +29,6 @@
 
                     <div class="d-grid gap-2 mt-2">
                         @Html.Partial("CreditInfo", Model.Cart)
-
-                        @Html.Partial("PaypalInfo", Model.Cart)
-
-                        @Html.Partial("BankInfo", Model.Cart)
                     </div>
 
                     <button type="submit" class="px-4 py-1 rounded-2 mt-4" style="background-color: #ef6c17; color: white; border: none; text-decoration: none; width: 220px;">Ödeme Yap</button>
@@ -54,12 +50,6 @@
         });
     });
     
-    document.getElementById("bank-btn").addEventListener("click", () => {
-        const form = document.getElementById("bank-form");
-        form.style.display = form.style.display === "none" ? "block" : "none";
-    });
-
-
     const paymentMethodInput = document.getElementById('payment-method');
 
     const selectPaymentMethod = (method) => {
@@ -70,12 +60,6 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("credit-card-btn").addEventListener("click", () => {
             selectPaymentMethod('Kredi Kartı');
-        });
-        document.getElementById("bank-btn").addEventListener("click", () => {
-            selectPaymentMethod('Banka Havale');
-        });
-        document.getElementById("paypal-btn").addEventListener("click", () => {
-            selectPaymentMethod('PayPal');
         });
     });
 </script>

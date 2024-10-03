@@ -154,20 +154,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvQWRkcmVzc0luZm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Checkout/BankInfo.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvQmFua0luZm8uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Checkout/CreditInfo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvQ3JlZGl0SW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Checkout/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Checkout/PaypalInfo.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvUGF5cGFsSW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Checkout/SideInfo.cshtml]
