@@ -5,6 +5,7 @@
         <h3 style="font-weight: bold">Hesabım</h3>
         <form asp-controller="Auth" asp-action="Edit" method="post">
             <input type="hidden" name="userId" value="@Model.User.Id"/>
+            <input type="hidden" name="address" value="@Model.User.Address" />
             <div class="d-flex flex-column gap-2">
                 <div class="d-flex flex-column gap-2">
                     <span style="font-size: 14px;">E-posta</span>

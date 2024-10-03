@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model Products
 
 
@@ -6,11 +7,19 @@
         @if (ViewBag.Questions != null && ViewBag.Questions.Count > 0)
         {
             <div class="py-3" style="border-bottom: 0.5px solid #71717a; width: 750px;">
-                <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#questionModal">
-                    Soru Sor
-                </button>
+                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                {
+                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#questionModal">
+                        Soru Sor
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#questionModal">
+                        Soru sormak için lütfen giriş yapınız
+                    </button>
+                }
             </div>
-
             @foreach (var question in ViewBag.Questions)
             {
                 <div class="py-2" style="width: 636px;">
@@ -83,7 +92,7 @@
                                     <input type="hidden" name="id" value="@question.Id"/>
                                     <input type="hidden" name="productId" value="@Model.Id"/>
                                     <input name="answer" class="form-control bg-dark text-white" rows="3"></input>
-                                    <button type="submit" class="px-4 py-2 rounded-2 mt-2" style="background-color: #ef6c17; color: white; border: none">Cevapla</button>
+                                    <button type="submit" class="px-4 py-2 rounded-2 mt-2" style="background-color: #27272a; color: white; border: none">Cevapla</button>
                                 </form>
                             </div>
                         }
@@ -111,9 +120,19 @@
                     </div>
                     <div class="h5" style="color:#484848;">Ürün hakkında bir soru bulunmuyor</div>
                     <div class="mt-3">
-                        <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#questionModal">
-                            Soru Sor
-                        </button>
+                        @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                        {
+                            <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#questionModal">
+                                Soru Sor
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#questionModal">
+                                Soru sormak için lütfen giriş yapınız
+                            </button>
+                        }
+                       
                     </div>
                 </div>
             </div>

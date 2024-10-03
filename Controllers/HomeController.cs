@@ -5,7 +5,7 @@ using ProductManagament_MVC.Models;
 
 namespace ProductManagament_MVC.Controllers;
 
-[Authorize]
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

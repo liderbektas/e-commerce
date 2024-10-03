@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model Products
 
 
@@ -6,9 +7,19 @@
         @if (ViewBag.Reviews != null && ViewBag.Reviews.Count > 0)
         {
             <div class="py-3" style="border-bottom: 0.5px solid #71717a; width: 750px;">
-                <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#reviewModal">
-                    Yorum Yap
-                </button>
+                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                {
+                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                        Yorum Yap
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                        Yorum yapmak için lütfen giriş yapınız
+                    </button>
+                }
+                
             </div>
             <div class="rounded-2 p-4 pb-5" style="border: 0.5px solid white">
                 <div class="row g-4">
@@ -141,9 +152,19 @@
                     </div>
                     <div class="h5" style="color:#484848;">Ürün hakkında bir yorum bulunmuyor</div>
                     <div class="mt-3">
-                        <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#reviewModal">
-                            Yorum Yap
-                        </button>
+                        @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                        {
+                            <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                Yorum Yap
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                                Yorum yapmak için lütfen giriş yapınız
+                            </button>
+                        }
+                       
                     </div>
                 </div>
             </div>

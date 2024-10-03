@@ -17,6 +17,7 @@ public class AuthController : Controller
 
     public IActionResult Index()
     {
+        
         return View();
     }
 
@@ -72,20 +73,26 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Register(User user)
+    public IActionResult Register(string userName, string email, string password)
     {
         try
         {
-            var existingUser = _context.Users.FirstOrDefault(x => x.email == user.email);
-
+            var existingUser = _context.Users.FirstOrDefault(x => x.email == email);
+            
             if (existingUser != null)
             {
                 ViewBag.Error = "Bu e-posta adresi ile bir kullanıcı zaten kayıtlı.";
-                return View(user);
+                return View();
             }
             
-            user.role = "Müşteri";
-
+            var user = new User
+            {
+                userName = userName,
+                email = email,
+                password = password,
+                role = "Müşteri"
+            };
+            
             _context.Users.Add(user);
             _context.SaveChanges();
             return RedirectToAction("Login", "Auth");
@@ -93,9 +100,10 @@ public class AuthController : Controller
         catch (Exception ex)
         {
             ViewBag.Error = $"Bir hata oluştu: {ex.Message}";
-            return View(user);
+            return View(); 
         }
     }
+
     
     [HttpPost]
     public IActionResult Edit(int userId , string address , string phone , DateTime birthDate , string email , string userName)

@@ -1,3 +1,4 @@
+@using System.Security.Claims
 @model Products
 
 
@@ -19,12 +20,21 @@
             <form id="form-@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post" style="display: flex; gap: 20px;">
                 <input type="hidden" name="productId" value="@Model.Id" style="display: none;"/>
                 <input type="number" name="quantity" value="1" min="1" class="form-control w-25 text-center">
+                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                {
                 <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">
                     <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
                 </button>
+                }
+                else
+                {
+                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;">
+                        <i class="fas fa-shopping-cart me-2"></i> Sepete Eklemek için lütfen giriş yapınız
+                    </button>
+                }
             </form>
         </div>
-
+       
         <div class="mt-5">
             <div class="d-flex justify-content-between border-top pt-3 text-white">
                 <span><i class="fas fa-shipping-fast me-2"></i>Hızlı Teslimat</span>

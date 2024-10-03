@@ -22,6 +22,8 @@ public class Checkout : Controller
             return RedirectToAction("Login", "Auth");
         }
 
+        var user = _context.Users.Find(int.Parse(userId));
+
         var cart = await _context.Carts
             .Include(x => x.CartItems)
             .ThenInclude(o => o.Products)
@@ -32,17 +34,28 @@ public class Checkout : Controller
             return BadRequest("Sepetiniz Boş");
         }
 
-        return View(cart);
+        var orderInfo = new OrderInfo()
+        {
+            User = user,
+            Cart = cart
+        };
+
+        return View(orderInfo);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(string shippingFullName, string shippingStreet, string shippingCity,
-        string shippingState, string shippingZipCode, string shippingCountry, string paymentMethod, string cardNumber)
+    public async Task<IActionResult> Index(string address, string paymentMethod, string cardNumber,
+        string cardName, string lastDate, string cvv)
     {
         if (ModelState.IsValid)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(address) || string.IsNullOrWhiteSpace(cardNumber))
+                {
+                    ModelState.AddModelError("", "Adres ve kart numarası boş olamaz.");
+                }
+
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (userId == null)
                 {
@@ -58,19 +71,18 @@ public class Checkout : Controller
                 {
                     return BadRequest("Sepetiniz Boş");
                 }
-                
+
+
                 var order = new Order
                 {
                     UserId = int.Parse(userId),
                     OrderDate = DateTime.Now,
-                    ShippingFullName = shippingFullName,
-                    ShippingStreet = shippingStreet,
-                    ShippingCity = shippingCity,
-                    ShippingState = shippingState,
-                    ShippingZipCode = shippingZipCode,
-                    ShippingCountry = shippingCountry,
+                    address = address,
                     PaymentMethod = paymentMethod,
                     CardNumber = cardNumber,
+                    CardName = cardName,
+                    LastDate = lastDate,
+                    CVV = cvv,
                     OrderItems = cart.CartItems.Select(x => new OrderItem
                     {
                         ProductId = x.ProductId,
@@ -78,7 +90,7 @@ public class Checkout : Controller
                         Products = x.Products
                     }).ToList()
                 };
-                
+
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
 

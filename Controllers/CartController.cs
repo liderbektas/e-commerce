@@ -93,4 +93,81 @@ public class CartController : Controller
         await _context.SaveChangesAsync();
         return RedirectToAction("Index", "Products");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Remove(int productId)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
+        var cart = await _context.Carts
+            .Include(c => c.CartItems)
+            .FirstOrDefaultAsync(c => c.UserId == userId);
+
+        if (cart == null)
+        {
+            cart = new Cart
+            {
+                UserId = userId,
+                CreatedAt = DateTime.Now,
+                CartItems = new List<CartItem>()
+            };
+            await _context.Carts.AddAsync(cart);
+            await _context.SaveChangesAsync();
+        }
+
+        var cartItem = cart.CartItems.FirstOrDefault(c => c.ProductId == productId);
+
+        if (cartItem != null)
+        {
+            cartItem.Quantity -= 1;
+
+            if (cartItem.Quantity <= 0)
+            {
+                cart.CartItems.Remove(cartItem);
+            }
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index", "Cart");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Added(int productId)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null || !int.TryParse(userIdClaim, out var userId))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
+        var cart = await _context.Carts
+            .Include(x => x.CartItems)
+            .FirstOrDefaultAsync(x => x.UserId == userId);
+
+        if (cart == null)
+        {
+            cart = new Cart()
+            {
+                UserId = userId,
+                CreatedAt = DateTime.Now,
+                CartItems = new List<CartItem>()
+            };
+
+            await _context.Carts.AddAsync(cart);
+            await _context.SaveChangesAsync();
+        }
+
+        var cartItem = cart.CartItems.FirstOrDefault(c => c.ProductId == productId);
+        if (cartItem != null)
+        {
+            cartItem.Quantity += 1;
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index", "Cart");
+    }
 }

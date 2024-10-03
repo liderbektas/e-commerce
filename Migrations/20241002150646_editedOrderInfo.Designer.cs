@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductManagament_MVC.Models;
 
@@ -11,9 +12,11 @@ using ProductManagament_MVC.Models;
 namespace ProductManagament_MVC.Migrations
 {
     [DbContext(typeof(PM_Context))]
-    partial class PM_ContextModelSnapshot : ModelSnapshot
+    [Migration("20241002150646_editedOrderInfo")]
+    partial class editedOrderInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,8 +134,8 @@ namespace ProductManagament_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CVV")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CVV")
+                        .HasColumnType("int");
 
                     b.Property<string>("CardName")
                         .HasColumnType("nvarchar(max)");
@@ -147,12 +150,14 @@ namespace ProductManagament_MVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -168,16 +173,16 @@ namespace ProductManagament_MVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProductsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -369,9 +374,7 @@ namespace ProductManagament_MVC.Migrations
                 {
                     b.HasOne("ProductManagament_MVC.Models.Order", null)
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("ProductManagament_MVC.Models.Products", "Products")
                         .WithMany()

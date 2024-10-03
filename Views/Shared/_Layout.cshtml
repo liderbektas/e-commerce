@@ -14,61 +14,124 @@
     <link rel="stylesheet" href="~/ProductManagement_MVC.styles.css" asp-append-version="true"/>
 </head>
 <body>
-@if (!ViewBag.HideHeader ?? false)
-{
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-xl">
-                <a class="navbar-brand" href="#" style="color: white; font-size: 24px;">zeta.</a>
 
-                <div class="collapse navbar-collapse justify-content-center">
-                    <ul class="navbar-nav gap-5" style="font-size: 14px;">
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-xl d-flex">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand mx-auto" style="color: white; font-size: 24px; padding-top: 20px;">zeta.</a>
+
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav gap-5" style="font-size: 14px;">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" asp-controller="Products" asp-action="Index">Alışveriş</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white" asp-controller="Home" asp-action="Contact">İletişim</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-flex align-items-center">
+                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                {
+                <a class="nav-link" asp-controller="Cart" asp-action="Index">
+                    <svg stroke="#fff" fill="#000" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                </a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle text-white" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white" asp-controller="Products" asp-action="Index">Alışveriş</a>
+                        @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
+                        {
+                        <li>
+                            <a class="dropdown-item" asp-controller="Area" asp-action="Index">Admin Panel</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white" asp-controller="" asp-action="">İletişim</a>
+                        }
+                        <li>
+                            <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
                         </li>
                     </ul>
                 </div>
-
-                <div class="d-flex align-items-center">
-                    <a class="nav-link" asp-controller="Cart" asp-action="Index">
-                        <i class="bi bi-cart text-white"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a class="nav-link dropdown-toggle text-white" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li>
-                                <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
-                            </li>
-                            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
-                            {
-                            <li>
-                                <a class="dropdown-item" asp-controller="Area" asp-action="Index">Admin Panel</a>
-                            </li>
-                            }
-                            <li>
-                                <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
+                }
+                else
+                {
+                <ul class="navbar-nav d-flex gap-3 align-items-center">
+                    <li class="nav-item">
+                        <a data-bs-toggle="modal" data-bs-target="#registerModal" style="font-size: 14px; cursor: pointer;">Kayıt Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white;" data-bs-toggle="modal" data-bs-target="#globalModal">Giriş Yap</a>
+                    </li>
+                </ul>
+                }
             </div>
-        </nav>
-    </header>
-}
+        </div>
+    </nav>
+</header>
+
 
 <div>
     <main role="main" class="pb-3">
         @RenderBody()
+        <div class="modal fade" id="globalModal" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-black" style="border: 0.5px solid white; width: 400px;">
+                    <div class="modal-header text-white" style="border: none">
+                        <h5 class="modal-title" id="globalModalLabel">Giriş Yap</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" asp-controller="Auth" asp-action="Login" class="d-flex flex-column gap-3">
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" class="form-control rounded-3 px-3 py-2 text-white" placeholder="E-posta adresinizi girin" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px;"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" name="password" class="form-control rounded-3 px-3 py-2 text-white" placeholder="Şifrenizi girin" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px;"/>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a style="font-size: 14px; cursor: pointer; margin-left: 2px;">Hesabım yok</a>
+                                <button type="submit" class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Giriş Yap</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-black" style="border: 0.5px solid white; width: 400px;">
+                    <div class="modal-header text-white" style="border: none">
+                        <h5 class="modal-title" id="registerModalLabel">Hesap Oluştur</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-controller="Auth" asp-action="Register" method="post" class="d-flex flex-column gap-3">
+                            <div class="form-group">
+                                <input name="userName" class="form-control rounded-3 px-3 py-2 text-white" placeholder="Kullanıcı Adı" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px;"/>
+                            </div>
+                            <div class="form-group">
+                                <input name="email" class="form-control rounded-3 px-3 py-2 text-white" placeholder="E-posta" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px;"/>
+                            </div>
+                            <div class="form-group">
+                                <input name="password" class="form-control rounded-3 px-3 py-2 text-white" placeholder="Şifre" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px;"/>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a style="font-size: 14px; cursor: pointer; margin-left: 2px;">Bir hesabım var</a>
+                                <button type="submit" class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Kayıt ol</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 </div>
 
