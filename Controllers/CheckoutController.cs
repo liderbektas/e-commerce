@@ -5,11 +5,11 @@ using ProductManagament_MVC.Models;
 
 namespace ProductManagament_MVC.Controllers;
 
-public class Checkout : Controller
+public class CheckoutController : Controller
 {
     private readonly PM_Context _context;
 
-    public Checkout(PM_Context context)
+    public CheckoutController(PM_Context context)
     {
         _context = context;
     }

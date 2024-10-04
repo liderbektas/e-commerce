@@ -1,0 +1,76 @@
+@model UserInfo
+
+
+<div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
+    <h3 class="mb-4">Adresler</h3>
+    <div class="d-flex text-muted gap-3">
+        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="flex-shrink-0 mt-1" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"></path>
+        </svg>
+        <p style="font-size: 14px;">Bu sayfada yapacağınız adres değişiklikleri, daha önce vermiş olduğunuz siparişleri etkilemez. Vermiş olduğunuz siparişlerin adres değişikliğini Siparişlerim alanından gerçekleştirebilirsiniz.</p>
+    </div>
+
+    @if (Model.User.Address == null)
+    {
+        <div style="margin-top: 25px;">
+            <div class="bg-black text-center d-flex align-items-center justify-content-center flex-column" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
+                <div class="h3">
+                    Adres eklemediniz
+                </div>
+                <p class="text-muted">Henüz bir adres eklemediniz, sipariş işlemleri için bir adres ekleyin.</p>
+                <div class="mt-3">
+                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: transparent; color: white; border: 0.5px solid #3a3a3f" data-bs-toggle="modal" data-bs-target="#addressModal">
+                        Yeni Ekle
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: black; border: 0.5px solid gray">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addressModalLabel">Yeni Adres Ekle</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addressForm" method="post" asp-controller="Auth" asp-action="Edit">
+                            <input type="hidden" name="UserId" value="@Model.User.Id"/>
+                            <input type="hidden" name="userName" value="@Model.User.userName"/>
+                            <input type="hidden" name="email" value="@Model.User.email"/>
+                            <input type="hidden" name="birthDate" value="@Model.User.BirthDate"/>
+                            <input type="hidden" name="phone" value="@Model.User.phoneNumber"/>
+
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Adres</label>
+                                <textarea style="background-color: #21252a; color: white;" class="form-control" name="Address" id="address" rows="4" placeholder="Adresinizi buraya girin..." required></textarea>
+                            </div>
+
+                            <div class="mt-3">
+                                <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">Adres Ekle</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border border-secondary p-3 rounded" style="width: 450px; margin-top: 25px; background-color: transparent;">
+            <div class="d-flex gap-2 align-items-center font-weight-bold">
+                <div style="margin-bottom: 16px;">
+                    <svg stroke="currentColor" fill="#ef6d16" stroke-width="0" viewBox="0 0 24 24" class="text-secondary" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21H5C4.44772 21 4 20.5523 4 20V11L1 11L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11L20 11V20C20 20.5523 19.5523 21 19 21ZM6 19H18V9.15745L12 3.7029L6 9.15745V19ZM8 15H16V17H8V15Z"></path>
+                    </svg>
+                </div>
+                <p style="font-size: 13px">Ev</p>
+            </div>
+            <div class="text-muted">
+                <p style="font-size: 14px;">@Model.User.Address</p>
+            </div>
+        </div>
+    }
+</div>

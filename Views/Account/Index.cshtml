@@ -6,17 +6,17 @@
 
 <div class="container mt-5 d-flex gap-5">
 
-    @Html.Partial("UserInfo", Model)
+    @Html.Partial("Partial/_User", Model)
 
     <div class="tab-content" style="flex-grow: 1;">
 
-        @Html.Partial("AccountInfo", Model)
+        @Html.Partial("Partial/_Account", Model)
 
-        @Html.Partial("OrderInfo", Model)
+        @Html.Partial("Partial/_Order", Model)
 
-        @Html.Partial("ReviewInfo", Model)
+        @Html.Partial("Partial/_Review", Model)
 
-        @Html.Partial("AddressInfo", Model)
+        @Html.Partial("Partial/_Address", Model)
 
     </div>
 </div>

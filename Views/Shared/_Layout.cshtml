@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-expand-lg">
         <div class="container-xl d-flex">
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand mx-auto" style="color: white; font-size: 24px; padding-top: 20px;">zeta.</a>
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand mx-auto" style="color: white; font-size: 24px;">zeta.</a>
 
             <div class="collapse navbar-collapse justify-content-center">
                 <ul class="navbar-nav gap-5" style="font-size: 14px;">
@@ -37,39 +37,41 @@
             <div class="d-flex align-items-center">
                 @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
                 {
-                <a class="nav-link" asp-controller="Cart" asp-action="Index">
-                    <svg stroke="#fff" fill="#000" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                </a>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle text-white" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person"></i>
+                    <a class="nav-link" asp-controller="Cart" asp-action="Index">
+                        <svg stroke="#fff" fill="#000" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="18" width="18" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
-                        </li>
-                        @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
-                        {
-                        <li>
-                            <a class="dropdown-item" asp-controller="Area" asp-action="Index">Admin Panel</a>
-                        </li>
-                        }
-                        <li>
-                            <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle text-white" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
+                            </li>
+                            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin")
+                            {
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Area" asp-action="Index">Admin Panel</a>
+                                </li>
+                            }
+                            <li>
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Çıkış Yap</a>
+                            </li>
+                        </ul>
+                    </div>
                 }
                 else
                 {
-                <ul class="navbar-nav d-flex gap-3 align-items-center">
-                    <li class="nav-item">
-                        <a data-bs-toggle="modal" data-bs-target="#registerModal" style="font-size: 14px; cursor: pointer;">Kayıt Ol</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white;" data-bs-toggle="modal" data-bs-target="#globalModal">Giriş Yap</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav d-flex gap-3 align-items-center">
+                        <li class="nav-item">
+                            <a data-bs-toggle="modal" data-bs-target="#registerModal" style="font-size: 14px; cursor: pointer;">Kayıt Ol</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white;" data-bs-toggle="modal" data-bs-target="#globalModal">Giriş Yap</a>
+                        </li>
+                    </ul>
                 }
             </div>
         </div>

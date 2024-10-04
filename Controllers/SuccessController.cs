@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProductManagament_MVC.Controllers;
 
-public class Success : Controller
+public class SuccessController : Controller
 {
     public IActionResult Index()
     {

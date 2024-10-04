@@ -10,20 +10,20 @@
 
 <div class="container mt-5" style="font-size: 14px;">
 
-    @Html.Partial("ProductInfo", Model)
+    @Html.Partial("Partial/_Product", Model)
 
     <div>
-        @Html.Partial("SectionInfo", Model)
+        @Html.Partial("Partial/_Section", Model)
 
         <div class="tab-content mt-3" id="myTabContent">
 
-            @Html.Partial("ReviewsInfo", Model)
+            @Html.Partial("Partial/_Reviews", Model)
 
-            @Html.Partial("ReviewModelInfo", Model)
+            @Html.Partial("Modal/_ReviewModel", Model)
 
-            @Html.Partial("QuestionInfo", Model)
+            @Html.Partial("Partial/_Question", Model)
 
-            @Html.Partial("QuestionModelInfo", Model)
+            @Html.Partial("Modal/_QuestionModel", Model)
 
         </div>
     </div>

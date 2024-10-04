@@ -8,7 +8,6 @@
             <img src="/Images/@Model.img" alt="@Model.name" class="img-fluid rounded shadow-lg">
         </div>
     </div>
-
     <div class="col-md-6">
         <h1 class="h2 mb-2 text-uppercase" style="font-weight: bold">@Model.name</h1>
         <p class="mb-2" style="line-height: 1.7; font-size: 1.1rem; color: #ef6c17">@Model.description</p>
@@ -22,9 +21,9 @@
                 <input type="number" name="quantity" value="1" min="1" class="form-control w-25 text-center">
                 @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
                 {
-                <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">
-                    <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
-                </button>
+                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">
+                        <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
+                    </button>
                 }
                 else
                 {
@@ -34,7 +33,6 @@
                 }
             </form>
         </div>
-       
         <div class="mt-5">
             <div class="d-flex justify-content-between border-top pt-3 text-white">
                 <span><i class="fas fa-shipping-fast me-2"></i>Hızlı Teslimat</span>

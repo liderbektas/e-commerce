@@ -143,9 +143,9 @@ body {
     box-shadow: none;
 }
 
-.active {
-    background-color: #ef6d16; /* Örnek arka plan rengi */
-    color: #fff; /* Yazı rengi */
+.active1 {
+    background-color: #ef6d16; 
+    color: #fff; 
 }
 
 
