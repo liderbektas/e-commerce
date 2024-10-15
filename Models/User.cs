@@ -10,4 +10,5 @@ public class User
     public string? Address { get; set; }
     public string? phoneNumber { get; set; }
     public DateTime? BirthDate { get; set; }
+    public DateTime? CreatedAt { get; set; }
 }

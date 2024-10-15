@@ -1,24 +1,23 @@
-@model ProductsInfo
+@model ProductsViewModel
 
 @{
     ViewBag.HideHeader = false;
 }
 
-<div class="container mt-5 d-flex gap-5">
+<div class="container my-4 d-flex flex-column gap-5">
 
-    <aside class="d-flex flex-column rounded-3" style="min-width: 300px; height: 320px; background-color: #141416; border: 0.5px solid gray;">
+    <nav class="d-flex justify-content-center rounded-3" style=" background-color: #141416; border: 0.5px solid gray;">
         <div class="p-3">
-            <h4 class="font-bold text-white">Kategoriler</h4>
-            <div class="px-2 mt-3">
-                <nav class="nav flex-column gap-3">
+            <div class="px-2">
+                <nav class="nav gap-5">
                     @foreach (var category in Model.Category)
                     {
-                        <a href="/Products?categoryId=@category.Id" class="nav-link3 text-white rounded-3 px-3 py-2">@category.Name</a>
+                        <a href="/Products?categoryId=@category.Id" class="nav-link3 text-white rounded-3 px-3 py-2" style="font-size: 14px;">@category.Name</a>
                     }
                 </nav>
             </div>
         </div>
-    </aside>
+    </nav>
 
 
     <section class="flex-grow-1">
@@ -41,15 +40,15 @@
                         <div class="card product-card2 shadow-sm rounded-md overflow-hidden" style="width: 225px; height: 340px; background-color: transparent;">
 
                             <div class="d-flex align-items-center justify-content-center px-3 py-2" style="width: 225px; height: 200px;">
-                                <img src="Images/@product.img" class="img-fluid h-100 w-100" alt="@product.name">
+                                <img src="Images/@product.Img" class="img-fluid h-100 w-100" alt="@product.Name">
                             </div>
 
                             <div class="card-body d-flex flex-column">
-                                <small class="text-muted mb-2" style="font-weight: lighter">@product.name</small>
-                                <h6 class="card-title text-white text-truncate" style="font-size: 14px;">@product.description</h6>
+                                <small class="text-muted mb-2" style="font-weight: lighter">@product.Name</small>
+                                <h6 class="card-title text-white text-truncate" style="font-size: 14px;">@product.Description</h6>
 
                                 <div class="font-weight-bold mb-3" style="font-size: 14px; color: #ef6c17;">
-                                    @product.price.ToString("C2") <small class="text-muted">/ 1 Adet</small>
+                                    @product.Price.ToString("C2") <small class="text-muted">/ 1 Adet</small>
                                 </div>
                             </div>
                         </div>

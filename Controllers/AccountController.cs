@@ -40,7 +40,7 @@ namespace ProductManagament_MVC.Controllers
                 .Where(r => r.UserId == user.Id)
                 .ToList();
 
-            var userInfo = new UserInfo()
+            var userInfo = new UserViewModel()
             {
                 User = user,
                 Orders = orders,

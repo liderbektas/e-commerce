@@ -4,6 +4,7 @@ public class Order
 {
     public int Id { get; set; }
     public int? UserId { get; set; }
+    public User? User { get; set; }
     public DateTime OrderDate { get; set; }
     public string? address { get; set; }
     public string? PaymentMethod { get; set; }
@@ -11,6 +12,7 @@ public class Order
     public string? CardName { get; set; }
     public string? LastDate { get; set; }
     public string? CVV { get; set; }
+    public DateTime? CreatedAt { get; set; }
     public List<OrderItem>? OrderItems { get; set; } = new();
 }
 

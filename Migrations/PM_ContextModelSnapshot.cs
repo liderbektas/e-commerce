@@ -143,6 +143,9 @@ namespace ProductManagament_MVC.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("LastDate")
                         .HasColumnType("nvarchar(max)");
 
@@ -159,6 +162,8 @@ namespace ProductManagament_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -203,22 +208,28 @@ namespace ProductManagament_MVC.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("Stock")
                         .HasColumnType("int");
 
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -312,6 +323,13 @@ namespace ProductManagament_MVC.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -321,10 +339,6 @@ namespace ProductManagament_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
@@ -370,6 +384,15 @@ namespace ProductManagament_MVC.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
+                {
+                    b.HasOne("ProductManagament_MVC.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProductManagament_MVC.Models.OrderItem", b =>
                 {
                     b.HasOne("ProductManagament_MVC.Models.Order", null)
@@ -403,7 +426,7 @@ namespace ProductManagament_MVC.Migrations
             modelBuilder.Entity("ProductManagament_MVC.Models.Questions", b =>
                 {
                     b.HasOne("ProductManagament_MVC.Models.Products", "Products")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("ProductsId");
 
                     b.HasOne("ProductManagament_MVC.Models.User", "User")
@@ -447,6 +470,11 @@ namespace ProductManagament_MVC.Migrations
             modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("ProductManagament_MVC.Models.Products", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

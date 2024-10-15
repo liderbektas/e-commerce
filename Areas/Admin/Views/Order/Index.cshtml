@@ -9,33 +9,57 @@
         <thead>
         <tr class="text-start" style="font-size: 14px;">
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Sipariş No</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter;">Kullanıcı</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kullanıcı</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter;">Ürünler</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturulma Tarihi</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter;">Tutar</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter;">Oluşturulma</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter;">İşlemler</div>
             </th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var order in Model)
+        @if (Model.Any())
         {
-            <tr>
-                <td style="padding: 10px 5px;">@order.Id</td>
-                <td style="padding: 10px 5px;">@order.UserId</td>
-                <td style="padding: 10px 5px;">@order.OrderDate</td>
-                <td style="padding: 10px 5px;">
-                    <div class="d-flex gap-2">
-                        <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.Id" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff;">Detay</a>
-                    </div>
-                </td>
-            </tr>
+            foreach (var order in Model)
+            {
+                <tr>
+                    <td style="padding: 10px 5px;">
+                        @if (order.User != null)
+                        {
+                            <p>@order.User.userName</p>
+                        }
+                        else
+                        {
+                            <p>-</p>
+                        }
+                    </td>
+                    <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@order.OrderItems.Count Ürün</td>
+                    <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                        ₺@order.OrderItems.Sum(o => (o.Products.Price * o.Quantity))
+                        <span style="margin-top: 9px; font-size: 12px; color: #68686f;">(@order.PaymentMethod)</span>
+                    </td>
+                    <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@order.OrderDate</td>
+                    <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                        <div class="d-flex gap-2">
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.Id" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff;">Detay</a>
+                        </div>
+                    </td>
+                </tr>
+            }
         }
         </tbody>
     </table>
+
+    @if (!Model.Any())
+    {
+        <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Sipariş bulunamadı</div>
+    }
 </div>

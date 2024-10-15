@@ -17,7 +17,10 @@ public class ReviewsController : Controller
     {
         ViewData["ActivePage"] = "Reviews";
         
-        var reviews = await _context.Reviews.ToListAsync();
+        var reviews = await _context.Reviews
+            .Include(r => r.User)
+            .Include(r => r.Products)
+            .ToListAsync();
         if (reviews == null)
         {
             return NotFound();

@@ -6,16 +6,34 @@
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
         </svg>
     </a>
-    
+
     <h3 style="font-weight: bold; font-size: 30px;" class="mt-3">Sipariş Bilgileri</h3>
     <table style="width: 100%;">
         <thead>
-        <tr class="text-start" style="font-size: 14px;">
+        <tr class="text-start" style="font-size: 13px;">
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Sipariş ID</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Sipariş</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kullanıcı ID</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kullanıcı</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Adres Bilgisi</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Ödeme Yöntemi</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kart Sahibi İsmi</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kart Numarası</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Son Kullanma</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kart CVV</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Sipariş Tarihi</div>
@@ -23,9 +41,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr style="font-size: 13px;">
             <td style="padding: 10px 5px;">@Model.Id</td>
-            <td style="padding: 10px 5px;">@Model.UserId</td>
+            <td style="padding: 10px 5px;">@Model.User.userName</td>
+            <td style="padding: 10px 5px;">@Model.address</td>
+            <td style="padding: 10px 5px;">@Model.PaymentMethod</td>
+            <td style="padding: 10px 5px;">@Model.CardName</td>
+            <td style="padding: 10px 5px;">@Model.CardNumber</td>
+            <td style="padding: 10px 5px;">@Model.LastDate</td>
+            <td style="padding: 10px 5px;">@Model.CVV</td>
             <td style="padding: 10px 5px;">@Model.OrderDate.ToString("dd MMMM yyyy")</td>
         </tr>
         </tbody>
@@ -39,7 +63,7 @@
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Resim</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Ürün Adı</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Açıklama</div>
@@ -60,15 +84,15 @@
         {
             foreach (var item in Model.OrderItems)
             {
-                <tr>
+                <tr style="font-size: 13px;">
                     <td style="padding: 10px 5px;">
-                        <img src="/Images/@item.Products?.img" alt="@item.Products?.name" class="img-fluid" style="width: 100px; height: auto;"/>
+                        <img src="/Images/@item.Products?.Img" alt="@item.Products?.Name" class="img-fluid" style="width: 100px; height: auto;"/>
                     </td>
-                    <td style="padding: 10px 5px;">@item.Products?.name</td>
-                    <td style="padding: 10px 5px;">@item.Products?.description</td>
-                    <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.price)</td>
+                    <td style="padding: 10px 5px;">@item.Products?.Name</td>
+                    <td style="padding: 10px 5px;">@item.Products?.Description</td>
+                    <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.Price)</td>
                     <td style="padding: 10px 5px;">@item.Quantity</td>
-                    <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.price * item.Quantity)</td>
+                    <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.Price * item.Quantity)</td>
                 </tr>
             }
         }

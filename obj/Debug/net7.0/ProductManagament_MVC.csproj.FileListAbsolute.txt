@@ -81,3 +81,4 @@
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/scopedcss/Areas/Admin/Views/Shared/AdminLayout.cshtml.rz.scp.css
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductManagament_MVC.sourcelink.json
 /Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/obj/Debug/net7.0/ProductM.68A5477E.Up2Date
+/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/bin/Debug/net7.0/Newtonsoft.Json.dll

@@ -17,7 +17,6 @@ public class AuthController : Controller
 
     public IActionResult Index()
     {
-        
         return View();
     }
 
@@ -27,7 +26,7 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public IActionResult Login(string email, string password)
+    public async Task<IActionResult> Login(string email, string password)
     {
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
@@ -36,36 +35,35 @@ public class AuthController : Controller
         }
 
         var user = _context.Users.FirstOrDefault(x => x.email == email);
-        
+
         if (user == null || password != user.password)
         {
             ViewBag.Error = "Geçersiz e-posta veya şifre.";
             return View();
         }
-
+        
         var claims = new List<Claim>()
         {
             new Claim(ClaimTypes.Name, user.userName),
             new Claim(ClaimTypes.Email, user.email),
-            new Claim(ClaimTypes.Role, user.role),
+            new Claim(ClaimTypes.Role, user.role),  
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var principle = new ClaimsPrincipal(identity);
+        var principal = new ClaimsPrincipal(identity);
 
-        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principle);
+        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
         return RedirectToAction("Index", "Home");
     }
 
     [HttpGet]
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout()
     {
-        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction("Login", "Auth");
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Index", "Home");
     }
-
 
     public IActionResult Register()
     {
@@ -78,35 +76,36 @@ public class AuthController : Controller
         try
         {
             var existingUser = _context.Users.FirstOrDefault(x => x.email == email);
-            
+
             if (existingUser != null)
             {
                 ViewBag.Error = "Bu e-posta adresi ile bir kullanıcı zaten kayıtlı.";
                 return View();
             }
-            
+
             var user = new User
             {
                 userName = userName,
                 email = email,
                 password = password,
-                role = "Müşteri"
+               role = "Müşteri",
+                CreatedAt = DateTime.Now
             };
-            
+
             _context.Users.Add(user);
             _context.SaveChanges();
-            return RedirectToAction("Login", "Auth");
+
+            return RedirectToAction("Index", "Home");
         }
         catch (Exception ex)
         {
             ViewBag.Error = $"Bir hata oluştu: {ex.Message}";
-            return View(); 
+            return View();
         }
     }
 
-    
     [HttpPost]
-    public IActionResult Edit(int userId , string address , string phone , DateTime birthDate , string email , string userName)
+    public IActionResult Edit(int userId, string address, string phone, DateTime birthDate, string email, string userName)
     {
         var user = _context.Users.Find(userId);
         if (user == null)
@@ -122,6 +121,6 @@ public class AuthController : Controller
 
         _context.Users.Update(user);
         _context.SaveChanges();
-        return RedirectToAction("Index" , "Account");
+        return RedirectToAction("Index", "Account");
     }
 }

@@ -46,7 +46,8 @@ public class ProductsController : Controller
                         using var stream = new FileStream(Path.Combine(folder, img.FileName), FileMode.Create);
                         await img.CopyToAsync(stream);
                         products.UserId = currentUser.Id;
-                        products.img = img.FileName;
+                        products.Img = img.FileName;
+                        products.CreatedAt = DateTime.Now;
                     }
 
                     _context.Products.Add(products);
@@ -79,7 +80,7 @@ public class ProductsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(Products product, int id)
+    public async Task<IActionResult> Edit(Products product, int id , int Stock)
     {
         if (ModelState.IsValid)
         {
@@ -89,9 +90,11 @@ public class ProductsController : Controller
                 return NotFound();
             }
 
-            existingProduct.name = product.name;
-            existingProduct.description = product.description;
-            existingProduct.price = product.price;
+            
+            existingProduct.Name = product.Name;
+            existingProduct.Description = product.Description;
+            existingProduct.Price = product.Price;
+            existingProduct.Stock = Stock; 
 
             _context.Products.Update(existingProduct);
             await _context.SaveChangesAsync();

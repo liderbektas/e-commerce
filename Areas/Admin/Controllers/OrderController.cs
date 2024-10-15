@@ -17,20 +17,21 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["ActivePage"] = "Order";
-            var orders = await _context.Orders.ToListAsync();
-            if (orders == null || !orders.Any())
-            {
-                return NotFound();
-            }
-
+            var orders = await _context.Orders
+                .Include(o => o.User)
+                .Include(O => O.OrderItems)
+                .ThenInclude(o => o.Products)
+                .ToListAsync();
+            
             return View(orders);
         }
 
-        public async Task<IActionResult> Details(int id , int productId)
+        public async Task<IActionResult> Details(int id, int productId)
         {
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
                 .ThenInclude(o => o.Products)
+                .ThenInclude(o => o.User)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)

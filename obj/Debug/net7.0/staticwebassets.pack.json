@@ -85,6 +85,10 @@
       "PackagePath": "staticwebassets/Images/MX2D3-Photoroom.webp"
     },
     {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/Tel1.webp",
+      "PackagePath": "staticwebassets/Images/Tel1.webp"
+    },
+    {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/airpods-max-select-green-202011.webp",
       "PackagePath": "staticwebassets/Images/airpods-max-select-green-202011.webp"
     },
@@ -111,6 +115,30 @@
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/cheese_feast.webp",
       "PackagePath": "staticwebassets/Images/cheese_feast.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f1.png",
+      "PackagePath": "staticwebassets/Images/f1.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f2.png",
+      "PackagePath": "staticwebassets/Images/f2.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f3.png",
+      "PackagePath": "staticwebassets/Images/f3.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f4.png",
+      "PackagePath": "staticwebassets/Images/f4.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f5.png",
+      "PackagePath": "staticwebassets/Images/f5.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/f6.png",
+      "PackagePath": "staticwebassets/Images/f6.png"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/hawaiian.webp",
@@ -195,6 +223,18 @@
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/pizza.webp",
       "PackagePath": "staticwebassets/Images/pizza.webp"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/tel3-removebg-preview.png",
+      "PackagePath": "staticwebassets/Images/tel3-removebg-preview.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/tel5-removebg-preview.png",
+      "PackagePath": "staticwebassets/Images/tel5-removebg-preview.png"
+    },
+    {
+      "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/tel7-removebg-preview.png",
+      "PackagePath": "staticwebassets/Images/tel7-removebg-preview.png"
     },
     {
       "Id": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ıhone_pembe.webp",

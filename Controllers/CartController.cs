@@ -13,7 +13,7 @@ public class CartController : Controller
     {
         _context = context;
     }
-
+    
     public async Task<IActionResult> Index()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

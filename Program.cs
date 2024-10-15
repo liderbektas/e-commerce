@@ -29,8 +29,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/AccessDenied";
     });
 
-// Gerekli diğer servisleri ekleyin (örneğin CartController)
-builder.Services.AddScoped<CartController>();
+
 
 var app = builder.Build();
 

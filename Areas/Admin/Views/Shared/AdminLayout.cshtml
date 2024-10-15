@@ -15,20 +15,23 @@
     <nav class="navbar1 navbar-expand-sm">
         <div class="d-flex flex-column mb-1" style="padding-left: 22px;">
             <h4 style="font-weight: bold">
-                zeta.
+                LZ.
             </h4>
             <p class="text-muted" style="font-weight : lighter; font-size: 13px;">Yönetim Paneli</p>
         </div>
         <div class="container-fluid">
             <ul class="navbar-nav flex-column gap-3">
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Main" ? "active1" : "")" asp-area="Admin" asp-controller="Main" asp-action="Index">Ana sayfa</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Panel" ? "active1" : "")" asp-area="Admin" asp-controller="Main" asp-action="Index">Panel</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
-                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Products" ? "active1" : "") "  asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Admins" ? "active1" : "")" asp-area="Admin" asp-controller="Admins" asp-action="Index">Yöneticiler</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "User" ? "active1" : "")" asp-area="Admin" asp-controller="User" asp-action="Index">Kullanıcılar</a>
+                </li>
+                <li class="nav-item" style="font-size: 14px;">
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Products" ? "active1" : "") " asp-area="Admin" asp-controller="Products" asp-action="Index">Ürünler</a>
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Category" ? "active1" : "")" asp-area="Admin" asp-controller="Category" asp-action="Index">Kategoriler</a>

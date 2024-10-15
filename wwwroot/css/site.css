@@ -1,5 +1,6 @@
 html {
     font-size: 14px;
+    margin: 0;
 }
 
 @media (min-width: 768px) {
@@ -13,7 +14,7 @@ html {
 }
 
 body {
-    background-color: black;
+    background-color: #0a0a0b;
     color: white !important;
 }
 
@@ -144,8 +145,8 @@ body {
 }
 
 .active1 {
-    background-color: #ef6d16; 
-    color: #fff; 
+    background-color: #ef6d16;
+    color: #fff;
 }
 
 

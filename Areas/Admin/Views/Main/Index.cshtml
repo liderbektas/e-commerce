@@ -1,4 +1,128 @@
-<h2 style="font-weight: bold; font-size: 30px;">
-    Hoşgeldiniz @User.Identity.Name
-</h2>
+@using System.Globalization
+@using System.Security.Claims
+@model PanelViewModel
 
+@{
+    var userName = User.FindFirst(ClaimTypes.Name)?.Value;
+    var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+}
+
+<div style="color: #fff;">
+    <div class="mb-4">
+        <div class="card text-center" style="background-color: transparent;">
+            <div class="card-body">
+                <h5 style="font-weight: bold;">Giriş Yapan Admin: <span style="color:#ef6e16;">@userName</span> - <span style="color:#ef6e16;">@userEmail</span></h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center" style="background-color: transparent; border: 1px solid #52525b; color: #fff;">
+                <div class="card-header" style="background-color: transparent; border-bottom: 1px solid #52525b;">
+                    <h5 class="mb-0" style="font-weight: bold;">Toplam Kullanıcı</h5>
+                </div>
+                <div class="card-body">
+                    <h4 style="font-weight: bold; color:#ef6e16;">@Model.Users.Count()</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card text-center" style="background-color: transparent; border: 1px solid #52525b; color: #fff;">
+                <div class="card-header" style="background-color: transparent; border-bottom: 1px solid #52525b;">
+                    <h5 class="mb-0" style="font-weight: bold;">Toplam Ürün</h5>
+                </div>
+                <div class="card-body">
+                    <h4 style="font-weight: bold; color:#ef6e16;">@Model.ProductsList.Count()</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card text-center" style="background-color: transparent; border: 1px solid #52525b; color: #fff;">
+                <div class="card-header" style="background-color: transparent; border-bottom: 1px solid #52525b;">
+                    <h5 class="mb-0" style="font-weight: bold;">Toplam Sipariş</h5>
+                </div>
+                <div class="card-body">
+                    <h4 style="font-weight: bold; color:#ef6e16;">@Model.Orders.Count()</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: transparent; border: none; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 10px;">
+                <div class="card-header" style="background-color: transparent; ">
+                    <h5 class="mb-0" style="font-weight: bold;">Son Kayıt Olan Kullanıcılar</h5>
+                </div>
+                <div class="card-body">
+                    <table style="width: 100%;">
+                        <thead>
+                        <tr class="text-start" style="font-size: 14px;">
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
+                            </th>
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">E-mail</div>
+                            </th>
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturulma Tarihi</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var user in Model.LastCustomers)
+                        {
+                            <tr>
+                                <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.userName</td>
+                                <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.email</td>
+                                <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@(user.CreatedAt != null ? user.CreatedAt : "-")</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="card" style="background-color: transparent; border: none; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-radius: 10px;">
+                <div class="card-header" style="background-color: transparent;">
+                    <h5 class="mb-0" style="font-weight: bold;">Son Eklenen Ürünler</h5>
+                </div>
+                <div class="card-body">
+                    <table style="width: 100%;">
+                        <thead>
+                        <tr class="text-start" style="font-size: 14px;">
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Ürün Adı</div>
+                            </th>
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Fiyat</div>
+                            </th>
+                            <th style="color:#a1a1aa; font-weight: lighter;">
+                                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Eklenme Tarihi</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var product in Model.LastProducts)
+                        {
+                        <tr>
+                            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Name</td>
+                            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Price₺</td>
+                            <td class="text-center" style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                                @(product.CreatedAt != null ? product.CreatedAt : "-")
+                            </td>
+                        </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

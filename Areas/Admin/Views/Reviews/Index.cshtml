@@ -11,7 +11,7 @@
 
     <table style="width: 100%;">
         <thead>
-        <tr class="text-start" style="font-size: 14px;">
+        <tr class="text-start" style="font-weight: lighter; font-size: 14px;">
             <th style="color:#a1a1aa; font-weight: lighter;">
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Kullanıcı</div>
             </th>
@@ -33,11 +33,33 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var review in Model)
+        @if (Model.Any())
         {
-        <tr>
-            <td style="padding: 10px 5px;">@review.UserId</td>
-            <td style="padding: 10px 5px;">@review.ProductId</td>
+        foreach (var review in Model)
+        {
+        <tr style="font-weight: lighter; font-size: 14px;">
+            <td style="padding: 10px 5px;">
+                @if (review.User != null)
+                {
+                <p>@review.User.userName</p>
+                }
+                else
+                {
+                <p>-</p>
+                }
+            </td>
+            <td style="padding: 10px 5px;">
+                @if (review.Products != null)
+                {
+                <div>
+                    <img src="~/Images/@review.Products.Img" alt="Product Image" height="50" />
+                </div>
+                }
+                else
+                {
+                <p>-</p>
+                }
+            </td>
             <td style="padding: 10px 5px;">@review.Review</td>
             <td style="width: 150px; padding: 10px 5px;">
                 @for (int i = 0; i < review.Rating; i++)
@@ -58,6 +80,12 @@
             </td>
         </tr>
         }
+        }
         </tbody>
     </table>
+
+    @if (!Model.Any())
+    {
+    <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Yorum bulunamadı</div>
+    }
 </div>

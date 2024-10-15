@@ -17,14 +17,56 @@ public class UserController : Controller
     public async Task<IActionResult> Index()
     {
         ViewData["ActivePage"] = "User";
+
+        var user = await _context.Users
+            .Where(u => u.role == "Müşteri")
+            .ToListAsync();
         
-        var user = await _context.Users.ToListAsync();
         if (user == null)
         {
             return NotFound();
         }
 
         return View(user);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Index(string username , string email , string phone , string password , string role , DateTime birthday)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var existUser = await _context.Users.FirstOrDefaultAsync(u => u.email == email);
+                if (existUser != null)
+                {
+                    ViewData["Error"] = "Bu kullanıcı zaten kayıtlı";
+                }
+                else
+                {
+                    var newUser = new User()
+                    {
+                        userName = username,
+                        email = email,
+                        password = password,
+                        phoneNumber = phone,
+                        role = "Müşteri",
+                        BirthDate = birthday,
+                        CreatedAt = DateTime.Now
+                    };
+
+                    await _context.AddAsync(newUser);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "User");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewData["Error"] = e.Message;
+            }
+        }
+
+        return View();
     }
 
     public async Task<IActionResult> Delete(int id)

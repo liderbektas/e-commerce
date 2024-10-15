@@ -1,6 +1,6 @@
 namespace ProductManagament_MVC.Models;
 
-public class ProductsInfo
+public class ProductsViewModel
 {
     public List<Products>? Products  { get; set; }
     public List<Category> Category { get; set; }

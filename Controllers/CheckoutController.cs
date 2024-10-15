@@ -34,14 +34,15 @@ public class CheckoutController : Controller
             return BadRequest("Sepetiniz Boş");
         }
 
-        var orderInfo = new OrderInfo()
+        var orderViewModel = new OrderViewModel()
         {
             User = user,
-            Cart = cart
+            Cart = cart,
         };
 
-        return View(orderInfo);
+        return View(orderViewModel);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Index(string address, string paymentMethod, string cardNumber,
@@ -54,6 +55,7 @@ public class CheckoutController : Controller
                 if (string.IsNullOrWhiteSpace(address) || string.IsNullOrWhiteSpace(cardNumber))
                 {
                     ModelState.AddModelError("", "Adres ve kart numarası boş olamaz.");
+                    return View("Error");
                 }
 
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -70,6 +72,25 @@ public class CheckoutController : Controller
                 if (cart == null || !cart.CartItems.Any())
                 {
                     return BadRequest("Sepetiniz Boş");
+                }
+
+
+                foreach (var cartItem in cart.CartItems)
+                {
+                    var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == cartItem.ProductId);
+                    if (product == null)
+                    {
+                        ModelState.AddModelError("", $"Ürün bulunamadı: {cartItem.ProductId}");
+                        return View("Error");
+                    }
+
+                    if (product.Stock < cartItem.Quantity)
+                    {
+                        ModelState.AddModelError("", $"Yetersiz stok: {product.Name} (Stok: {product.Stock})");
+                        return View("Error");
+                    }
+
+                    product.Stock -= cartItem.Quantity;
                 }
 
 
@@ -93,6 +114,7 @@ public class CheckoutController : Controller
 
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
+
 
                 cart.CartItems.Clear();
                 await _context.SaveChangesAsync();

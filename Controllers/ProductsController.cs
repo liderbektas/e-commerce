@@ -28,14 +28,14 @@ public class ProductsController : Controller
 
         var category = _context.Categories.Find(categoryId);
 
-        var productsInfo = new ProductsInfo()
+        var productsViewModel = new ProductsViewModel()
         {
             Category = categories,
             Products = products.ToList(),
             CategoryName = category?.Name
         };
 
-        return View(productsInfo);
+        return View(productsViewModel);
     }
 
 
@@ -94,6 +94,7 @@ public class ProductsController : Controller
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == ProductId);
 
                 if (userId == null)
                 {
@@ -105,6 +106,7 @@ public class ProductsController : Controller
                     UserId = int.Parse(userId),
                     Question = PQuestion,
                     ProductId = ProductId,
+                    Products = product,
                     CreatedAt = DateTime.Now
                 };
 
@@ -140,9 +142,12 @@ public class ProductsController : Controller
                 var product = _context.Products
                     .FirstOrDefault(p => p.Id == ProductId);
 
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == int.Parse(userId));
+                
                 var review = new Reviews()
                 {
                     UserId = int.Parse(userId),
+                    User = user,
                     ProductId = ProductId,
                     Rating = Rating,
                     Review = Review,

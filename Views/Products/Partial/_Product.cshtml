@@ -5,35 +5,54 @@
 <div class="row g-4">
     <div class="col-md-6">
         <div>
-            <img src="/Images/@Model.img" alt="@Model.name" class="img-fluid rounded shadow-lg">
+            <img src="/Images/@Model.Img" alt="@Model.Name" class="img-fluid rounded shadow-lg">
         </div>
     </div>
     <div class="col-md-6">
-        <h1 class="h2 mb-2 text-uppercase" style="font-weight: bold">@Model.name</h1>
-        <p class="mb-2" style="line-height: 1.7; font-size: 1.1rem; color: #ef6c17">@Model.description</p>
+        <h1 class="h2 mb-2 text-uppercase" style="font-weight: bold">@Model.Name</h1>
+        <p class="mb-2" style="line-height: 1.7; font-size: 1.1rem; color: #ef6c17">@Model.Description</p>
         <div class="d-flex gap-3">
             <h5 class="font-weight-bold text-white mb-1">Fiyat :</h5>
-            <p class="text-white mb-4">@Model.price.ToString("C")</p>
+            <p class="text-white mb-4">@Model.Price.ToString("C")</p>
         </div>
         <div class="d-flex align-items-center gap-3 mt-2">
-            <form id="form-@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post" style="display: flex; gap: 20px;">
+            <form class="d-flex flex-column" id="form-@Model.Id" asp-action="AddToCart" asp-controller="Cart" method="post">
                 <input type="hidden" name="productId" value="@Model.Id" style="display: none;"/>
-                <input type="number" name="quantity" value="1" min="1" class="form-control w-25 text-center">
-                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                @if (Model.Stock > 0)
                 {
-                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">
-                        <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
-                    </button>
+                    @if (Model.Stock < 5)
+                    {
+                        <p class="px-4 py-3 rounded-3" style="background-color: #211a0e; color: #dba811;">Bu ürün stokta tükenmek üzere hemen sipariş verin, son @Model.Stock ürün</p>
+                    }
+
+                    <div class="d-flex align-items-center gap-3">
+                        <input type="number" name="quantity" value="1" min="1" class="form-control w-25 text-center">
+                        @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
+                        {
+                            <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none">
+                                <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;">
+                                <i class="fas fa-shopping-cart me-2"></i> Sepete Eklemek için lütfen giriş yapınız
+                            </button>
+                        }
+                    </div>
                 }
                 else
                 {
-                    <button type="submit" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;">
-                        <i class="fas fa-shopping-cart me-2"></i> Sepete Eklemek için lütfen giriş yapınız
-                    </button>
+                    <div class="d-flex align-items-center gap-3 px-4 py-3" style="background-color: #27272a; color: #EF4444; width: 500px;">
+                        <svg stroke="currentColor" fill="#ef4444" stroke-width="0" viewBox="0 0 512 512" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M235.4 172.2c0-11.4 9.3-19.9 20.5-19.9 11.4 0 20.7 8.5 20.7 19.9s-9.3 20-20.7 20c-11.2 0-20.5-8.6-20.5-20zm1.4 35.7H275V352h-38.2V207.9z"></path><path d="M256 76c48.1 0 93.3 18.7 127.3 52.7S436 207.9 436 256s-18.7 93.3-52.7 127.3S304.1 436 256 436c-48.1 0-93.3-18.7-127.3-52.7S76 304.1 76 256s18.7-93.3 52.7-127.3S207.9 76 256 76m0-28C141.1 48 48 141.1 48 256s93.1 208 208 208 208-93.1 208-208S370.9 48 256 48z"></path>
+                        </svg>
+                        Bu ürünün stokları tükenmiştir
+                    </div>
                 }
             </form>
         </div>
-        <div class="mt-5">
+        <div class="mt-5" style="display:  @(Model.Stock > 0 ? "block" : "none")">
             <div class="d-flex justify-content-between border-top pt-3 text-white">
                 <span><i class="fas fa-shipping-fast me-2"></i>Hızlı Teslimat</span>
                 <span><i class="fas fa-check me-2"></i> Stokta Mevcut</span>
