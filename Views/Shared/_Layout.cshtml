@@ -28,7 +28,7 @@
                         <a class="nav-link" style="color: white" asp-controller="Products" asp-action="Index">Alışveriş</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white" asp-controller="Account" asp-action="Index">İletişim</a>
+                        <a class="nav-link" style="color: white" asp-controller="Contact" asp-action="Index">İletişim</a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +52,7 @@
                             <li>
                                 <a class="dropdown-item" asp-controller="Account" asp-action="Index">Hesabım</a>
                             </li>
-                            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "SuperAdmin")
+                            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Admin" || User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
                             {
                                 <li>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Main" asp-action="Index">Admin Panel</a>

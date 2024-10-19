@@ -167,37 +167,4 @@ public class ProductsController : Controller
 
         return RedirectToAction("Index", "Home");
     }
-
-    public async Task<IActionResult> Answer(string answer, int id, int productId)
-    {
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (userId == null)
-                {
-                    return RedirectToAction("Login", "Auth");
-                }
-
-                var answers = new Answer()
-                {
-                    Content = answer,
-                    CreatedAt = DateTime.Now,
-                    QuestionId = id,
-                    userId = int.Parse(userId),
-                };
-
-                await _context.Answers.AddAsync(answers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Products", new { id = productId });
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("", "Soru cevaplanamadı." + e.Message);
-            }
-        }
-
-        return RedirectToAction("Index", "Home");
-    }
 }

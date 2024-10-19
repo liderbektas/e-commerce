@@ -1,15 +1,9 @@
 @model UserViewModel
 
-@{
-    ViewBag.HideHeader = false;
-}
-
 <div class="container my-5 d-flex gap-5" style=" height: calc(100vh - 313px);">
-
     @Html.Partial("Partial/_User", Model)
-
+    
     <div class="tab-content" style="flex-grow: 1;">
-
         @Html.Partial("Partial/_Account", Model)
 
         @Html.Partial("Partial/_Order", Model)
@@ -17,7 +11,5 @@
         @Html.Partial("Partial/_Review", Model)
 
         @Html.Partial("Partial/_Address", Model)
-
     </div>
 </div>
-<div/>

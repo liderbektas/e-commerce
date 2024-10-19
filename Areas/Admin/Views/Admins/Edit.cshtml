@@ -1,0 +1,72 @@
+@model User
+
+
+<a asp-action="Index" style="cursor:pointer; color:#fff;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+</a>
+
+<div>
+    <h2 class="my-4" style="font-weight: bold; font-size: 30px;">Kullanıcı Güncelle</h2>
+
+    <form asp-area="Admin" asp-controller="Admins" asp-action="Edit" method="post">
+        <input type="hidden" name="Id" value="@Model.Id"/>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="username" class="form-label">Kullanıcı Adı</label>
+            <input name="username" value="@Model.userName" class="form-control"/>
+            <span asp-validation-for="userName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="email" class="form-label">E-posta</label>
+            <input name="email" value="@Model.email" class="form-control" type="email"/>
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="password" class="form-label">Şifre</label>
+            <input name="password" value="@Model.password" class="form-control" type="password"/>
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="address" class="form-label">Adres</label>
+            <textarea name="address" class="form-control" rows="3">@Model.Address</textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="phoneNumber" class="form-label">Telefon Numarası</label>
+            <input name="phoneNumber" value="@Model.phoneNumber" class="form-control"/>
+            <span asp-validation-for="phoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3" style="width: 500px;">
+            <label for="BirhtDate" class="form-label">Doğum Tarihi</label>
+            <input name="birthDate" value="@Model.BirthDate?.ToString("yyyy-MM-dd")" type="date" class="form-control" />
+        </div>
+        
+
+        <div class="mt-3">
+            <button type="submit" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;">Güncelle</button>
+        </div>
+        
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+    <div class="alert alert-danger mt-4">
+        @ViewBag.Error
+    </div>
+    }
+
+
+    @if (ViewBag.Error != null)
+    {
+    <div class="alert alert-danger mt-4">
+        @ViewBag.Error
+    </div>
+    }
+</div>

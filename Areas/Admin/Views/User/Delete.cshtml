@@ -1,28 +1,56 @@
 @model User
 
-<h2 class="mb-4 text-black">Ürün Sil</h2>
+<a asp-action="Edit" asp-area="Admin" asp-controller="User" asp-route-id="@Model.Id" style="cursor:pointer; color:#fff;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+</a>
 
-<div class="text-black">
-    <div>
-        <h4 class="card-title">Bu ürünü silmek istediğinizden emin misiniz?</h4>
-        <div class="mb-3">
-            <h5>Kullanıcı Adı : @Model.userName</h5>
-            <p>Mail Adresi : @Model.email</p>
-            <p>Kullanıcı Rolü : @(Model.role == "Admin" ? "Admin" : "Müşteri")</p>
-            
-        </div>
 
-        <form asp-controller="User" asp-action="Delete" method="post">
-            <input type="hidden" asp-for="Id"/>
-            <button type="submit" class="btn btn-danger me-2 btn-sm" style="width: 80px;">Sil</button>
-            <a asp-action="Index" class="btn btn-secondary btn-sm" style="width: 80px;">İptal</a>
-        </form>
-    </div>
+<div class="d-flex justify-content-between align-items-center my-3">
+    <h3 style="font-weight: bold; font-size: 30px;">@Model.userName</h3>
 </div>
 
-@if (ViewBag.Error != null)
-{
-    <div class="alert alert-danger mt-4">
-        @ViewBag.Error
-    </div>
-}
+<form asp-area="Admin" asp-controller="User" asp-action="Delete" method="post">
+    <table style="width: 100%;">
+        <thead>
+        <tr class="text-start" style="font-size: 14px;">
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">E-posta</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Telefon</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturulma Tarihi</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@Model.userName</td>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@Model.email</td>
+            @if (Model.phoneNumber != null)
+            {
+                <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@Model.phoneNumber</td>
+            }
+            else
+            {
+                <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">-</td>
+            }
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@Model.CreatedAt</td>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                <div class="d-flex gap-2">
+                    <button type="submit" class="px-3 py-2 rounded-3" style="background-color: #371517; text-decoration: none; font-size: 14px; color:#d23c3d; border: none;">Sil</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

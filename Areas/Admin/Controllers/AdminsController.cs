@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductManagament_MVC.Models;
 
 namespace ProductManagament_MVC.Areas.Admin.Controllers;
@@ -18,7 +19,7 @@ public class AdminsController : Controller
         ViewData["ActivePage"] = "Admins";
 
         var admins = _context.Users
-            .Where(u => u.role == "Admin" || u.role ==  "SuperAdmin")
+            .Where(u => u.role == "Admin" || u.role == "Manager")
             .ToList();
 
         if (admins == null)
@@ -57,8 +58,51 @@ public class AdminsController : Controller
                 return RedirectToAction("Index");
             }
         }
-        
+
         return View();
     }
 
+    public IActionResult Edit(int id)
+    {
+        var user = _context.Users.FirstOrDefault(u => u.Id == id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        
+        return View(user);
+    }
+
+    [HttpPost]
+    public IActionResult Edit(int id, string username, string email, string password, string address,
+        string phoneNumber , DateTime birthDate)
+    {
+        try
+        {
+            var existUser = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (existUser == null)
+            {
+                return NotFound();
+            }
+
+
+            existUser.userName = username;
+            existUser.email = email;
+            existUser.password = password;
+            existUser.Address = address;
+            existUser.phoneNumber = phoneNumber;
+            existUser.BirthDate = birthDate;
+
+            _context.Users.Update(existUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        catch (Exception e)
+        {
+            ViewBag.Error = e.Message;
+        }
+
+        return View();
+    }
 }

@@ -69,6 +69,49 @@ public class UserController : Controller
         return View();
     }
 
+    public async Task<IActionResult> Edit(int id)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        
+        return View(user);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Edit(int id, string username, string email, string password, string address,
+        string phoneNumber , DateTime birthDate)
+    {
+        try
+        {
+            var existUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (existUser == null)
+            {
+                return NotFound();
+            }
+
+            existUser.userName = username;
+            existUser.email = email;
+            existUser.password = password;
+            existUser.Address = address;
+            existUser.phoneNumber = phoneNumber;
+            existUser.BirthDate = birthDate;
+
+            _context.Users.Update(existUser);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index" , "User");
+        }
+        catch (Exception e)
+        {
+            ViewBag.Error = e.Message;
+        }
+        
+        return View();
+    }
+
+
     public async Task<IActionResult> Delete(int id)
     {
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);

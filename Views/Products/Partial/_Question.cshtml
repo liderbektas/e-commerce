@@ -6,20 +6,6 @@
     <div>
         @if (ViewBag.Questions != null && ViewBag.Questions.Count > 0)
         {
-            <div class="py-3" style="border-bottom: 0.5px solid #71717a; width: 750px;">
-                @if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
-                {
-                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none" data-bs-toggle="modal" data-bs-target="#questionModal">
-                        Soru Sor
-                    </button>
-                }
-                else
-                {
-                    <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#questionModal">
-                        Soru sormak için lütfen giriş yapınız
-                    </button>
-                }
-            </div>
             @foreach (var question in ViewBag.Questions)
             {
                 <div class="py-2" style="width: 636px;">
