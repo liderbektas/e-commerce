@@ -69,19 +69,34 @@ public class CartController : Controller
             await _context.SaveChangesAsync();
         }
 
+        var product = await _context.Products.FindAsync(productId);
         var cartItem = cart.CartItems.FirstOrDefault(x => x.ProductId == productId);
         if (cartItem != null)
         {
-            cartItem.Quantity += quantity;
+            var totalRequest = cartItem.Quantity + quantity;
+
+            if (totalRequest > product.Stock)
+            {
+                cartItem.Quantity = product.Stock.Value;
+            }
+            else
+            {
+                cartItem.Quantity = totalRequest;
+            }
         }
         else
         {
-            var product = await _context.Products.FindAsync(productId);
+           
             if (product == null)
             {
                 return NotFound("Ürün bulunamadı.");
             }
 
+            if (quantity > product.Stock)
+            {
+                quantity = product.Stock.Value;
+            }
+            
             cart.CartItems.Add(new CartItem()
             {
                 ProductId = productId,
