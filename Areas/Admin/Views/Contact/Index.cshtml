@@ -1,0 +1,49 @@
+@model IEnumerable<Contact>
+
+<div class="">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="font-weight: bold; font-size: 30px;">İletişim</h3>
+    </div>
+    <table style="width: 100%;">
+        <thead>
+        <tr class="text-start" style="font-size: 14px; font-weight: lighter;">
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">E-posta</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Mesaj</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturma</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr style="font-weight: lighter; font-size: 14px;">
+                <td style="padding: 10px 5px;">@contact.UserName</td>
+                <td style="padding: 10px 5px;">@contact.Email</td>
+                <td style="padding: 10px 5px;">@contact.Message</td>
+                <td style="padding: 10px 5px;">@contact.ReceivedDate.ToString("dd/MM/yyyy")</td>
+                <td class="d-flex gap-3" style="padding: 10px 5px;">
+                    <div class="d-flex gap-2">
+                        <a asp-area="Admin" asp-controller="Contact" asp-action="Delete" asp-route-id="@contact.Id" class="px-3 py-2 rounded-3" style="background-color: #371517; text-decoration: none; font-size: 14px; color:#c03839;">Sil</a>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    @if (!Model.Any())
+    {
+    <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Veri bulunamadı</div>
+    }
+</div>

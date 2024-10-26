@@ -40,8 +40,7 @@ public class QuestionsController : Controller
         return View(questions);
     }
 
-
-
+    
     public async Task<IActionResult> Edit(int id)
     {
         var question = await _context.Questions.FirstOrDefaultAsync(q => q.Id == id);
@@ -106,4 +105,43 @@ public class QuestionsController : Controller
             return View();
         }
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var questions = await _context.Questions.FindAsync(id);
+        if (questions == null)
+        {
+            return NotFound();
+        }
+            
+        return View(questions);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var questions = await _context.Questions.FindAsync(id);
+                if (questions == null)
+                {
+                    return NotFound();
+                }
+
+                 _context.Questions.Remove(questions);
+                 await _context.SaveChangesAsync();
+                 return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+            }
+        }
+
+        return View();
+    }
+    
+    
 }

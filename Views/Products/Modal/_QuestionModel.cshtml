@@ -3,19 +3,18 @@
 
 <div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-black text-white" style="border: 0.5px solid white">
+        <div class="modal-content bg-black text-white" style="border-radius: 12px;">
             <div class="modal-header">
-                <h5 class="modal-title" id="questionModalLabel">Soru Sor</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="questionModalLabel" style="font-weight: bold; font-size: 22px;">Soru Sor</h5>
             </div>
             <div class="modal-body">
                 <form id="questionForm" asp-action="AskQuestions" asp-controller="Products" method="post">
                     <div class="mb-3">
                         <label for="question" class="form-label">Sorunuz</label>
-                        <textarea style="outline: none;" name="PQuestion" class="form-control bg-dark text-white" id="question" rows="3" required></textarea>
+                        <textarea placeholder="Bize soru sor" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;" name="PQuestion" class="form-control text-white" id="question" rows="3" required></textarea>
                     </div>
                     <input type="hidden" name="ProductId" value="@Model.Id"/>
-                    <button type="submit" class="px-4 py-2 rounded-2 btn-sm" style="background-color: #0f0f0f; color: white; border: 0.5px solid white;">Gönder</button>
+                    <button type="submit" class="px-4 py-2 rounded-2 btn-sm" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Gönder</button>
                 </form>
             </div>
         </div>

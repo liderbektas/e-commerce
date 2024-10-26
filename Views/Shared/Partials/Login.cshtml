@@ -1,0 +1,31 @@
+<div class="modal fade" id="globalModal" tabindex="-1" aria-labelledby="globalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-black" style="width: 400px; border-radius: 12px;">
+            <div class="modal-header text-white" style="border: none">
+                <h5 class="modal-title" id="globalModalLabel" style="font-weight: bold; font-size: 22px;">Giriş Yap</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Auth" asp-action="Login" class="d-flex flex-column gap-3">
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-control rounded-3 px-3 py-2 text-white" placeholder="E-posta adresinizi girin" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" class="form-control rounded-3 px-3 py-2 text-white" placeholder="Şifrenizi girin" required style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                    </div>
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div style="background-color: #371517; color: #fff; padding: 15px; border-radius: 8px; font-size: 14px;">
+                            @TempData["Error"]
+                        </div>
+                    }
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a style="font-size: 14px; cursor: pointer; margin-left: 2px;">Hesabım yok</a>
+                        <button type="submit" class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Giriş Yap</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

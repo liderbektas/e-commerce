@@ -31,11 +31,11 @@ public class AdminsController : Controller
     }
 
     [HttpPost]
-    public IActionResult Index(string role, string userName, string email, string password)
+    public IActionResult Index(string role, string Username, string Email, string Password)
     {
         if (ModelState.IsValid)
         {
-            var existUser = _context.Users.FirstOrDefault(u => u.email == email);
+            var existUser = _context.Users.FirstOrDefault(u => u.email == Email);
 
             if (existUser != null)
             {
@@ -45,9 +45,9 @@ public class AdminsController : Controller
             {
                 var newAdmin = new User()
                 {
-                    userName = userName,
-                    email = email,
-                    password = password,
+                    userName = Username,
+                    email = Email,
+                    password = Password,
                     role = role,
                     CreatedAt = DateTime.Now
                 };
@@ -61,21 +61,10 @@ public class AdminsController : Controller
 
         return View();
     }
-
-    public IActionResult Edit(int id)
-    {
-        var user = _context.Users.FirstOrDefault(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        
-        return View(user);
-    }
-
+    
     [HttpPost]
-    public IActionResult Edit(int id, string username, string email, string password, string address,
-        string phoneNumber , DateTime birthDate)
+    public IActionResult Edit(int id, string Username, string Email, string Password, string Address,
+        string PhoneNumber , DateTime BirthDate , string userRole)
     {
         try
         {
@@ -84,14 +73,14 @@ public class AdminsController : Controller
             {
                 return NotFound();
             }
-
-
-            existUser.userName = username;
-            existUser.email = email;
-            existUser.password = password;
-            existUser.Address = address;
-            existUser.phoneNumber = phoneNumber;
-            existUser.BirthDate = birthDate;
+            
+            existUser.userName = Username;
+            existUser.email = Email;
+            existUser.password = Password;
+            existUser.Address = Address;
+            existUser.phoneNumber = PhoneNumber;
+            existUser.BirthDate = BirthDate;
+            existUser.role = userRole;
 
             _context.Users.Update(existUser);
             _context.SaveChanges();

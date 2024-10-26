@@ -1,9 +1,22 @@
-<div class="d-flex align-items-center justify-content-center flex-column gap-5">
+@{
+    Layout = null;
+}
 
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <i class="bi bi-check-circle-fill" style="font-size: 300px; color: #0f5132"></i>
-        <h4 class="text-center">Siparişiniz başarılı şekilde alınmıştır.</h4>
+<style>
+    body{
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
+
+<div style="background-color: #0a0a0b; height: 100vh; margin: 0px; padding: 0px; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; color: #333;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; column-gap: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="380" height="380" fill="#0f5132" class="bi bi-check-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+        </svg>
+        <h2 style="color: white">Siparişiniz başarılı şekilde alınmıştır.</h2>
+        <a asp-controller="Home" asp-action="Index" style="background-color: transparent; color: #fff; width: 180px; border: 0.5px solid white; border-radius: 5px; padding: 10px 20px; font-size: 16px; transition: background-color 0.3s ease, transform 0.2s; margin-top: 20px; text-decoration: none; text-align: center; display: inline-block;">Ana sayfaya dön</a>
     </div>
-
-    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light mb-4" style="width: 150px;">Ana sayfaya dön</a>
 </div>

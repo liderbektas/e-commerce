@@ -17,19 +17,17 @@ public class ProductsController : Controller
     public async Task<IActionResult> Index()
     {
         ViewData["ActivePage"] = "Products";
+        
         var products = await _context.Products.Include(x => x.Category).ToListAsync();
-        return View(products);
-    }
-
-    public async Task<IActionResult> Create()
-    {
+        
         var categories = await _context.Categories.ToListAsync();
-        ViewBag.Categories = new SelectList(categories, "Id", "Name");
-        return View();
+        ViewData["Categories"] = new SelectList(categories, "Id", "Name");
+        
+        return View(products);
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create(Products products, IFormFile? img)
+    public async Task<IActionResult> Create(string Name, string Description, decimal Price, int CategoryId, int Stock, IFormFile? img)
     {
         if (ModelState.IsValid)
         {
@@ -40,17 +38,31 @@ public class ProductsController : Controller
 
                 if (currentUser != null)
                 {
+                    var product = new Products
+                    {
+                        Name = Name,
+                        Description = Description,
+                        Price = Price,
+                        UserId = currentUser.Id,
+                        Stock = Stock,
+                        CreatedAt = DateTime.Now,
+                        CategoryId = CategoryId
+                    };
+
                     if (img != null)
                     {
                         var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/");
-                        using var stream = new FileStream(Path.Combine(folder, img.FileName), FileMode.Create);
-                        await img.CopyToAsync(stream);
-                        products.UserId = currentUser.Id;
-                        products.Img = img.FileName;
-                        products.CreatedAt = DateTime.Now;
+                        var filePath = Path.Combine(folder, img.FileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await img.CopyToAsync(stream);
+                        }
+
+                        product.Img = img.FileName;
                     }
 
-                    _context.Products.Add(products);
+                    _context.Products.Add(product);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -64,23 +76,12 @@ public class ProductsController : Controller
         {
             ViewBag.Error = "Formda eksik veya geçersiz bilgiler var.";
         }
-        
-        return View(products);
+    
+        return View();
     }
     
-    public async Task<IActionResult> Edit(int id)
-    {
-        var products = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
-        if (products == null)
-        {
-           return NotFound();
-        }
-
-        return View(products);
-    }
-
     [HttpPost]
-    public async Task<IActionResult> Edit(Products product, int id , int Stock)
+    public async Task<IActionResult> Edit(int id, string Name, string Description, decimal Price, int Stock)
     {
         if (ModelState.IsValid)
         {
@@ -89,35 +90,22 @@ public class ProductsController : Controller
             {
                 return NotFound();
             }
-
             
-            existingProduct.Name = product.Name;
-            existingProduct.Description = product.Description;
-            existingProduct.Price = product.Price;
+            existingProduct.Name = Name;
+            existingProduct.Description = Description;
+            existingProduct.Price = Price;
             existingProduct.Stock = Stock; 
 
             _context.Products.Update(existingProduct);
             await _context.SaveChangesAsync();
-
             return RedirectToAction("Index");
         }
 
-        return View(product);
+        return View();
     }
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        var products = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
-        if (products == null)
-        {
-            NotFound();
-        }
-
-        return View(products);
-    }
-
+    
     [HttpPost, ActionName("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> DeleteConfirmed(int id )
     {
         var products = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         if (ModelState.IsValid)

@@ -1,66 +1,85 @@
 @using System.Security.Claims
 @model IEnumerable<User>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 style="font-weight: bold; font-size: 30px;">Yöneticiler</h3>
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="font-weight: bold; font-size: 30px;">Yöneticiler</h3>
 
-    @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
-    {
-        <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addAdminModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
-    }
-    else
-    {
-        <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" disabled data-bs-target="#addAdminModal" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d;">Bu işlem için yetkiniz bulunmuyor</button>
-    }
-    
+        @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
+        {
+            <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addAdminModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
+        }
+        else
+        {
+            <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" disabled data-bs-target="#addAdminModal" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d;">Bu işlem için yetkiniz bulunmuyor</button>
+        }
+    </div>
+
+    <table style="width: 100%;">
+        <thead>
+        <tr class="text-start" style="font-size: 14px;">
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">İsim</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">E-posta</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">Oluşturma</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">Rol</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">İşlemler</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.userName</td>
+                <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.email</td>
+                <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.CreatedAt</td>
+                <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.role</td>
+                <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">
+                    @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
+                    { 
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#editAdmin"
+                            class="px-3 py-2 rounded-3" 
+                            style="background-color: #27272a; border: none; font-size: 14px; color:#fff; text-decoration: none;"
+                            onclick="openEditModal('@user.Id' ,'@user.userName' , '@user.email' , '@user.password' , '@user.Address' , '@user.phoneNumber' , '@user.BirthDate' , '@user.role')">
+                            Düzenle
+                        </button>
+                    }
+                    else
+                    {
+                        <button class="px-3 py-2 rounded-3" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d; pointer-events: none;">Bu işlem için yetkiniz bulunmuyor</button>
+                    }
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+
     @Html.Partial("Modal/Admin")
-    
+    @Html.Partial("Modal/Edit")
 </div>
 
-<table style="width: 100%;">
-    <thead>
-    <tr class="text-start" style="font-size: 14px;">
-        <th style="color:#a1a1aa; font-weight: lighter;">
-            <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">İsim</div>
-        </th>
-        <th style="color:#a1a1aa; font-weight: lighter;">
-            <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">E-posta</div>
-        </th>
-        <th style="color:#a1a1aa; font-weight: lighter;">
-            <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">Oluşturma</div>
-        </th>
-        <th style="color:#a1a1aa; font-weight: lighter;">
-            <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">Rol</div>
-        </th>
-        <th style="color:#a1a1aa; font-weight: lighter;">
-            <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-size: 14px; font-weight: lighter;">İşlemler</div>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-
-    @foreach (var user in Model)
-    {
-    
-    string rowColor = user.role == "Manager" ? "#28af52" : "inherit";
-
-    <tr style="color: @rowColor;">
-        <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.userName</td>
-        <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.email</td>
-        <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.CreatedAt</td>
-        <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.role</td>
-        <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">
-            @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
-            {
-            <a asp-area="Admin" asp-controller="Admins" asp-action="Edit" asp-route-id="@user.Id" class="px-3 py-2 rounded-3" style="background-color: #27272a; border: none; font-size: 14px; color:#fff; text-decoration: none;">Düzenle</a>
-            }
-            else
-            {
-            <button class="px-3 py-2 rounded-3" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d;">Bu işlem için yetkiniz bulunmuyor</button>
-            }
-        </td>
-    </tr>
+<script>
+    function openEditModal(id, username, email, password, address, phoneNumber, birthDate , role) {
+        $('#editAdmin input[name="id"]').val(id);
+        $('#editAdmin input[name="Username"]').val(username);
+        $('#editAdmin input[name="Email"]').val(email);
+        $('#editAdmin input[name="Password"]').val(password);
+        $('#editAdmin textarea[name="Address"]').val(address); 
+        $('#editAdmin input[name="PhoneNumber"]').val(phoneNumber);
+        $('#editAdmin input[name="BirthDate"]').val(birthDate);
+        $('#editAdmin select[name="userRole"]').val(role);
     }
-
-    </tbody>
-</table>
+</script>

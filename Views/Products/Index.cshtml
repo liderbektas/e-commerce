@@ -1,9 +1,5 @@
 @model ProductsViewModel
 
-@{
-    ViewBag.HideHeader = false;
-}
-
 <div class="container my-4 d-flex flex-column gap-5">
 
     <nav class="d-flex justify-content-center rounded-3" style=" background-color: #141416; border: 0.5px solid gray;">
@@ -37,9 +33,9 @@
             {
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 product-card" style="cursor: pointer;">
                     <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="d-flex h-100" style="text-decoration: none;">
-                        <div class="card product-card2 shadow-sm rounded-md overflow-hidden" style="width: 225px; height: 340px; background-color: transparent;">
+                        <div class="card product-card2 shadow-sm rounded-md overflow-hidden" style="width: 250px; height: 340px; background-color: transparent;">
 
-                            <div class="d-flex align-items-center justify-content-center px-3 py-2" style="width: 225px; height: 200px;">
+                            <div class="d-flex align-items-center justify-content-center px-3 py-2" style="height: 200px;">
                                 <img src="Images/@product.Img" class="img-fluid h-100 w-100" alt="@product.Name">
                             </div>
 

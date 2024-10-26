@@ -3,60 +3,93 @@
 <div class="">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 style="font-weight: bold; font-size: 30px;">Ürünler</h3>
-        <a class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff;" asp-action="Create">Yeni Ekle</a>
+        <button data-bs-toggle="modal" data-bs-target="#createProducts" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;">Yeni Ekle</button>
     </div>
-   
+
     <table style="width: 100%;">
         <thead>
         <tr class="text-start" style="font-size: 14px;">
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">Resim</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">Resim</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">İsim</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">İsim</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">Kategori</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">Kategori</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">Açıklama</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">Açıklama</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">Fiyat</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">Fiyat</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">Stok</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">Stok</div>
             </th>
             <th style="color:#a1a1aa; font-weight: lighter;">
-                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px; font-weight: lighter; font-size: 14px;">İşlemler</div>
+                <div class="py-2" style="border-bottom: 2px solid #52525b;">İşlemler</div>
             </th>
         </tr>
         </thead>
         <tbody>
         @foreach (var product in Model)
         {
-        <tr>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
-                <img src="/Images/@product.Img" title="@product.Name" height="70" />
-            </td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Name</td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Category?.Name</td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Description</td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Price.ToString("C")</td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@product.Stock Adet</td>
-            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
-                <div class="d-flex gap-2">
-                    <a asp-area="Admin" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff;">Düzenle</a>
-                    @* <a asp-area="Admin" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="px-3 py-2 rounded-3" style="background-color: #dc2626; text-decoration: none; font-size: 14px; color:#fff;">Sil</a> *@
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td style="padding: 10px 5px;">
+                    <img src="/Images/@product.Img" title="@product.Name" height="70"/>
+                </td>
+                <td style="padding: 10px 5px;">@product.Name</td>
+                <td style="padding: 10px 5px;">@product.Category?.Name</td>
+                <td style="padding: 10px 5px;">@product.Description</td>
+                <td style="padding: 10px 5px;">@product.Price.ToString("C")</td>
+                <td style="padding: 10px 5px;">@product.Stock Adet</td>
+                <td style="padding: 10px 5px;">
+                    <div class="d-flex gap-2">
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#editProduct"
+                            class="px-3 py-2 rounded-3"
+                            style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;"
+                            onclick="openEditModal('@product.Id', '@product.Name', '@product.Description', @product.Price, @product.Stock)">
+                            Düzenle
+                        </button>
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteProduct"
+                            class="px-3 py-2 rounded-3" style="background-color: #371517; text-decoration: none; font-size: 14px; color:#c03839; border: none;"
+                            onclick="openDeleteModal('@product.Id', '@product.Name', '@product.Description')">
+                            Sil
+                        </button>
+                    </div>
+                </td>
+            </tr>
         }
         </tbody>
     </table>
 
     @if (!Model.Any())
     {
-    <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Veri bulunamadı</div>
+        <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Veri bulunamadı</div>
     }
+
+    @Html.Partial("Modals/Create")
+    @Html.Partial("Modals/Edit")
+    @Html.Partial("Modals/Delete")
 </div>
+
+<script>
+    function openEditModal(id, name, description, price, stock) {
+        $('#editProduct input[name="id"]').val(id);
+        $('#editProduct input[name="Name"]').val(name);
+        $('#editProduct textarea[name="Description"]').val(description);
+        $('#editProduct input[name="Price"]').val(price);
+        $('#editProduct input[name="Stock"]').val(stock);
+    }
+    
+    function openDeleteModal(id , name , description) {
+        $('#deleteProduct input[name="id"]').val(id);
+        $('#deleteProduct input[name="Name"]').val(name);
+        $('#deleteProduct textarea[name="Description"]').val(description);
+    }
+</script>

@@ -3,17 +3,15 @@
 
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-black text-white" style="border: 0.5px solid white">
+        <div class="modal-content text-white" style="border-radius: 12px; width: 400px; background-color: #0a0a0b">
             <div class="modal-header">
-                <h5 class="modal-title" id="reviewModalLabel">Değerlendirme Yap</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="reviewModalLabel" style="font-weight: bold; font-size: 22px;">Değerlendirme Yap</h5>
             </div>
             <div class="modal-body">
                 <form id="reviewForm" asp-action="Reviews" asp-controller="Products" method="post">
                     <div class="mb-3">
-                        <label for="rating" class="form-label">Yıldız Değerlendirmesi</label>
-                        <select name="Rating" id="rating" class="form-control bg-dark text-white" required>
-                            <option value="">Seçin</option>
+                        <select style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;" name="Rating" id="rating" class="form-control text-white" required>
+                            <option value="">Puan</option>
                             <option value="1">1 Yıldız</option>
                             <option value="2">2 Yıldız</option>
                             <option value="3">3 Yıldız</option>
@@ -22,11 +20,10 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="reviewContent" class="form-label">Yorumunuz</label>
-                        <textarea style="outline: none;" name="Review" class="form-control bg-dark text-white" id="reviewContent" rows="3" required></textarea>
+                        <input placeholder="Yorumunuz" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;" name="Review" class="form-control text-white" id="reviewContent" rows="3" required></input>
                     </div>
                     <input type="hidden" name="ProductId" value="@Model.Id"/>
-                    <button type="submit" class="px-4 py-2 btn-sm rounded-2" style="background-color: #0f0f0f; color: white; border: 0.5px solid white;">Gönder</button>
+                    <button type="submit" class="px-4 py-2 btn-sm rounded-2" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Gönder</button>
                 </form>
             </div>
         </div>

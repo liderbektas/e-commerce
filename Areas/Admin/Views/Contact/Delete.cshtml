@@ -1,0 +1,56 @@
+@model Contact
+
+<a asp-action="Index" style="cursor:pointer; color:#fff;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+</a>
+
+<div class="d-flex justify-content-between align-items-center my-3">
+    <h3 style="font-weight: bold; font-size: 30px;">@Model.Message</h3>
+</div>
+
+<form asp-controller="Contact" asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id"/>
+        <table style="width: 100%;">
+            <thead>
+            <tr class="text-start" style="font-size: 14px; font-weight: lighter;">
+                <th style="color:#a1a1aa; font-weight: lighter;">
+                    <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
+                </th>
+                <th style="color:#a1a1aa; font-weight: lighter;">
+                    <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Açıklama</div>
+                </th>
+                <th style="color:#a1a1aa; font-weight: lighter;">
+                    <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Mesaj</div>
+                </th>
+                <th style="color:#a1a1aa; font-weight: lighter;">
+                    <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturma</div>
+                </th>
+                <th style="color:#a1a1aa; font-weight: lighter;">
+                    <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="font-weight: lighter; font-size: 14px;">
+                <td style="padding: 10px 5px;">@Model.UserName</td>
+                <td style="padding: 10px 5px;">@Model.Email</td>
+                <td style="padding: 10px 5px;">@Model.Message</td>
+                <td style="padding: 10px 5px;">@Model.ReceivedDate.ToString("dd/MM/yyyy")</td>
+                <td class="d-flex gap-3" style="padding: 10px 5px;">
+                    <div class="d-flex gap-2">
+                        <button type="submit"  class="px-3 py-2 rounded-3" style="background-color: #371517; text-decoration: none; font-size: 14px; color:#c03839; border: none;">Sil</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</form>
+
+@if (ViewBag.Error != null)
+{
+<div class="alert alert-danger mt-4">
+    @ViewBag.Error
+</div>
+}

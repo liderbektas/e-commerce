@@ -28,4 +28,41 @@ public class ReviewsController : Controller
         
         return View(reviews);
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var review = await _context.Reviews.FindAsync(id);
+        if (review == null)
+        {
+            return NotFound();
+        }
+
+        return View(review);
+    }
+    
+    [HttpPost , ActionName("Delete")]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var review = await _context.Reviews.FindAsync(id);
+                if (review == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Reviews.Remove(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+            }
+        }
+        
+        return View();
+    }
 }

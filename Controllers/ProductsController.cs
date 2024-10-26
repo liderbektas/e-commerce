@@ -37,13 +37,17 @@ public class ProductsController : Controller
 
         return View(productsViewModel);
     }
-
-
+    
     public async Task<IActionResult> Details(int id)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
         var product = await _context.Products.FindAsync(id);
+
+        if (product == null)
+        {
+            return NotFound();
+        }
+
+        var users = await _context.Users.ToListAsync();
 
         var questions = await _context.Questions
             .Where(q => q.ProductId == id)
@@ -51,9 +55,10 @@ public class ProductsController : Controller
 
         var reviews = await _context.Reviews
             .Where(r => r.ProductId == id)
-            .Include(r => r.User) // Kullanıcı bilgilerini dahil et
+            .Include(r => r.User)
             .ToListAsync();
-
+        
+            
         var questionsId = questions.Select(q => q.Id).ToList();
 
         var answers = await _context.Answers
@@ -61,6 +66,7 @@ public class ProductsController : Controller
             .ToListAsync();
 
         double ratingAverage = 0;
+        
         if (reviews.Any())
         {
             ratingAverage = reviews.Average(r => r.Rating);
@@ -70,22 +76,20 @@ public class ProductsController : Controller
             .GroupBy(r => r.Rating)
             .ToDictionary(g => g.Key, g => g.Count());
 
-
-        ViewBag.RatingAverage = ratingAverage;
-        ViewBag.RatingCounts = ratingCounts;
-        ViewBag.Questions = questions;
-        ViewBag.Reviews = reviews;
-        ViewBag.Answers = answers;
-
-        if (product == null)
+        var viewModel = new ProductDetailsViewModel
         {
-            return NotFound();
-        }
+            Product = product,
+            Questions = questions,
+            Answers = answers,
+            Reviews = reviews,
+            RatingAverage = ratingAverage,
+            RatingCounts = ratingCounts
+        };
 
-        return View(product);
+        return View(viewModel);
     }
 
-
+    
     [HttpPost]
     public async Task<IActionResult> AskQuestions(string PQuestion, int ProductId)
     {
@@ -123,7 +127,6 @@ public class ProductsController : Controller
         {
             ModelState.AddModelError("", "Model geçersiz.");
         }
-
         return View("ProductDetails");
     }
 

@@ -13,7 +13,7 @@ public class CartController : Controller
     {
         _context = context;
     }
-    
+
     public async Task<IActionResult> Index()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -86,7 +86,6 @@ public class CartController : Controller
         }
         else
         {
-           
             if (product == null)
             {
                 return NotFound("Ürün bulunamadı.");
@@ -96,7 +95,7 @@ public class CartController : Controller
             {
                 quantity = product.Stock.Value;
             }
-            
+
             cart.CartItems.Add(new CartItem()
             {
                 ProductId = productId,

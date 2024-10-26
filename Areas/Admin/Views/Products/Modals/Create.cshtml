@@ -1,0 +1,49 @@
+<div class="modal fade" id="createProducts" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #0a0a0b; color: #fff; border-radius: 12px;">
+            <div class="modal-header">
+                <h5 class="modal-title" style="font-weight: bold; font-size: 22px;">Yeni Ürün Ekle</h5>
+            </div>
+            <div class="modal-body">
+                @if(ViewData["Error"] != null)
+                {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Error"]
+                </div>
+                }
+
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div class="form-group mb-3 form-container">
+                        <input name="Name" class="form-control text-white" placeholder="İsim" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                    </div>
+
+                    <div class="form-group mb-3 form-container">
+                        <textarea name="Description" class="form-control text-white" placeholder="Açıklama" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"></textarea>
+                    </div>
+
+                    <div class="form-group mb-3 form-container">
+                        <input name="Price" class="form-control text-white" type="number" step="0.01" placeholder="Fiyat girin" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                    </div>
+
+                    <div class="form-group mb-3 form-container">
+                        <input name="Stock" class="form-control text-white" type="number" step="0.01" placeholder="Stok girin" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.DropDownList("CategoryId", (SelectList)ViewData["Categories"], "Kategori Seçin", new { @class = "form-control dropdown custom-dropdown" })
+                    </div>
+
+                    <div class="form-group mb-3 form-container">
+                        <input type="file" name="img" class="form-control text-white" accept="image/*" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 36px;"/>
+                    </div>
+                    
+
+                    <div class="mt-3">
+                        <button type="submit" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;">Oluştur</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

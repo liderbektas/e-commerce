@@ -1,4 +1,4 @@
-@model Products
+@model ProductDetailsViewModel
 
 @{
     ViewBag.HideHeader = false;
@@ -10,20 +10,20 @@
 
 <div class="container my-5" style="font-size: 14px;">
 
-    @Html.Partial("Partial/_Product", Model)
+    @Html.Partial("Partial/_Product", Model.Product)
 
     <div>
-        @Html.Partial("Partial/_Section", Model)
+        @Html.Partial("Partial/_Section", Model.Product)
 
         <div class="tab-content mt-3" id="myTabContent">
 
             @Html.Partial("Partial/_Reviews", Model)
 
-            @Html.Partial("Modal/_ReviewModel", Model)
+            @Html.Partial("Modal/_ReviewModel", Model.Product)
 
             @Html.Partial("Partial/_Question", Model)
 
-            @Html.Partial("Modal/_QuestionModel", Model)
+            @Html.Partial("Modal/_QuestionModel", Model.Product)
 
         </div>
     </div>

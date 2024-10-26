@@ -1,14 +1,13 @@
 @model IEnumerable<User>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 style="font-weight: bold; font-size: 30px;">Kullanıcılar</h3>
-    <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addUserModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 style="font-weight: bold; font-size: 30px;">Kullanıcılar</h3>
+        <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addUserModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
+    </div>
 
-    @Html.Partial("Modal/User")
-</div>
-
-<table style="width: 100%;">
-    <thead>
+    <table style="width: 100%;">
+        <thead>
         <tr class="text-start" style="font-size: 14px;">
             <th style="color:#a1a1aa; font-weight: lighter;">
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İsim</div>
@@ -26,8 +25,8 @@
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
             </th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @if (Model.Any())
         {
             foreach (var user in Model)
@@ -35,28 +34,67 @@
                 <tr>
                     <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.userName</td>
                     <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.email</td>
-                  @if (user.phoneNumber != null)
-                  {
-                      <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.phoneNumber</td>
-                  }
-                  else
-                  {
-                      <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">-</td>
-
-                  }
+                    @if (user.phoneNumber != null)
+                    {
+                        <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.phoneNumber</td>
+                    }
+                    else
+                    {
+                        <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">-</td>
+                    }
                     <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">@user.CreatedAt</td>
                     <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
                         <div class="d-flex gap-2">
-                            <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff;">Düzenle</a>
+                            <button
+                                data-bs-toggle="modal"
+                                data-bs-target="#editUser"
+                                class="px-3 py-2 rounded-3"
+                                style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;"
+                                onclick="openUserEditModal('@user.Id' ,'@user.userName' , '@user.email' , '@user.password' , '@user.Address' , '@user.phoneNumber' , '@user.BirthDate' , '@user.role')">
+                                Düzenle
+                            </button>
+                            <button
+                                data-bs-toggle="modal"
+                                data-bs-target="#editDeleteUser"
+                                class="px-3 py-2 rounded-3"
+                                style="background-color: #371517; text-decoration: none; font-size: 14px; color:#d23c3d; border: none;"
+                                onclick="openUserDeleteModal('@user.Id' ,'@user.userName' , '@user.email' , '@user.password' , '@user.Address' , '@user.phoneNumber' , '@user.BirthDate')">
+                                Sil
+                            </button>
                         </div>
                     </td>
                 </tr>
             }
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+    @Html.Partial("Modal/Create")
+    @Html.Partial("Modal/Edit")
+    @Html.Partial("Modal/Delete")
+</div>
 
 @if (!Model.Any())
 {
     <div class="mt-2 py-3 px-4" style="font-weight: lighter; background-color: #211a0e; color:#d6a30e;">Veri bulunamadı</div>
 }
+
+<script>
+    function openUserEditModal(id, username, email, password, address, phoneNumber, birthDate , role) {
+        $('#editUser input[name="id"]').val(id);
+        $('#editUser input[name="Username"]').val(username);
+        $('#editUser input[name="Email"]').val(email);
+        $('#editUser input[name="Password"]').val(password);
+        $('#editUser textarea[name="Address"]').val(address);
+        $('#editUser input[name="PhoneNumber"]').val(phoneNumber);
+        $('#editUser input[name="BirthDate"]').val(birthDate);
+        $('#editUser select[name="userRole"]').val(role);
+    }
+
+    function openUserDeleteModal(id, username, email, password) {
+        $('#editDeleteUser input[name="id"]').val(id);
+        $('#editDeleteUser input[name="Username"]').val(username);
+        $('#editDeleteUser input[name="Email"]').val(email);
+        $('#editDeleteUser input[name="Password"]').val(password);
+    }
+</script>

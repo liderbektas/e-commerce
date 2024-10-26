@@ -1,0 +1,66 @@
+@model Reviews
+
+<a asp-action="Index" style="cursor:pointer; color:#fff;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+</a>
+
+<div class="d-flex justify-content-between align-items-center my-3">
+    <h3 style="font-weight: bold; font-size: 30px;">@Model.Review</h3>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <table style="width: 100%;">
+        <thead>
+        <tr class="text-start" style="font-size: 14px;">
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Yorum</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Puan</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Oluşturma Tarihi</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                @Model.Review
+            </td>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+               @for (int i = 0; i < Model.Rating; i++)
+               {
+                   <svg aria-hidden="true" class="rr--svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 23.77" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+                       <g shape-rendering="geometricPrecision">
+                           <path d="M12.5,18.16l-7.73,5.61,2.95-9.08L0,9.07H9.55S12.5,0,12.5,0l2.95,9.07h9.55l-7.73,5.62,2.95,9.08-7.73-5.61Z" fill="#db711a"></path>
+                       </g>
+                   </svg>
+               }
+            </td>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                @Model.CreatedAt
+            </td>
+            <td style="padding: 10px 5px; font-weight: lighter; font-size: 14px;">
+                <button type="submit" class="px-3 py-2 rounded-3" style="background-color: #371517; text-decoration: none; font-size: 14px; color:#d23c3d; border: none;">Sil</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex gap-2 mt-3">
+    </div>
+</form>
+
+@if (ViewBag.Error != null)
+{
+<div class="alert alert-danger mt-4">
+    @ViewBag.Error
+</div>
+}

@@ -19,20 +19,22 @@ public class CategoryController : Controller
         var categories = _context.Categories.ToList();
         return View(categories);
     }
-
-    public IActionResult Create()
-    {
-        
-        return View();
-    }
-
+    
     [HttpPost]
-    public IActionResult Create(Category category)
+    public IActionResult Create(string Name , string Description)
     {
         if (ModelState.IsValid)
         {
             try
             {
+
+                var category = new Category()
+                {
+                    Name = Name,
+                    Description = Description,
+                    CreatedAt = DateTime.Now
+                };
+
                 _context.Categories.Add(category);
                 _context.SaveChanges();
                 return RedirectToAction("Index" , "Category");
@@ -46,40 +48,58 @@ public class CategoryController : Controller
         return View();
     }
 
-    public IActionResult Edit(int id)
-    {
-        var category = _context.Categories.Find(id);
-        if (category == null)
-        {
-            return NotFound();
-        }
-        
-        return View(category);
-    }
-
     [HttpPost]
-    public IActionResult Edit(int id, Category category)
+    public IActionResult Edit(int id, string Name , string Description)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                _context.Categories.Update(category);
+                var existCategory = _context.Categories.FirstOrDefault(c => c.Id == id);
+                if (existCategory == null)
+                {
+                    return NotFound();
+                }
+
+                existCategory.Name = Name;
+                existCategory.Description = Description;
+                
+                _context.Categories.Update(existCategory);
                 _context.SaveChanges();
-                return RedirectToAction("Edit");
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
                 ViewBag.Error = "Güncelleme işlemi yapılamadı." + e.Message;
             }
         }
-        return View(category);
+        return View();
     }
-
+    
+    [HttpPost , ActionName("Delete")]
     public IActionResult Delete(int id)
     {
-        var category = _context.Categories.Find(id);
-        return View(category);
+        if (ModelState.IsValid)
+        {
+            var category = _context.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+            }
+        }
+        
+        return RedirectToAction("Index");
     }
     
 }

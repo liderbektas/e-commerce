@@ -1,0 +1,22 @@
+@model Order
+
+<div class="modal fade" id="updateStatus" tabindex="-1" aria-labelledby="updateStatus" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #0a0a0b; color: #fff; border-radius: 12px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionModalLabel" style="font-weight: bold; font-size: 22px;">Sipariş Durumunu Güncelle</h5>
+            </div>
+            <div class="modal-body">
+                <form id="questionForm" asp-action="Details" asp-controller="Order" method="post">
+                    <div class="form-group">
+                        <label for="Status">Durum</label>
+                        <select style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;" asp-for="Status" class="form-control text-white" asp-items="ViewBag.Status">
+                            <option value="">Durum Seçin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="px-3 py-2 mt-3 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

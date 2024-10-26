@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - ProductManagament_MVC</title>
+    <title>LZ. - Admin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/ProductManagament_MVC.styles.css" asp-append-version="true"/>
@@ -44,6 +44,9 @@
                 </li>
                 <li class="nav-item" style="font-size: 14px;">
                     <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Reviews" ? "active1" : "")" asp-area="Admin" asp-controller="Reviews" asp-action="Index">İncelemeler</a>
+                </li>
+                <li class="nav-item" style="font-size: 14px;">
+                    <a class="nav-link1 text-white @(ViewData["ActivePage"]?.ToString() == "Contact" ? "active1" : "")" asp-area="Admin" asp-controller="Contact" asp-action="Index">İletişim</a>
                 </li>
             </ul>
         </div>

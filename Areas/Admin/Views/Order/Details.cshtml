@@ -77,6 +77,12 @@
             <th style="color:#a1a1aa; font-weight: lighter;">
                 <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Toplam</div>
             </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">Durum</div>
+            </th>
+            <th style="color:#a1a1aa; font-weight: lighter;">
+                <div class="py-2" style="border-bottom: 2px solid #52525b; margin-right: 8px;">İşlemler</div>
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -93,8 +99,16 @@
                     <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.Price)</td>
                     <td style="padding: 10px 5px;">@item.Quantity</td>
                     <td style="padding: 10px 5px;">@String.Format("{0:C}", item.Products?.Price * item.Quantity)</td>
+                    <td style="padding: 10px 5px;">@Model.Status</td>
+                    <td style="padding: 10px 5px;">
+                        <div class="d-flex gap-2">
+                            <button data-bs-toggle="modal" data-bs-target="#updateStatus" data-bs- class="px-3 py-2 rounded-3" style="background-color: #27272a; text-decoration: none; font-size: 14px; color:#fff; border: none;">Düzenle</button>
+                        </div>
+                    </td>
                 </tr>
             }
+            
+            @Html.Partial("Modals/Status")
         }
         else
         {

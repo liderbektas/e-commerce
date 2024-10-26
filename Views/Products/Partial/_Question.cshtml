@@ -1,12 +1,12 @@
 @using System.Security.Claims
-@model Products
+@model ProductDetailsViewModel
 
 
 <div class="tab-pane" id="questions" role="tabpanel" aria-labelledby="questions-tab">
     <div>
-        @if (ViewBag.Questions != null && ViewBag.Questions.Count > 0)
+        @if (Model.Questions != null && Model.Questions.Count > 0)
         {
-            @foreach (var question in ViewBag.Questions)
+            @foreach (var question in Model.Questions)
             {
                 <div class="py-2" style="width: 636px;">
                     <div class="text-muted mb-2">Soru</div>
@@ -22,13 +22,13 @@
                     </div>
 
                     @{
-                        var answers = ViewBag.Answers as IEnumerable<Answer>;
+                        var answers = Model.Answers as IEnumerable<Answer>;
                     }
-                    @if (ViewBag.Answers != null && answers.Any(a => a.QuestionId == question.Id))
+                    @if (Model.Answers != null && answers.Any(a => a.QuestionId == question.Id))
                     {
                         <div class="mt-2">
                             <p style="color: #ef6c17">Cevap - Admin</p>
-                            @foreach (var answer in ViewBag.Answers)
+                            @foreach (var answer in Model.Answers)
                             {
                                 if (answer.QuestionId == question.Id)
                                 {
@@ -102,7 +102,7 @@
                         }
                         else
                         {
-                            <button type="button" class="px-4 py-2 rounded-2" style="background-color: #ef6c17; color: white; border: none; pointer-events: none; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#questionModal">
+                            <button disabled="disabled" type="button" class="px-4 py-2 rounded-2" style="background-color: transparent; color: white; border: 0.5px solid #cccccc; opacity: 50%;" data-bs-toggle="modal" data-bs-target="#questionModal">
                                 Soru sormak için lütfen giriş yapınız
                             </button>
                         }

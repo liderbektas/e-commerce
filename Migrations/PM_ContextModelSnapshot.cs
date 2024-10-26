@@ -126,6 +126,37 @@ namespace ProductManagament_MVC.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("ProductManagament_MVC.Models.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReceivedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
+                });
+
             modelBuilder.Entity("ProductManagament_MVC.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -135,30 +166,39 @@ namespace ProductManagament_MVC.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CVV")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastDate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PaymentMethod")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -179,13 +219,13 @@ namespace ProductManagament_MVC.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductsId")
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -348,6 +388,17 @@ namespace ProductManagament_MVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 10, 24, 22, 38, 29, 121, DateTimeKind.Local).AddTicks(3140),
+                            email = "admin@example.com",
+                            password = "Ads3129110.",
+                            role = "Manager",
+                            userName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("ProductManagament_MVC.Models.Answer", b =>
@@ -403,7 +454,9 @@ namespace ProductManagament_MVC.Migrations
 
                     b.HasOne("ProductManagament_MVC.Models.Products", "Products")
                         .WithMany()
-                        .HasForeignKey("ProductsId");
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Products");
                 });

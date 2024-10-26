@@ -16,6 +16,8 @@ html {
 body {
     background-color: #0a0a0b;
     color: white !important;
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .navbar {
@@ -124,22 +126,15 @@ body {
 }
 
 .product-card2 {
-    border: 1px solid #27262b;
-
+    border: 1px solid #3f3f46;
 }
 
 .product-card:hover .product-card2 {
     border: 0.5px solid white;
-    transition: 0.2s ease-in-out;
-}
-
-.product-card:hover img {
-    scale: 1.05;
-    transition: 0.2s ease-in-out;
 }
 
 .form-control:focus {
-    outline: 1px solid white;
+    outline: 0.5px solid #f4f4f6;
     outline-offset: 2px;
     box-shadow: none;
 }
@@ -150,3 +145,51 @@ body {
 }
 
 
+.modal-backdrop.show {
+    background-color: #fff3;
+    opacity: 0.9; 
+}
+
+.modal-header{
+    padding-top: 15px;
+    padding-bottom: 0px;
+    border-bottom: none;
+}
+
+.modal-dialog{
+    width: 400px;
+}
+
+.custom-dropdown {
+    background-color: #18181c; 
+    color: #fff; 
+    border: 0.5px solid #71717a; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 15px; 
+}
+
+.custom-dropdown:focus {
+    outline: none; 
+    border: 1px solid #4a4a4a;
+}
+
+.dropdown-menu {
+    background-color: #18181c;
+    border-radius: 8px; 
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); 
+    padding: 10px 0;
+    border: 1px solid #3f3f46;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 10px 20px; 
+    color: white; 
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: #ef6c17;
+    background-color: transparent;
+}

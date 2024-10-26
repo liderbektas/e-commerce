@@ -1,10 +1,13 @@
 namespace ProductManagament_MVC.Models;
 
+
 public class Contact
 {
-    public int UserId { get; set; }
-    public User User { get; set; }
+    public int Id { get; set; }
+    public string UserName { get; set; }
+
+    public int? UserId { get; set; }
+    public string Email { get; set; }
     public string Message { get; set; }
-    public string Subject { get; set; }
-    public DateTime SentAt { get; set; } = DateTime.Now;
+    public DateTime ReceivedDate { get; set; } = DateTime.Now;
 }

@@ -26,9 +26,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/";
-        options.AccessDeniedPath = "/Home/AccessDenied";
     });
-
 
 
 var app = builder.Build();

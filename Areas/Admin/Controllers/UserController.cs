@@ -69,20 +69,9 @@ public class UserController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Edit(int id)
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-        
-        return View(user);
-    }
-    
     [HttpPost]
-    public async Task<IActionResult> Edit(int id, string username, string email, string password, string address,
-        string phoneNumber , DateTime birthDate)
+    public async Task<IActionResult> Edit(int id, string Username, string Email, string Password, string Address,
+        string PhoneNumber , DateTime BirthDate , string userRole)
     {
         try
         {
@@ -92,12 +81,13 @@ public class UserController : Controller
                 return NotFound();
             }
 
-            existUser.userName = username;
-            existUser.email = email;
-            existUser.password = password;
-            existUser.Address = address;
-            existUser.phoneNumber = phoneNumber;
-            existUser.BirthDate = birthDate;
+            existUser.userName = Username;
+            existUser.email = Email;
+            existUser.password = Password;
+            existUser.Address = Address;
+            existUser.phoneNumber = PhoneNumber;
+            existUser.BirthDate = BirthDate;
+            existUser.role = userRole;
 
             _context.Users.Update(existUser);
             await _context.SaveChangesAsync();
@@ -110,21 +100,9 @@ public class UserController : Controller
         
         return View();
     }
-
-
-    public async Task<IActionResult> Delete(int id)
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        return View(user);
-    }
-
+    
     [HttpPost, ActionName("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 

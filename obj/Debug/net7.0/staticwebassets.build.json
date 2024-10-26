@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QCO4txp5c4hE/zQySyEYnzANX1ybB/huG10LSxNQZEA=",
+  "Hash": "s8SwDN4p7Klmq9iJRfm5wR2OTi0fdZU0xaISjmHENIg=",
   "Source": "ProductManagament_MVC",
   "BasePath": "_content/ProductManagament_MVC",
   "Mode": "Default",
@@ -262,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/Images/airpods-max-select-spacegray-202011.webp"
+    },
+    {
+      "Identity": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/ASSET_MMS_120111127.webp",
+      "SourceId": "ProductManagament_MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/",
+      "BasePath": "_content/ProductManagament_MVC",
+      "RelativePath": "Images/ASSET_MMS_120111127.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/ASSET_MMS_120111127.webp"
     },
     {
       "Identity": "/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/wwwroot/Images/burger.jpg",
