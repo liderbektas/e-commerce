@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProductManagament_MVC.Models;
 
 namespace ProductManagament_MVC.Areas.Admin.Controllers;
@@ -22,6 +23,7 @@ public class AdminsController : Controller
             .Where(u => u.role == "Admin" || u.role == "Manager")
             .ToList();
 
+
         if (admins == null)
         {
             return NotFound();
@@ -40,6 +42,7 @@ public class AdminsController : Controller
             if (existUser != null)
             {
                 ViewData["Error"] = "Bu e-posta ile kayıtlı bir kullanıcı zaten mevcut.";
+                return View(_context.Users.Where(u => u.role == "Admin" || u.role == "Manager").ToList());
             }
             else
             {
@@ -59,21 +62,25 @@ public class AdminsController : Controller
             }
         }
 
-        return View();
+        ViewData["Error"] = "Formu eksiksiz doldurunuz.";
+        return View(_context.Users.Where(u => u.role == "Admin" || u.role == "Manager").ToList());
     }
-    
+
+
     [HttpPost]
     public IActionResult Edit(int id, string Username, string Email, string Password, string Address,
-        string PhoneNumber , DateTime BirthDate , string userRole)
+        string PhoneNumber, DateTime BirthDate, string userRole)
     {
         try
         {
             var existUser = _context.Users.FirstOrDefault(u => u.Id == id);
-            if (existUser == null)
+            var existEmail = _context.Users.FirstOrDefault(u => u.email == existUser.email && u.Id != id);
+            if (existEmail != null)
             {
-                return NotFound();
+                TempData["Error3"] = "Bu e-posta ile kayıtlı bir kullanıcı zaten mevcut.";
+                return View("Index", _context.Users.Where(u => u.role == "Admin" || u.role == "Manager").ToList());
             }
-            
+
             existUser.userName = Username;
             existUser.email = Email;
             existUser.password = Password;
@@ -89,9 +96,8 @@ public class AdminsController : Controller
         }
         catch (Exception e)
         {
-            ViewBag.Error = e.Message;
+            ViewData["Error"] = "";
+            return View("Index", _context.Users.Where(u => u.role == "Admin" || u.role == "Manager").ToList());
         }
-
-        return View();
     }
 }

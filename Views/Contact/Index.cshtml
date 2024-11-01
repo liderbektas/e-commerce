@@ -1,8 +1,7 @@
 @model Contact
 
 @{
-Layout = "~/Views/Shared/_Layout.cshtml";
-ViewBag.Title = "İletişim";
+    ViewBag.Title = "İletişim";
 }
 
 <div class="container mt-5 mb-5">
@@ -12,7 +11,7 @@ ViewBag.Title = "İletişim";
     <div class="d-flex align-items-center justify-content-center">
         <div class="p-5 rounded" style="background-color: #18181c; width: 100%; max-width: 600px; border: 0.5px solid #3f3f46">
             <h3 class="text-center mb-4" style="font-weight: bold; font-size: 24px; color: #fff;">İletişim Formu</h3>
-            <form asp-controller="Contact" asp-action="Index" method="post" >
+            <form asp-controller="Contact" asp-action="Index" method="post">
                 <div class="form-group mb-4">
                     <input name="username" class="form-control rounded-3 px-4 py-3 text-white" placeholder="Kullanıcı Adı" required style="background-color: #27272a; border: none; font-size: 16px;"/>
                 </div>

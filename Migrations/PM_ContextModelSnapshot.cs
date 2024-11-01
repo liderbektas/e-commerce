@@ -393,7 +393,7 @@ namespace ProductManagament_MVC.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 10, 24, 22, 38, 29, 121, DateTimeKind.Local).AddTicks(3140),
+                            CreatedAt = new DateTime(2024, 10, 29, 12, 41, 5, 765, DateTimeKind.Local).AddTicks(9880),
                             email = "admin@example.com",
                             password = "Ads3129110.",
                             role = "Manager",

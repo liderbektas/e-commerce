@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MailKit" Version="4.8.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.20"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11"/>
@@ -32,6 +33,7 @@
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\Auth\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\Auth\Login.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\Auth\Register.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Password\Index.cshtml" />
     </ItemGroup>
 
 </Project>

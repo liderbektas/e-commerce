@@ -1,18 +1,9 @@
-@using System.Security.Claims
 @model IEnumerable<User>
 
 <div>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 style="font-weight: bold; font-size: 30px;">Yöneticiler</h3>
-
-        @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
-        {
-            <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addAdminModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
-        }
-        else
-        {
-            <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" disabled data-bs-target="#addAdminModal" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d;">Bu işlem için yetkiniz bulunmuyor</button>
-        }
+        <button class="px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addAdminModal" style="background-color: #27272a; border: none; font-size: 14px; color:#fff;">Yeni Ekle</button>
     </div>
 
     <table style="width: 100%;">
@@ -45,12 +36,12 @@
                 <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.CreatedAt</td>
                 <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">@user.role</td>
                 <td style="padding: 10px 5px; font-weight: 400; font-size: 15px;">
-                    @if (User.FindFirst(ClaimTypes.Role)?.Value == "Manager")
-                    { 
+                    @if (ViewBag.User != false && user.role != "Manager")
+                    {
                         <button
                             data-bs-toggle="modal"
                             data-bs-target="#editAdmin"
-                            class="px-3 py-2 rounded-3" 
+                            class="px-3 py-2 rounded-3"
                             style="background-color: #27272a; border: none; font-size: 14px; color:#fff; text-decoration: none;"
                             onclick="openEditModal('@user.Id' ,'@user.userName' , '@user.email' , '@user.password' , '@user.Address' , '@user.phoneNumber' , '@user.BirthDate' , '@user.role')">
                             Düzenle
@@ -58,9 +49,14 @@
                     }
                     else
                     {
-                        <button class="px-3 py-2 rounded-3" style="background-color: #371517; border: none; font-size: 14px; color:#d23c3d; pointer-events: none;">Bu işlem için yetkiniz bulunmuyor</button>
+                        <button
+                            class="px-3 py-2 rounded-3"
+                            style="background-color: #371517; color: #c03839; font-size: 14px; border: none; pointer-events: none; opacity: 50%;">
+                            Düzenlenemez
+                        </button>
                     }
                 </td>
+
             </tr>
         }
 
@@ -81,5 +77,11 @@
         $('#editAdmin input[name="PhoneNumber"]').val(phoneNumber);
         $('#editAdmin input[name="BirthDate"]').val(birthDate);
         $('#editAdmin select[name="userRole"]').val(role);
+
+        if (role === "Manager") {
+            $('#editAdmin select[name="userRole"]').val(role).prop('disabled', true); 
+        } else {
+            $('#editAdmin select[name="userRole"]').val(role).prop('disabled', false);
+        }
     }
 </script>

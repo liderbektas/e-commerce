@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ProductManagament_MVC.Models
@@ -7,7 +8,6 @@ namespace ProductManagament_MVC.Models
         public PM_Context(DbContextOptions<PM_Context> options) : base(options)
         {
         }
-
         public DbSet<Products> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -17,6 +17,7 @@ namespace ProductManagament_MVC.Models
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,7 +26,7 @@ namespace ProductManagament_MVC.Models
             {
                 Id = 1,
                 userName = "admin",
-                password = "Ads3129110.", 
+                password = "Ads3129110.",
                 email = "admin@example.com",
                 role = "Manager",
                 CreatedAt = DateTime.Now

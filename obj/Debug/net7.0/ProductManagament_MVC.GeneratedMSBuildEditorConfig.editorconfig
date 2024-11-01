@@ -66,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQ29udGFjdC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Contact/Modals/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQ29udGFjdC9Nb2RhbHMvRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Logout/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvTG9nb3V0L0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,16 +106,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUHJvZHVjdHMvTW9kYWxzL0VkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Questions/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUXVlc3Rpb25zL0RlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Questions/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUXVlc3Rpb25zL0VkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Questions/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUXVlc3Rpb25zL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Questions/Modals/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUXVlc3Rpb25zL01vZGFscy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Questions/Modals/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvUXVlc3Rpb25zL01vZGFscy9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Areas/Admin/Views/Reviews/Delete.cshtml]
@@ -256,10 +260,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Shared/Partials/Dropdown.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0Ryb3Bkb3duLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Shared/Partials/Footer.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0Zvb3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/liderbektas/Desktop/MVC/ProductManagament_MVC/ProductManagament_MVC/Views/Shared/Partials/Links.cshtml]

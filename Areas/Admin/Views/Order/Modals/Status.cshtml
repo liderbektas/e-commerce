@@ -6,6 +6,23 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="questionModalLabel" style="font-weight: bold; font-size: 22px;">Sipariş Durumunu Güncelle</h5>
             </div>
+
+            <div class="px-3">
+                @if (Model.Status == OrderStatus.TeslimEdildi)
+                {
+                <div class="w-100 text-center" style="background-color: #371517; color: #fff; padding: 8px; border-radius: 2px; font-size: 14px; margin-top: 6px;">
+                    Ürün teslim edildiği için güncelleme yapamazsınız.
+                </div>
+                }
+
+                @if (Model.Status == OrderStatus.IptalEdildi)
+                {
+                <div class="w-100 text-center" style="background-color: #371517; color: #fff; padding: 8px; border-radius: 2px; font-size: 14px; margin-top: 6px;">
+                    Ürün iptal edildiği için güncelleme yapamazsınız.
+                </div>
+                }
+            </div> 
+            
             <div class="modal-body">
                 <form id="questionForm" asp-action="Details" asp-controller="Order" method="post">
                     <div class="form-group">
@@ -14,7 +31,16 @@
                             <option value="">Durum Seçin</option>
                         </select>
                     </div>
-                    <button type="submit" class="px-3 py-2 mt-3 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Güncelle</button>
+                    @if (Model.Status == OrderStatus.TeslimEdildi || Model.Status == OrderStatus.IptalEdildi)
+                    {
+                        <button type="submit" class="px-3 py-2 mt-3 rounded-3 d-flex align-items-center justify-content-center" disabled="disabled" style="font-size: 14px; pointer-events: none; opacity: 50%; background-color: #27272a; text-decoration: none; color: white; border: none;">Güncelle</button>
+
+                    }
+                    else
+                    {
+                        <button type="submit" class="px-3 py-2 mt-3 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Güncelle</button>
+
+                    }
                 </form>
             </div>
         </div>

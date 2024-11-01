@@ -32,7 +32,7 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
             var order = await _context.Orders
                 .Include(o => o.OrderItems)
                 .ThenInclude(o => o.Products)
-                .ThenInclude(o => o.User)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
@@ -49,7 +49,6 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
                 }).ToList();
 
             ViewBag.Status = new SelectList(statusList, "Value", "Text", order.Status);
-
             return View(order);
         }
 

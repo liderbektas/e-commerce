@@ -21,7 +21,6 @@
                     }
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <a style="font-size: 14px; cursor: pointer; margin-left: 2px;">Hesabım yok</a>
                         <button type="submit" class="px-3 py-2 rounded-3 d-flex align-items-center justify-content-center" style="font-size: 14px; cursor: pointer; background-color: #27272a; text-decoration: none; color: white; border: none;">Giriş Yap</button>
                     </div>
                 </form>
@@ -29,3 +28,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if ('@TempData["Error"]' !== '') {
+            var modal = new bootstrap.Modal(document.getElementById('globalModal'));
+            modal.show();
+        }
+
+        document.getElementById('globalModal').addEventListener('hidden.bs.modal', function () {
+            location.reload();
+        });
+    })
+</script>

@@ -88,8 +88,8 @@ public class AuthController : Controller
 
             if (existingUser != null)
             {
-                ViewBag.Error = "Bu e-posta adresi ile bir kullanıcı zaten kayıtlı.";
-                return View();
+                TempData["Error1"] = "Bu e-posta adresi ile bir kullanıcı zaten kayıtlı.";
+                return RedirectToAction("Index", "Home");
             }
 
             var user = new User
@@ -103,13 +103,12 @@ public class AuthController : Controller
 
             _context.Users.Add(user);
             _context.SaveChanges();
-
             return RedirectToAction("Index", "Home");
         }
         catch (Exception ex)
         {
-            ViewBag.Error = $"Bir hata oluştu: {ex.Message}";
-            return View();
+            TempData["Error1"] = $"Bir hata oluştu: {ex.Message}";
+            return RedirectToAction("Index", "Home");
         }
     }
 

@@ -88,7 +88,6 @@ public class ProductsController : Controller
 
         return View(viewModel);
     }
-
     
     [HttpPost]
     public async Task<IActionResult> AskQuestions(string PQuestion, int ProductId)

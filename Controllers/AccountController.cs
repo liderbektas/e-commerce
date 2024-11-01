@@ -2,7 +2,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductManagament_MVC.Models;
-using System.Linq; // Linq ekleniyor
 
 namespace ProductManagament_MVC.Controllers
 {
@@ -28,15 +27,15 @@ namespace ProductManagament_MVC.Controllers
             {
                 return NotFound();
             }
-            
+
             var orders = _context.Orders
                 .Where(o => o.UserId == user.Id)
                 .Include(o => o.OrderItems)
                 .ThenInclude(p => p.Products)
-                .ToList(); 
+                .ToList();
 
             var reviews = _context.Reviews
-                .Include(r => r.Products) 
+                .Include(r => r.Products)
                 .Where(r => r.UserId == user.Id)
                 .ToList();
 
@@ -46,9 +45,36 @@ namespace ProductManagament_MVC.Controllers
                 Orders = orders,
                 Reviews = reviews
             };
-    
+
             return View(userInfo);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CancelOrder(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+                    if (order == null)
+                    {
+                        return NotFound();
+                    }
+
+                    order.Status = OrderStatus.IptalEdildi;
+
+                    _context.Orders.Update(order);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+            return View();
+        }
     }
 }

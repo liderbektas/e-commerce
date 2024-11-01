@@ -18,47 +18,27 @@ public class QuestionsController : Controller
     public async Task<IActionResult> Index()
     {
         ViewData["ActivePage"] = "Questions";
-        
+
         var questions = await _context.Questions
-            .Include(q => q.Products) 
-            .Include(q => q.User)      
+            .Include(q => q.Products)
+            .Include(q => q.User)
             .ToListAsync();
 
-        var questionsListId = questions.Select(q => q.Id).ToList();
+        var questionIds = questions.Select(q => q.Id).ToList();
 
         var answers = await _context.Answers
-            .Where(a => questionsListId.Contains(a.QuestionId))
+            .Where(a => questionIds.Contains(a.QuestionId))
             .ToListAsync();
 
-        ViewBag.Answer = answers;
-
-        if (questions == null)
+        var questionViewModels = questions.Select(q => new QuestionsViewModel()
         {
-            return NotFound();
-        }
+            Questions = q,
+            Answer = answers.FirstOrDefault(a => a.QuestionId == q.Id)
+        }).ToList();
 
-        return View(questions);
+        return View(questionViewModels);
     }
-
     
-    public async Task<IActionResult> Edit(int id)
-    {
-        var question = await _context.Questions.FirstOrDefaultAsync(q => q.Id == id);
-        var answer = await _context.Answers.FirstOrDefaultAsync(a => a.QuestionId == id);
-
-        if (question == null)
-        {
-            return NotFound();
-        }
-
-        var questionsViewModel = new QuestionsViewModel()
-        {
-            Questions = question,
-            Answer = answer
-        };
-        return View(questionsViewModel);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Edit(int questionId, string questionContent, string answerContent)
     {
@@ -101,38 +81,27 @@ public class QuestionsController : Controller
         }
         catch (Exception e)
         {
-            ViewBag.Error = "An error occurred while processing your request.";
+            ViewBag.Error = "Bir hata oluştu";
             return View();
         }
     }
 
-    public async Task<IActionResult> Delete(int id)
-    {
-        var questions = await _context.Questions.FindAsync(id);
-        if (questions == null)
-        {
-            return NotFound();
-        }
-            
-        return View(questions);
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    [HttpPost , ActionName("Delete")]
+    public async Task<IActionResult> Delete(int questionId)
     {
         if (ModelState.IsValid)
         {
             try
             {
-                var questions = await _context.Questions.FindAsync(id);
+                var questions = await _context.Questions.FindAsync(questionId);
                 if (questions == null)
                 {
                     return NotFound();
                 }
 
-                 _context.Questions.Remove(questions);
-                 await _context.SaveChangesAsync();
-                 return RedirectToAction("Index");
+                _context.Questions.Remove(questions);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
@@ -142,6 +111,4 @@ public class QuestionsController : Controller
 
         return View();
     }
-    
-    
 }

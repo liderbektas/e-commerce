@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace ProductManagament_MVC.Models;
 
-public class User
+public class User 
 {
     public int Id { get; set; }
     public string userName { get; set; }

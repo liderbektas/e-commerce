@@ -4,12 +4,21 @@
             <div class="modal-header">
                 <h5 class="modal-title" style="font-weight: bold; font-size: 22px;">Kullanıcıyı Güncelle</h5>
             </div>
+
+            @if (TempData["Error2"] != null)
+            {
+                <div class="px-3">
+                    <div class="w-100 text-center" style="background-color: #371517; color: #fff; padding: 8px; border-radius: 2px; font-size: 14px; margin-top: 6px;">
+                        @TempData["Error2"]
+                    </div>
+                </div>
+            }
             <div class="modal-body">
                 <form asp-action="Edit" method="post">
                     <input type="hidden" name="id"/>
 
                     <div class="form-group mb-3 form-container">
-                        <input name="Username" class="form-control text-white" placeholder="İsim" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
+                        <input id="username" name="Username" class="form-control text-white" placeholder="İsim" style="background-color: #18181c; border: 0.5px solid #71717a; font-size: 15px; height: 45px;"/>
                     </div>
 
                     <div class="form-group mb-3 form-container">
@@ -48,3 +57,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById('editUser').addEventListener('hidden.bs.modal', function () {
+            location.reload();
+        });
+    });
+    
+</script>

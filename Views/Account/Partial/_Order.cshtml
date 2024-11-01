@@ -1,61 +1,73 @@
 @model UserViewModel
 
-
 <div class="tab-pane fade overflow-auto" id="order" role="tabpanel" aria-labelledby="order-tab" style="height: 420px;">
-            <h3 class="mb-4">Siparişler</h3>
-            @if (Model.Orders != null && Model.Orders.Count > 0)
-            {
-                @foreach (var order in Model.Orders)
+    <h3 class="mb-4">Siparişler</h3>
+    @if (Model.Orders != null && Model.Orders.Count > 0)
+    {
+       @foreach (var order in Model.Orders)
+{
+    <div class="order-border rounded-3 mt-2 overflow-hidden" style="opacity: @(order.Status == OrderStatus.IptalEdildi ? "0.5" : "1");">
+        <div class="d-flex justify-content-between align-items-center p-3 w-100 text-start" style="background-color: #141416; border: none;">
+            <div class="d-flex gap-2 align-items-center" style="flex: 1;">
+                @foreach (var orderItem in order.OrderItems)
                 {
-                    <div class="order-border rounded-3 mt-2 overflow-hidden">
-                        <button class="d-flex justify-content-between align-items-center p-3 w-100 text-start" type="button" aria-expanded="false" style="background-color: #141416; border: none;">
-                            <div class="d-flex gap-2 align-items-center" style="flex: 1;">
-                                @foreach (var orderItem in order.OrderItems)
-                                {
-                                    var product = orderItem.Products;
-                                    if (product != null)
-                                    {
-                                        <img src="/Images/@product.Img" alt="@product.Name" class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"/>
-                                    }
-                                }
-                            </div>
-                            <div class="d-flex align-items-center flex-grow-1" style="min-width: 200px;">
-                                <div>
-                                    <div class="text-muted" style="font-size: 0.875rem;">Sipariş numarası</div>
-                                    <div class="text-white" style="font-size: 1rem;">@order.Id</div>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="text-muted d-flex align-items-center gap-1 me-5" style="font-size: 0.875rem;">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm11.575-4.75a.825.825 0 1 0-1.65 0v5.5c0 .296.159.57.416.716l3.5 2a.825.825 0 0 0 .818-1.432l-3.084-1.763Z"></path>
-                                    </svg>
-                                    @order.Status
-                                </div>
-                            </div>
-                            <div class="text-end" style="min-width: 150px;">
-                                <div class="text-muted" style="font-size: 0.875rem;">
-                                    @order.OrderDate.ToString("dd MMMM yyyy")
-                                </div>
-                            </div>
-                        </button>
-                    </div>
+                    var product = orderItem.Products;
+                    if (product != null)
+                    {
+                        <img src="/Images/@product.Img" alt="@product.Name" class="rounded-3" style="height: 50px; width: 50px; object-fit: cover;"/>
+                    }
                 }
-            }
-            else
-            {
-                <div style="margin-top: 50px;">
-                    <div class="bg-transparent text-center d-flex align-items-center justify-content-center flex-column rounded-3" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
-                        <div class="d-flex justify-content-center mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="84" viewBox="0 -960 960 960" width="84" fill="#ef6c17">
-                                <path d="M464.62-157.85v-313.61L190.77-629.77V-330q0 6.15 3.08 11.54 3.07 5.38 9.23 9.23l261.54 151.38Zm30.76 0 261.54-151.38q6.16-3.85 9.23-9.23 3.08-5.39 3.08-11.54v-300L495.38-471.62v313.77ZM480-497.08l270.62-157.3-258.31-149.39q-6.16-3.08-12.31-3.08t-12.31 3.08L209.15-654.38 480-497.08ZM187.69-282.62q-13.48-7.65-20.58-20.67-7.11-13.02-7.11-27.48v-298.46q0-14.46 7.11-27.48 7.1-13.02 20.58-20.67l264.62-153q13.56-7.24 27.85-7.24 14.3 0 27.53 7.24l264.62 153q13.48 7.65 20.58 20.67 7.11 13.02 7.11 27.48v298.46q0 14.46-7.11 27.48-7.1 13.02-20.58 20.67l-264.62 153q-13.56 7.24-27.85 7.24-14.3 0-27.53-7.24l-264.62-153ZM480-480Z"></path>
-                            </svg>
-                        </div>
-                        <div class="h3" style="color:#fff;">Siparişiniz bulunmuyor</div>
-                        <div class="mt-1">
-                            <p style="font-weight: lighter;">Henüz bir sipariş vermediniz.</p>
-                        </div>
-                    </div>
+            </div>
+            <div class="d-flex align-items-center flex-grow-1" style="min-width: 200px;">
+                <div>
+                    <div class="text-muted" style="font-size: 0.875rem;">Sipariş numarası</div>
+                    <div class="text-white" style="font-size: 1rem;">@order.Id</div>
                 </div>
-            }
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="text-muted d-flex align-items-center gap-1 me-5" style="font-size: 0.875rem;">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12Zm11.575-4.75a.825.825 0 1 0-1.65 0v5.5c0 .296.159.57.416.716l3.5 2a.825.825 0 0 0 .818-1.432l-3.084-1.763Z"></path>
+                    </svg>
+                    @order.Status
+                </div>
+            </div>
+            <div class="text-end me-3" style="min-width: 150px;">
+                <div class="text-muted" style="font-size: 0.875rem;">
+                    @order.OrderDate.ToString("dd MMMM yyyy")
+                </div>
+            </div>
+            <form asp-controller="Account" asp-action="CancelOrder" method="post">
+                <input type="hidden" name="id" value="@order.Id"/>
+                @if (order.Status == OrderStatus.IptalEdildi)
+                {
+                    <button type="submit" disabled="disabled" class="rounded-2 ms-2" style="background-color: transparent; color: #ef4444; font-size: 13px; border: none;">Sipariş iptal edildi</button>
+                }
+                else
+                {
+                    <button type="submit" class="rounded-2 ms-2" style="background-color: transparent; color: #ef4444; font-size: 13px; border: none;">Siparişi İptal Et</button>
+
+                }
+            </form>
         </div>
+    </div>
+}
+
+    }
+    else
+    {
+        <div style="margin-top: 50px;">
+            <div class="bg-transparent text-center d-flex align-items-center justify-content-center flex-column rounded-3" style="border: 0.5px solid #71717a; height: 230px;" role="alert">
+                <div class="d-flex justify-content-center mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="84" viewBox="0 -960 960 960" width="84" fill="#ef6c17">
+                        <path d="M464.62-157.85v-313.61L190.77-629.77V-330q0 6.15 3.08 11.54 3.07 5.38 9.23 9.23l261.54 151.38Zm30.76 0 261.54-151.38q6.16-3.85 9.23-9.23 3.08-5.39 3.08-11.54v-300L495.38-471.62v313.77ZM480-497.08l270.62-157.3-258.31-149.39q-6.16-3.08-12.31-3.08t-12.31 3.08L209.15-654.38 480-497.08ZM187.69-282.62q-13.48-7.65-20.58-20.67-7.11-13.02-7.11-27.48v-298.46q0-14.46 7.11-27.48 7.1-13.02 20.58-20.67l264.62-153q13.56-7.24 27.85-7.24 14.3 0 27.53 7.24l264.62 153q13.48 7.65 20.58 20.67 7.11 13.02 7.11 27.48v298.46q0 14.46-7.11 27.48-7.1 13.02-20.58 20.67l-264.62 153q-13.56 7.24-27.85 7.24-14.3 0-27.53-7.24l-264.62-153ZM480-480Z"></path>
+                    </svg>
+                </div>
+                <div class="h3" style="color:#fff;">Siparişiniz bulunmuyor</div>
+                <div class="mt-1">
+                    <p style="font-weight: lighter;">Henüz bir sipariş vermediniz.</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
