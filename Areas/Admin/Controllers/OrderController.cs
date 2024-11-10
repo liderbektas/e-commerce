@@ -40,6 +40,7 @@ namespace ProductManagament_MVC.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            // Chatgpt yarımı ile yapıldı.
             var statusList = Enum.GetValues(typeof(OrderStatus))
                 .Cast<OrderStatus>()
                 .Select(s => new SelectListItem()

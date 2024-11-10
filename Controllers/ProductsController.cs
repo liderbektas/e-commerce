@@ -71,7 +71,8 @@ public class ProductsController : Controller
         {
             ratingAverage = reviews.Average(r => r.Rating);
         }
-
+        
+        // Chatgpt yardımı ile yapıldı.
         var ratingCounts = reviews
             .GroupBy(r => r.Rating)
             .ToDictionary(g => g.Key, g => g.Count());

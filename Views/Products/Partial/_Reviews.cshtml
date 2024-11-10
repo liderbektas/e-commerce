@@ -33,6 +33,7 @@
                     </div>
                 </div>
                 @{
+                    // Chatgpt yardımı ile yapıldı.
                     var ratingCounts = Model.RatingCounts as Dictionary<int, int>;
                 }
                 <div class="d-flex align-items-center gap-3" style="height: 200px; border-bottom: 0.5px solid #27272a">
@@ -77,6 +78,7 @@
                                 <span class="me-2 flex-grow-1">
                                     @if (i > 0)
                                     {
+                                        // Chatpt yardımı ile yapıldı.
                                         @if (ratingCounts.ContainsKey(i) && ratingCounts[i] > 0)
                                         {
                                             <div class="rounded-2" style="width: 180px; height: 4px; background-color: #ef6c17;"></div>

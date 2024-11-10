@@ -75,8 +75,8 @@ public class CheckoutController : Controller
                 {
                     return BadRequest("Sepetiniz Boş");
                 }
-
-
+                
+                // Chatgpt yardımı ile yapıldı.
                 foreach (var cartItem in cart.CartItems)
                 {
                     var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == cartItem.ProductId);
